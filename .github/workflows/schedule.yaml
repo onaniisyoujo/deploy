@@ -11,27 +11,26 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
-      - name: Build and Deploy Site
-        env:
-          SITE_PATH: "/"
+
+      - name: Determine Deployment Directory
+        id: determine_directory
         run: |
-          if [ $(date +%u) -eq 1 ] || [ $(date +%u) -eq 3 ] || [ $(date +%u) -eq 5 ] || [ $(date +%u) -eq 7 ]
-          then
-            # 使用第一套静态文件
-            rm -rf $SITE_PATH/*
-            cp -r Fluid/* $SITE_PATH
-          else
-            # 使用第二套静态文件
-            rm -rf $SITE_PATH/*
-            cp -r Particlex/* $SITE_PATH
+          day_of_week=$(date +'%u')
+          if [ $((day_of_week % 2)) -eq 0 ]; then
+          echo "::set-output name=directory::Particlex/"
+            else
+          echo "::set-output name=directory::Fluid/"
           fi
           
-      - name: Commit and Push Changes
-        uses: EndBug/add-and-commit@v7
+      - name: Get Current Time
+        id: current_time
+        run: echo "::set-output name=time::$(date +'%Y-%m-%d %H:%M:%S')"
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3 # 使用部署到 GitHub pages 的 action
         with:
-          message: "Update site for $(date +%Y-%m-%d)"
-          add: "."
-          push: true
-          author_name: "onaniisyoujo"
-          author_email: "143579403+onaniisyoujo@users.noreply.github.com"
+          publish_dir: ${{ steps.determine_directory.outputs.directory }} 
+          github_token: ${{ secrets.DEPLOY_SECRET }} # secret 名
+          user_name: ${{ secrets.MY_USER_NAME }}
+          user_email: ${{ secrets.MY_USER_EMAIL }}
+          commit_message: "Automated Deployment at ${{ steps.current_time.outputs.time }}" # 在 commit message 中添加当前时间
