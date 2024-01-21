@@ -17,9 +17,9 @@ jobs:
         run: |
           day_of_week=$(date +'%u')
           if [ $((day_of_week % 2)) -eq 0 ]; then
-          echo "::set-output name=directory::Particlex/"
-            else
           echo "::set-output name=directory::Fluid/"
+            else
+          echo "::set-output name=directory::Particlex/"
           fi
           
       - name: Get Current Time
