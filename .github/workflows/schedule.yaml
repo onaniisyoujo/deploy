@@ -1,0 +1,36 @@
+name: Update Blog
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Build and Deploy Site
+        env:
+          SITE_PATH: "/"
+        run: |
+          if [ $(date +%u) -eq 1 ] || [ $(date +%u) -eq 3 ] || [ $(date +%u) -eq 5 ] || [ $(date +%u) -eq 7 ]
+          then
+            # 使用第一套静态文件
+            rm -rf $SITE_PATH/*
+            cp -r Fluid/* $SITE_PATH
+          else
+            # 使用第二套静态文件
+            rm -rf $SITE_PATH/*
+            cp -r Particlex/* $SITE_PATH
+          fi
+          
+      - name: Commit and Push Changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: "Update site for $(date +%Y-%m-%d)"
+          add: "."
+          push: true
+          author_name: "onaniisyoujo"
+          author_email: "143579403+onaniisyoujo@users.noreply.github.com"
