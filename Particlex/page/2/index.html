@@ -167,6 +167,227 @@
         
 
 <div class="post">
+    <a href="/2023/10/05/%E9%AD%94%E6%94%B9Hexo-Fluid/">
+        <h2 class="post-title">魔改Hexo Fluid</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B5%84%E6%BA%90/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                资源
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/10/5
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>整理一下本少女在使用hexo fluid时用到的代码  </p>
+<h2 id="添加自定义字体"><a href="#添加自定义字体" class="headerlink" title="添加自定义字体"></a>添加自定义字体</h2><ol>
+<li>通过自定义CSS引入字体</li>
+</ol>
+<pre><code class="css">@font-face &#123;
+  font-family: &#39;FontName&#39;;  /*换成你自己的字体名及路径*/
+  src: url(&#39;/font/font.ttf&#39;) format(&#39;truetype&#39;);
+  font-weight: normal;
+  font-style: normal;
+&#125;
+</code></pre>
+<ol start="2">
+<li>修改<code>Blog/_config.fluid.yml</code></li>
+</ol>
+<pre><code class="yaml">font:
+  font_size: 18px   # 按需要自定义
+  font_family: FontName  # 换成你自己的字体名
+  letter_spacing: 0.02em
+  code_font_size: 85%
+</code></pre>
+<h2 id="添加网页背景图片"><a href="#添加网页背景图片" class="headerlink" title="添加网页背景图片"></a>添加网页背景图片</h2><ol>
+<li>使用自定义CSS实现<br>用上面的方法添加自定义CSS</li>
+</ol>
+<pre><code class="css">body &#123;
+  background: url(/img/background.jpg);  /*换成你自己的背景图*/
+  background-attachment: fixed;
+  background-size: cover;  
+&#125;
+</code></pre>
+<p>可以使用图片的api，个人感觉会拖慢加载速度  </p>
+<h2 id="复制变色"><a href="#复制变色" class="headerlink" title="复制变色"></a>复制变色</h2><p>自定义CSS添加以下内容  </p>
+<pre><code class="css">::selection &#123;
+    color: #66ccff; /* 设置选中文字的颜色 */
+    background: transparent; /* 设置选中文字的背景为透明 */
+&#125;
+</code></pre>
+<h2 id="Banner图随网页滑动变透明"><a href="#Banner图随网页滑动变透明" class="headerlink" title="Banner图随网页滑动变透明"></a>Banner图随网页滑动变透明</h2><p>Hexo Fluid，随着网页的滑动，Banner图会逐渐变透明<br>打字机也会变透明  </p>
+<p>自定义js</p>
+<pre><code class="javascript">// 获取图片元素
+var image = document.getElementById(&quot;banner&quot;);
+var targetDistance = 695; // 设置滑动695px后完全透明
+window.addEventListener(&quot;scroll&quot;, function() &#123;
+  var scrollDistance = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  var opacity = 1 - (scrollDistance / targetDistance);
+  if(opacity &lt; 0) &#123;
+    opacity = 0;
+  &#125;
+  image.style.opacity = opacity.toString();
+&#125;);
+</code></pre>
+<p>或者根据滑动网页的百分比减少不透明度</p>
+<pre><code class="javascript">var image = document.getElementById(&quot;banner&quot;);
+var pageHeight = document.body.scrollHeight - window.innerHeight;
+window.addEventListener(&quot;scroll&quot;, function() &#123;
+  var scrollDistance = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  var opacity = 1 - (scrollDistance / pageHeight);
+  if(opacity &lt; 0) &#123;
+    opacity = 0;
+  &#125; else if(opacity &gt; 1) &#123;
+    opacity = 1;
+  &#125;
+  image.style.opacity = opacity.toString();
+&#125;);
+</code></pre>
+<p>设置banner的淡出样式</p>
+<pre><code class="css">#banner &#123;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+&#125;
+</code></pre>
+<h2 id="文章中代码的字体及背景色"><a href="#文章中代码的字体及背景色" class="headerlink" title="文章中代码的字体及背景色"></a>文章中代码的字体及背景色</h2><p>自定义CSS添加以下内容</p>
+<pre><code class="css">.markdown-body code &#123;
+    tab-size: 4;
+    background-color: rgb(251 253 83 / 50%);
+    transition: background-color 0.2s ease-in-out;
+    font-family: &quot;FontName&quot;;  /*改为你自己的字体名*/
+&#125;
+</code></pre>
+<ul>
+<li><code>background-color</code>用于设置背景色</li>
+<li><code>font-family</code>用于设置字体</li>
+</ul>
+<h2 id="滚动条"><a href="#滚动条" class="headerlink" title="滚动条"></a>滚动条</h2><p>自定义CSS</p>
+<pre><code class="css">::-webkit-scrollbar &#123;
+    width: 10px;
+    height: 10px;
+&#125;
+
+::-webkit-scrollbar-thumb &#123;
+    background-color: #e58a8a;
+    background-image: -webkit-linear-gradient( 45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
+    border-radius: 2em;
+&#125;
+
+::-webkit-scrollbar-corner &#123;
+    background-color: transparent;
+&#125;
+
+::-moz-selection &#123;
+    color: #fff;
+    background-color: #e58a8a;
+&#125;
+</code></pre>
+<p>先写这些~</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/hexo/" style="color: #ff7d73">hexo</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/fluid/" style="color: #03a9f4">fluid</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ffa2c4">资源</a>
+        </span>
+        
+    </div>
+    <a href="/2023/10/05/%E9%AD%94%E6%94%B9Hexo-Fluid/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/10/05/%E6%88%91%E6%83%B3%E5%8F%98%E6%88%90%E5%A5%B3%E7%94%9F/">
+        <h2 class="post-title">我想变成女生</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%97%A5%E5%B8%B8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                日常
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/10/5
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="我想变成女生"><a href="#我想变成女生" class="headerlink" title="我想变成女生"></a>我想变成女生</h1><p>好想变成女生</p>
+<p>变成女生会很可爱</p>
+<p>为什么我不是女生，可恶</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">日常</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ffa2c4">女生</a>
+        </span>
+        
+    </div>
+    <a href="/2023/10/05/%E6%88%91%E6%83%B3%E5%8F%98%E6%88%90%E5%A5%B3%E7%94%9F/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/08/30/hello-world/">
         <h2 class="post-title">Hello, World!</h2>
     </a>

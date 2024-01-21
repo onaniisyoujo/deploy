@@ -106,6 +106,9 @@
 
     // 设置其他应用
     setApplications(current);
+
+    // 设置自window.cuset的值(自定义)
+    window.cuset = current;
   }
 
   var invertColorSchemaObj = {
