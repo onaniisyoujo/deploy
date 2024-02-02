@@ -17,16 +17,16 @@ jobs:
         run: |
           day_of_week=$(date +'%u')
           if [ $day_of_week -eq 1 ] || [ $day_of_week -eq 4 ] || [ $day_of_week -eq 7 ]; then
-            echo "name=directory::Fluid/" >>$GITHUB_OUTPUT
+            echo "::set-output name=directory::Fluid/"
           elif [ $day_of_week -eq 2 ] || [ $day_of_week -eq 5 ]; then
-            echo "name=directory::Particlex/" >>$GITHUB_OUTPUT
+            echo "::set-output name=directory::Particlex/"
           else # For Wednesday and Saturday
-            echo "name=directory::Stellaris/" >>$GITHUB_OUTPUT
+            echo "::set-output name=directory::Stellaris/"
           fi
           
       - name: Get Current Time
         id: current_time
-        run: echo "name=time::$(date +'%Y-%m-%d %H:%M:%S')" >>$GITHUB_OUTPUT
+        run: echo "::set-output name=time::$(date +'%Y-%m-%d %H:%M:%S')"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.9.3 # 使用部署到 GitHub pages 的 action
