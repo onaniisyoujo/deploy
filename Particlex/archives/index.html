@@ -81,6 +81,11 @@
             <span>&ensp;Tags</span>
         </a>
         
+        <a href="/shuoshuo">
+            <i class="fa-solid fa-pen fa-fw"></i>
+            <span>&ensp;Diary</span>
+        </a>
+        
     </nav>
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
@@ -135,6 +140,15 @@
                     </div>
                 </a>
                 
+                <a href="/shuoshuo">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-pen fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Diary</div>
+                    </div>
+                </a>
+                
             </div>
         </transition>
     </nav>
@@ -148,20 +162,6 @@
 <div id="archives">
     
     <div id="timeline-wrap" ref="timeline">
-        
-        <div class="timeline" data-title="test">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2023/8/30</div>
-                <a href="/2023/08/30/test/">
-                    <h3>test</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
         <div class="timeline" data-title="hello,world!">
             <div class="timeline-tail"></div>
@@ -204,12 +204,12 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">日常</a>
+                            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #ffa2c4">日常</a>
                         </span>
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ffa2c4">女生</a>
+                            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ff7d73">女生</a>
                         </span>
                         
                     </span>
@@ -337,7 +337,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/hexo/" style="color: #03a9f4">hexo</a>
+                            <a href="/tags/hexo/" style="color: #00a596">hexo</a>
                         </span>
                         
                         <span class="tag">
@@ -378,12 +378,12 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #03a9f4">日常</a>
+                            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #ff7d73">日常</a>
                         </span>
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ffa2c4">女生</a>
+                            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #00a596">女生</a>
                         </span>
                         
                     </span>
@@ -424,7 +424,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ff7d73">女生</a>
+                            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #00a596">女生</a>
                         </span>
                         
                     </span>
@@ -470,7 +470,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E4%BA%BA%E8%AE%BE/" style="color: #ffa2c4">人设</a>
+                            <a href="/tags/%E4%BA%BA%E8%AE%BE/" style="color: #00a596">人设</a>
                         </span>
                         
                     </span>
@@ -511,12 +511,12 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/fluid/" style="color: #00bcd4">fluid</a>
+                            <a href="/tags/fluid/" style="color: #03a9f4">fluid</a>
                         </span>
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #03a9f4">资源</a>
+                            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00a596">资源</a>
                         </span>
                         
                     </span>
@@ -552,12 +552,12 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #ffa2c4">日常</a>
+                            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00bcd4">日常</a>
                         </span>
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #03a9f4">女生</a>
+                            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ffa2c4">女生</a>
                         </span>
                         
                     </span>
@@ -584,7 +584,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/birthday/" style="color: #ffa2c4">birthday</a>
+                            <a href="/tags/birthday/" style="color: #00bcd4">birthday</a>
                         </span>
                         
                     </span>
@@ -625,7 +625,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/Github/" style="color: #ffa2c4">Github</a>
+                            <a href="/tags/Github/" style="color: #00bcd4">Github</a>
                         </span>
                         
                     </span>
@@ -661,8 +661,44 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/hexo/" style="color: #00bcd4">hexo</a>
+                            <a href="/tags/hexo/" style="color: #ffa2c4">hexo</a>
                         </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00bcd4">资源</a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="hexoparticlex及diaspora主题使用artitalk">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2024/2/2</div>
+                <a href="/2024/02/02/Hexo-ParticleX%E5%8F%8ADiaspora%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8Artitalk/">
+                    <h3>Hexo ParticleX及Diaspora主题使用Artitalk</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/%E8%B5%84%E6%BA%90/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            资源
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
                         
                         <span class="tag">
                             

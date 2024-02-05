@@ -38,6 +38,8 @@
 
 
 
+<script src="https://cdn.staticfile.org/twikoo/1.6.31/twikoo.all.min.js"></script>
+
 
 
 <link rel="stylesheet" href="/css/main.css" />
@@ -83,6 +85,11 @@
         <a href="/tags">
             <i class="fa-solid fa-tags fa-fw"></i>
             <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/shuoshuo">
+            <i class="fa-solid fa-pen fa-fw"></i>
+            <span>&ensp;Diary</span>
         </a>
         
     </nav>
@@ -139,6 +146,15 @@
                     </div>
                 </a>
                 
+                <a href="/shuoshuo">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-pen fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Diary</div>
+                    </div>
+                </a>
+                
             </div>
         </transition>
     </nav>
@@ -178,12 +194,12 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00a596">资源</a>
+                <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #03a9f4">资源</a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Github/" style="color: #03a9f4">Github</a>
+                <a href="/tags/Github/" style="color: #ffa2c4">Github</a>
             </span>
             
         </span>
@@ -191,11 +207,14 @@
     </div>
     
     <div class="content" v-pre>
-        <p>使用<code>Github Actions</code>实现每天自动切换网站的主题</p>
+        <blockquote>
+<p>现在网站用了三套主题，可喜可贺</p>
+</blockquote>
+<p>使用<code>Github Actions</code>实现每天自动切换网站的主题</p>
 <p>比如周一、三、五、七使用<code>theme-A</code>，二、四、六使用<code>theme-B</code></p>
 <p>当然也可以添加<code>theme-C</code>、<code>theme-D</code>…</p>
 <ol>
-<li><p>公开的仓库中有两个文件夹<code>theme-A/</code>和<code>theme-B/</code>，用于存放两套主题的静态文件</p>
+<li><p>在<code>用户名.github.io</code>仓库中有两个文件夹<code>theme-A/</code>和<code>theme-B/</code>，用于存放两套主题的静态文件</p>
 </li>
 <li><p>在GitHub的 Settings -&gt; Developer Settings -&gt; Personal access tokens -&gt; Tokens (classic) (<a target="_blank" rel="noopener" href="https://github.com/settings/tokens/new">链接</a>)生成一个token，填写Note，勾选<code>repo</code>和<code>workflow</code>然后生成</p>
 <p><img src="/images/20240121/token.png" alt="token"></p>
@@ -211,14 +230,14 @@
 on:
   workflow_dispatch:
   schedule:
-    - cron: &quot;0 2 * * *&quot;  # UTC时间02:00
+    - cron: &quot;0 2 * * *&quot;
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Determine Deployment Directory
         id: determine_directory
@@ -227,7 +246,7 @@ jobs:
           if [ $((day_of_week % 2)) -eq 0 ]; then
           echo &quot;::set-output name=directory::theme-B/&quot;
             else
-          echo &quot;::set-output name=directory::/&quot;
+          echo &quot;::set-output name=directory::theme-A/&quot;
           fi
           
       - name: Get Current Time
@@ -235,10 +254,10 @@ jobs:
         run: echo &quot;::set-output name=time::$(date +&#39;%Y-%m-%d %H:%M:%S&#39;)&quot;
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3 # 使用部署到 GitHub pages 的 action
+        uses: peaceiris/actions-gh-pages@v3.9.3 # 使用部署到 GitHub pages 的 action
         with:
-          publish_dir: $&#123;&#123; steps.determine_directory.outputs.directory &#125;&#125;
-          github_token: $&#123;&#123; secrets.DEPLOY_SECRET &#125;&#125;
+          publish_dir: $&#123;&#123; steps.determine_directory.outputs.directory &#125;&#125; 
+          github_token: $&#123;&#123; secrets.DEPLOY_SECRET &#125;&#125; # secret 名
           user_name: $&#123;&#123; secrets.MY_USER_NAME &#125;&#125;
           user_email: $&#123;&#123; secrets.MY_USER_EMAIL &#125;&#125;
           commit_message: &quot;Automated Deployment at $&#123;&#123; steps.current_time.outputs.time &#125;&#125;&quot; # 在 commit message 中添加当前时间
@@ -257,10 +276,10 @@ jobs:
     
     
     
-    
     <div id="comment">
-        <div id="vcomments"></div>
+        <div id="twikoo-container"></div>
     </div>
+    
     
     
 </div>
@@ -298,21 +317,16 @@ jobs:
 
 
 
-
-<script src="https://cdn.bootcdn.net/ajax/libs/valine/1.5.1/Valine.min.js"></script>
 <script>
-    new Valine({
-        el: '#vcomments',
-        appId: 'MMH0HmN9WNMhxXgccAiwt5qA-MdYXbMMI',
-        appKey: 'meCb4Dp0hSEmax5CgVfNrZST',
-        placeholder: '请主人留下评论喵~',
-        avatar: 'mp',
-        pageSize: 10,
-        recordIP: false,
-        path: window.location.pathname,
-        serverURLs: 'https://api.miku.run.place',
-        });
+    twikoo.init({
+        el: "#twikoo-container",
+        envId: "https://mikukatsune.netlify.app/.netlify/functions/twikoo",
+        region: "",
+        path: location.pathname,
+        lang: "",
+    })
 </script>
+
 
     
 </body>

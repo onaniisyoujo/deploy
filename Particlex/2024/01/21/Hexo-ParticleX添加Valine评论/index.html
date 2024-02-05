@@ -38,6 +38,8 @@
 
 
 
+<script src="https://cdn.staticfile.org/twikoo/1.6.31/twikoo.all.min.js"></script>
+
 
 
 <link rel="stylesheet" href="/css/main.css" />
@@ -83,6 +85,11 @@
         <a href="/tags">
             <i class="fa-solid fa-tags fa-fw"></i>
             <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/shuoshuo">
+            <i class="fa-solid fa-pen fa-fw"></i>
+            <span>&ensp;Diary</span>
         </a>
         
     </nav>
@@ -139,6 +146,15 @@
                     </div>
                 </a>
                 
+                <a href="/shuoshuo">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-pen fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Diary</div>
+                    </div>
+                </a>
+                
             </div>
         </transition>
     </nav>
@@ -178,7 +194,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/hexo/" style="color: #ff7d73">hexo</a>
+                <a href="/tags/hexo/" style="color: #00a596">hexo</a>
             </span>
             
             <span class="tag">
@@ -237,10 +253,10 @@ valine:
     
     
     
-    
     <div id="comment">
-        <div id="vcomments"></div>
+        <div id="twikoo-container"></div>
     </div>
+    
     
     
 </div>
@@ -278,21 +294,16 @@ valine:
 
 
 
-
-<script src="https://cdn.bootcdn.net/ajax/libs/valine/1.5.1/Valine.min.js"></script>
 <script>
-    new Valine({
-        el: '#vcomments',
-        appId: 'MMH0HmN9WNMhxXgccAiwt5qA-MdYXbMMI',
-        appKey: 'meCb4Dp0hSEmax5CgVfNrZST',
-        placeholder: '请主人留下评论喵~',
-        avatar: 'mp',
-        pageSize: 10,
-        recordIP: false,
-        path: window.location.pathname,
-        serverURLs: 'https://api.miku.run.place',
-        });
+    twikoo.init({
+        el: "#twikoo-container",
+        envId: "https://mikukatsune.netlify.app/.netlify/functions/twikoo",
+        region: "",
+        path: location.pathname,
+        lang: "",
+    })
 </script>
+
 
     
 </body>

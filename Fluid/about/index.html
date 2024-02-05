@@ -6,7 +6,7 @@
 
 
 
-<head><!-- hexo injector head_begin start --><link id="custom-css" rel="stylesheet" type="text/css" href="/css/divback.css"><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 6; pointer-events: none;" ></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><!-- hexo injector head_begin end -->
+<head><!-- hexo injector head_begin start --><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 6; pointer-events: none;" ></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><link id="custom-css" rel="stylesheet" type="text/css" href="/css/divback.css"><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/myicon.jpg">
   <link rel="icon" href="/img/myicon.jpg">
@@ -17,15 +17,15 @@
   <meta name="author" content="オナニー少女">
   <meta name="keywords" content="">
   
-    <meta name="description" content="少女   永远16岁   主要性别: 女 miku的老婆  目前初三 明年就高一了喜欢初音未来、Python娘、动漫及代码周末小概率更新          new Valine({         el: &#39;#vcomments&#39;,         appId: &#39;MMH0HmN9WNMhxXgccAiwt5qA-MdYXbMMI&#39;,         appKey: &#39;meCb4Dp0hSEma">
+    <meta name="description" content="少女   永远16岁   主要性别: 女 miku的老婆  目前初三 明年就高一了喜欢初音未来、Python娘、动漫及代码周末小概率更新    twikoo.init({   envId: &#39;https:&#x2F;&#x2F;mikukatsune.netlify.app&#x2F;.netlify&#x2F;functions&#x2F;twikoo&#39;,   el: &#39;#tcomment&#39;,   path: location.pathnam">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于">
 <meta property="og:url" content="https://onaniisyoujo.github.io/about/index.html">
 <meta property="og:site_name" content="少女的Blog">
-<meta property="og:description" content="少女   永远16岁   主要性别: 女 miku的老婆  目前初三 明年就高一了喜欢初音未来、Python娘、动漫及代码周末小概率更新          new Valine({         el: &#39;#vcomments&#39;,         appId: &#39;MMH0HmN9WNMhxXgccAiwt5qA-MdYXbMMI&#39;,         appKey: &#39;meCb4Dp0hSEma">
+<meta property="og:description" content="少女   永远16岁   主要性别: 女 miku的老婆  目前初三 明年就高一了喜欢初音未来、Python娘、动漫及代码周末小概率更新    twikoo.init({   envId: &#39;https:&#x2F;&#x2F;mikukatsune.netlify.app&#x2F;.netlify&#x2F;functions&#x2F;twikoo&#39;,   el: &#39;#tcomment&#39;,   path: location.pathnam">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-30T07:12:58.000Z">
-<meta property="article:modified_time" content="2023-12-17T13:34:01.782Z">
+<meta property="article:modified_time" content="2024-02-05T10:29:39.721Z">
 <meta property="article:author" content="オナニー少女">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -330,24 +330,14 @@
 <li>miku的老婆</li>
 </ul>
 <p>目前初三 <del>明年就高一了</del><br>喜欢初音未来、Python娘、动漫及代码<br><del>周末小概率更新</del></p>
-<div id="vcomments">
-</div>
-<script src="/js/Valine.min.js">
-</script>
+<div id="tcomment"></div>
+<script src="https://cdn.staticfile.org/twikoo/1.6.31/twikoo.all.min.js"></script>
 <script>
-    new Valine({
-        el: '#vcomments',
-        appId: 'MMH0HmN9WNMhxXgccAiwt5qA-MdYXbMMI',
-        appKey: 'meCb4Dp0hSEmax5CgVfNrZST',
-        placeholder: '请主人留下评论喵~',
-        notify: false,
-        verify: false,
-        avatar: 'mp',
-        pageSize: 10,
-        recordIP: false,
-        path: window.location.pathname,
-        serverURLs: 'https://api.miku.run.place',
-    });
+twikoo.init({
+  envId: 'https://mikukatsune.netlify.app/.netlify/functions/twikoo',
+  el: '#tcomment',
+  path: location.pathname, //
+})
 </script>
   </div>
 
@@ -427,30 +417,6 @@
        <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
   
-  
-    <div class="statistics">
-  
-  
-
-  
-    
-      <span id="busuanzi_container_site_pv" style="display: none">
-        总访问量 
-        <span id="busuanzi_value_site_pv"></span>
-         次
-      </span>
-    
-    
-      <span id="busuanzi_container_site_uv" style="display: none">
-        总访客数 
-        <span id="busuanzi_value_site_uv"></span>
-         人
-      </span>
-    
-    
-  
-</div>
-
   
   
   
@@ -558,8 +524,6 @@
   <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>shuoshuo | 少女的Blog</title>
+    <title>少女的日记本 | 少女的Blog</title>
     <meta name="author" content="少女" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,6 +37,8 @@
 
 
 
+
+<script src="https://cdn.staticfile.org/twikoo/1.6.31/twikoo.all.min.js"></script>
 
 
 
@@ -83,6 +85,11 @@
         <a href="/tags">
             <i class="fa-solid fa-tags fa-fw"></i>
             <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/shuoshuo">
+            <i class="fa-solid fa-pen fa-fw"></i>
+            <span>&ensp;Diary</span>
         </a>
         
     </nav>
@@ -139,6 +146,15 @@
                     </div>
                 </a>
                 
+                <a href="/shuoshuo">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-pen fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Diary</div>
+                    </div>
+                </a>
+                
             </div>
         </transition>
     </nav>
@@ -150,23 +166,57 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>shuoshuo</h1>
+        <h1>少女的日记本</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/1/20
+            2023/11/18
         </span>
         
         
     </div>
     
     <div class="content" v-pre>
-        
+        <script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    // 找到class为content的div标签
+    var contentDiv = document.querySelector('.content');
+
+    // 动态创建div标签用于Artitalk
+    var artitalkDiv = document.createElement('div');
+    artitalkDiv.id = 'artitalk_main'; // 设置ID为artitalk_main
+    contentDiv.appendChild(artitalkDiv); // 将新创建的div添加到class为content的div内
+
+    // 创建script标签
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://cdn.staticfile.org/artitalk/3.3.4/js/artitalk.js';
+
+    // 当脚本加载完成后初始化Artitalk
+    script.onload = function() {
+      // 确保Artitalk已加载
+      if (typeof Artitalk !== 'undefined') {
+        new Artitalk({
+          appId: 'MMH0HmN9WNMhxXgccAiwt5qA-MdYXbMMI',
+          appKey: 'meCb4Dp0hSEmax5CgVfNrZST',
+          serverURL: 'https://api.miku.run.place',
+          color1: '#8DC9D3',
+          color2: '#FFBFD7',
+        });
+      }
+    };
+
+    // 将script标签添加到body中（也可以根据需要添加到head中）
+    document.body.appendChild(script);
+  });
+})();
+</script>
+
     </div>
-    
     
     
     
@@ -174,8 +224,9 @@
     
     
     <div id="comment">
-        <div id="vcomments"></div>
+        <div id="twikoo-container"></div>
     </div>
+    
     
     
 </div>
@@ -213,21 +264,16 @@
 
 
 
-
-<script src="https://cdn.bootcdn.net/ajax/libs/valine/1.5.1/Valine.min.js"></script>
 <script>
-    new Valine({
-        el: '#vcomments',
-        appId: 'MMH0HmN9WNMhxXgccAiwt5qA-MdYXbMMI',
-        appKey: 'meCb4Dp0hSEmax5CgVfNrZST',
-        placeholder: '请主人留下评论喵~',
-        avatar: 'mp',
-        pageSize: 10,
-        recordIP: false,
-        path: window.location.pathname,
-        serverURLs: 'https://api.miku.run.place',
-        });
+    twikoo.init({
+        el: "#twikoo-container",
+        envId: "https://mikukatsune.netlify.app/.netlify/functions/twikoo",
+        region: "",
+        path: location.pathname,
+        lang: "",
+    })
 </script>
+
 
     
 </body>

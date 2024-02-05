@@ -83,6 +83,11 @@
             <span>&ensp;Tags</span>
         </a>
         
+        <a href="/shuoshuo">
+            <i class="fa-solid fa-pen fa-fw"></i>
+            <span>&ensp;Diary</span>
+        </a>
+        
     </nav>
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
@@ -137,6 +142,15 @@
                     </div>
                 </a>
                 
+                <a href="/shuoshuo">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-pen fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Diary</div>
+                    </div>
+                </a>
+                
             </div>
         </transition>
     </nav>
@@ -165,6 +179,78 @@
 <div id="home-posts-wrap" true ref="homePostsWrap">
     <div id="home-posts">
         
+
+<div class="post">
+    <a href="/2023/10/05/%E9%85%8D%E7%BD%AEHexo-Fluid%E5%8F%8AValine%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+        <h2 class="post-title">配置Hexo-Fluid及Valine时遇到的问题</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B5%84%E6%BA%90/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                资源
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/10/5
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>一些小问题</p>
+<h2 id="关于Hexo-Fluid的评论"><a href="#关于Hexo-Fluid的评论" class="headerlink" title="关于Hexo Fluid的评论"></a>关于Hexo Fluid的评论</h2><p>因为出了一点Bug，本站的评论通过修改<code>Blog/themes/fluid/layout/post.ejs</code>实现。<br>将<code>post.ejs</code>中的<code>&lt;%- inject_point(&#39;postComments&#39;) %&gt;</code>替换为 你使用的评论系统 提供的html代码<br>以Utterance为例:</p>
+<pre><code class="html">&lt;script src=&quot;https://utteranc.es/client.js&quot;
+        repo=&quot;用户名/仓库地址&quot;
+        issue-term=&quot;pathname&quot;
+        theme=&quot;github-light&quot;
+        crossorigin=&quot;anonymous&quot;
+        async&gt;
+&lt;/script&gt;
+</code></pre>
+<h2 id="关于网站图标"><a href="#关于网站图标" class="headerlink" title="关于网站图标"></a>关于网站图标</h2><p>在<code>_config.fluid.yml</code>设置没反应，手动将网页图标重命名为<code>favicon.ico</code>，复制到<code>public</code>文件夹下</p>
+<h2 id="关于Valine"><a href="#关于Valine" class="headerlink" title="关于Valine"></a>关于Valine</h2><p>测试时发现LeanCloud提供的域名会屏蔽中国大陆的访问…<br>绑定自己的域名后就能正常访问…  </p>
+<p>在LeanCloud的<code>设置-域名绑定</code>选项绑定自己的子域名，然后在子域名的DNS上设置<code>CNAME</code>记录，解析到LeanCloud提供的域名，之后配置Valine时,使用绑定的子域名  </p>
+<p><del>不想打字了</del></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/hexo/" style="color: #03a9f4">hexo</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/fluid/" style="color: #ffa2c4">fluid</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ff7d73">资源</a>
+        </span>
+        
+    </div>
+    <a href="/2023/10/05/%E9%85%8D%E7%BD%AEHexo-Fluid%E5%8F%8AValine%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="go-post">阅读全文</a>
+</div>
 
 <div class="post">
     <a href="/2023/10/05/%E9%AD%94%E6%94%B9Hexo-Fluid/">
@@ -319,12 +405,12 @@ window.addEventListener(&quot;scroll&quot;, function() &#123;
         
         <span class="tag">
             
-            <a href="/tags/fluid/" style="color: #03a9f4">fluid</a>
+            <a href="/tags/fluid/" style="color: #00a596">fluid</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ffa2c4">资源</a>
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #03a9f4">资源</a>
         </span>
         
     </div>
@@ -375,12 +461,12 @@ window.addEventListener(&quot;scroll&quot;, function() &#123;
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #ffa2c4">日常</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ffa2c4">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ff7d73">女生</a>
         </span>
         
     </div>
@@ -416,37 +502,6 @@ window.addEventListener(&quot;scroll&quot;, function() &#123;
         
     </div>
     <a href="/2023/08/30/hello-world/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/08/30/test/">
-        <h2 class="post-title">test</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/8/30
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p><img src="/images/yjsp.jpg" alt="田所浩二"></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2023/08/30/test/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -488,7 +543,7 @@ window.addEventListener(&quot;scroll&quot;, function() &#123;
             
             <div class="friend-link">
                 
-                    <a href="https://onaniisyoujo.github.io">Shoujo</a>
+                    <a target="_blank" rel="noopener" href="https://onaniishoujo.github.io">Shoujo</a>
                 
             </div>
             

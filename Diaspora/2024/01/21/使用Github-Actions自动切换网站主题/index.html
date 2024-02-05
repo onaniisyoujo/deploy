@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>使用Github Actions自动切换网站主题 - 少女的Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    
+    <meta name="description" content="
+现在网站用了三套主题，可喜可贺
+
+使用Github Actions实现每天自动切换网站的主题
+比如周一、三、五、七使用theme-A，二、四、六使用theme-B
+当然也可以添加theme-C、t,"> 
+    <meta name="author" content="少女"> 
+    
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="使用Github Actions自动切换网站主题 - 少女的Blog"/>
+    <meta name="twitter:description" content="
+现在网站用了三套主题，可喜可贺
+
+使用Github Actions实现每天自动切换网站的主题
+比如周一、三、五、七使用theme-A，二、四、六使用theme-B
+当然也可以添加theme-C、t,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="少女的Blog"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="使用Github Actions自动切换网站主题 - 少女的Blog"/>
+    <meta property="og:description" content="
+现在网站用了三套主题，可喜可贺
+
+使用Github Actions实现每天自动切换网站的主题
+比如周一、三、五、七使用theme-A，二、四、六使用theme-B
+当然也可以添加theme-C、t,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.6.0/style.min.css" /><style>body { font-family: "LXGW WenKai", Lexend, "Noto Sans SC", sans-serif; }</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">少女的Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://onaniishoujo.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">使用Github Actions自动切换网站主题</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">使用Github Actions自动切换网站主题</h1>
+        <div class="stuff">
+            <span>一月 21, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%B5%84%E6%BA%90/" rel="tag">资源</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <blockquote>
+<p>现在网站用了三套主题，可喜可贺</p>
+</blockquote>
+<p>使用<code>Github Actions</code>实现每天自动切换网站的主题</p>
+<p>比如周一、三、五、七使用<code>theme-A</code>，二、四、六使用<code>theme-B</code></p>
+<p>当然也可以添加<code>theme-C</code>、<code>theme-D</code>…</p>
+<ol>
+<li><p>在<code>用户名.github.io</code>仓库中有两个文件夹<code>theme-A/</code>和<code>theme-B/</code>，用于存放两套主题的静态文件</p>
+</li>
+<li><p>在GitHub的 Settings -&gt; Developer Settings -&gt; Personal access tokens -&gt; Tokens (classic) (<a target="_blank" rel="noopener" href="https://github.com/settings/tokens/new">链接</a>)生成一个token，填写Note，勾选<code>repo</code>和<code>workflow</code>然后生成</p>
+<p><img src="/img/20240121/token.png" alt="token"></p>
+</li>
+<li><p>在仓库的 Settings -&gt; Secrets and variables -&gt; Actions 添加刚才的token</p>
+<p><img src="/img/20240121/secret.png" alt="secret"></p>
+</li>
+<li><p>在GitHub仓库中新建<code>.github/workflows</code>，新建一个<code>.yaml</code>文件，文件名随意；可以先点<code>Run workflow</code>把静态文件部署到<code>gh-pages</code>分支</p>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Update</span> <span class="string">Blog</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">workflow_dispatch:</span></span><br><span class="line">  <span class="attr">schedule:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">cron:</span> <span class="string">&quot;0 2 * * *&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">update:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span> <span class="string">code</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Determine</span> <span class="string">Deployment</span> <span class="string">Directory</span></span><br><span class="line">        <span class="attr">id:</span> <span class="string">determine_directory</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          day_of_week=$(date +&#x27;%u&#x27;)</span></span><br><span class="line"><span class="string">          if [ $((day_of_week % 2)) -eq 0 ]; then</span></span><br><span class="line"><span class="string">          echo &quot;::set-output name=directory::theme-B/&quot;</span></span><br><span class="line"><span class="string">            else</span></span><br><span class="line"><span class="string">          echo &quot;::set-output name=directory::theme-A/&quot;</span></span><br><span class="line"><span class="string">          fi</span></span><br><span class="line"><span class="string"></span>          </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Get</span> <span class="string">Current</span> <span class="string">Time</span></span><br><span class="line">        <span class="attr">id:</span> <span class="string">current_time</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;::set-output name=time::$(date +&#x27;%Y-%m-%d %H:%M:%S&#x27;)&quot;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">peaceiris/actions-gh-pages@v3.9.3</span> <span class="comment"># 使用部署到 GitHub pages 的 action</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">publish_dir:</span> <span class="string">$&#123;&#123;</span> <span class="string">steps.determine_directory.outputs.directory</span> <span class="string">&#125;&#125;</span> </span><br><span class="line">          <span class="attr">github_token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.DEPLOY_SECRET</span> <span class="string">&#125;&#125;</span> <span class="comment"># secret 名</span></span><br><span class="line">          <span class="attr">user_name:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.MY_USER_NAME</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">user_email:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.MY_USER_EMAIL</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">commit_message:</span> <span class="string">&quot;Automated Deployment at $<span class="template-variable">&#123;&#123; steps.current_time.outputs.time &#125;&#125;</span>&quot;</span> <span class="comment"># 在 commit message 中添加当前时间</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>在仓库的 Settings -&gt; Pages 设置<code>Build and deployment</code>的<code>Source</code>为<code>Deploy from a branch</code>，选择<code>gh-pages</code>分支，此时GitHub Pages将开始部署</li>
+</ol>
+<p><del>总之就挺神经病的</del></p>
+<p><del>写的方法我自己都看不懂</del></p>
+<p><del>感谢ChatGPT提供的GitHub Actions的源码</del></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                </ul>
+            
+        </div>
+        
+        <div id="gitalk-container" class="comment link">查看评论</div>
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="https://cdn.staticfile.org/twikoo/1.6.31/twikoo.all.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -83,6 +83,11 @@
             <span>&ensp;Tags</span>
         </a>
         
+        <a href="/shuoshuo">
+            <i class="fa-solid fa-pen fa-fw"></i>
+            <span>&ensp;Diary</span>
+        </a>
+        
     </nav>
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
@@ -137,6 +142,15 @@
                     </div>
                 </a>
                 
+                <a href="/shuoshuo">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-pen fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Diary</div>
+                    </div>
+                </a>
+                
             </div>
         </transition>
     </nav>
@@ -165,6 +179,95 @@
 <div id="home-posts-wrap" true ref="homePostsWrap">
     <div id="home-posts">
         
+
+<div class="post">
+    <a href="/2024/02/02/Hexo-ParticleX%E5%8F%8ADiaspora%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8Artitalk/">
+        <h2 class="post-title">Hexo ParticleX及Diaspora主题使用Artitalk</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B5%84%E6%BA%90/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                资源
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/2/2
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p><code>Hexo Particle</code>X和<code>Hexo Diaspora</code>主题，如果使用<code>hexo new page &lt;页面名&gt; </code>，并在生成的<code>.md</code>文件配置Artitalk的代码，会出现奇怪的Bug</p>
+<p>请教ChatGPT之后用下面的代码可以使用Artitalk</p>
+<pre><code class="javascript">&lt;script&gt;
+(function() &#123;
+  document.addEventListener(&#39;DOMContentLoaded&#39;, function() &#123;
+    // 找到class为content的div标签
+    var contentDiv = document.querySelector(&#39;.content&#39;);
+
+    // 动态创建div标签用于Artitalk
+    var artitalkDiv = document.createElement(&#39;div&#39;);
+    artitalkDiv.id = &#39;artitalk_main&#39;; // 设置ID为artitalk_main
+    contentDiv.appendChild(artitalkDiv); // 将新创建的div添加到class为content的div内
+
+    // 创建script标签
+    var script = document.createElement(&#39;script&#39;);
+    script.type = &#39;text/javascript&#39;;
+    script.src = &#39;https://cdn.staticfile.org/artitalk/3.3.4/js/artitalk.js&#39;;
+
+    // 当脚本加载完成后初始化Artitalk
+    script.onload = function() &#123;
+      // 确保Artitalk已加载
+      if (typeof Artitalk !== &#39;undefined&#39;) &#123;
+        new Artitalk(&#123;
+          appId: &#39;MMH0HmN9WNMhxXgccAiwt5qA-MdYXbMMI&#39;,
+          appKey: &#39;meCb4Dp0hSEmax5CgVfNrZST&#39;,
+          serverURL: &#39;https://api.miku.run.place&#39;,
+          color1: &#39;#8DC9D3&#39;,
+          color2: &#39;#FFBFD7&#39;,
+        &#125;);
+      &#125;
+    &#125;;
+
+    // 将script标签添加到body中（也可以根据需要添加到head中）
+    document.body.appendChild(script);
+  &#125;);
+&#125;)();
+&lt;/script&gt;
+</code></pre>
+<p>把这些添加进生成的<code>index.md</code>文件中</p>
+<p>这里是把Artitalk添加进<code>&lt;div class=&quot;content&quot;&gt;</code>内，可以根据需要改变class名</p>
+<p>在Diaspora主题上有Bug，需要刷新页面才能显示Artitalk，暂时没想到怎么解决</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ff7d73">资源</a>
+        </span>
+        
+    </div>
+    <a href="/2024/02/02/Hexo-ParticleX%E5%8F%8ADiaspora%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8Artitalk/" class="go-post">阅读全文</a>
+</div>
 
 <div class="post">
     <a href="/2024/01/21/Hexo-ParticleX%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/">
@@ -245,12 +348,12 @@ valine:
         
         <span class="tag">
             
-            <a href="/tags/hexo/" style="color: #00a596">hexo</a>
+            <a href="/tags/hexo/" style="color: #ffa2c4">hexo</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ffa2c4">资源</a>
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00bcd4">资源</a>
         </span>
         
     </div>
@@ -284,11 +387,14 @@ valine:
     <div class="description">
         <div class="content" v-pre>
             
-            <p>使用<code>Github Actions</code>实现每天自动切换网站的主题</p>
+            <blockquote>
+<p>现在网站用了三套主题，可喜可贺</p>
+</blockquote>
+<p>使用<code>Github Actions</code>实现每天自动切换网站的主题</p>
 <p>比如周一、三、五、七使用<code>theme-A</code>，二、四、六使用<code>theme-B</code></p>
 <p>当然也可以添加<code>theme-C</code>、<code>theme-D</code>…</p>
 <ol>
-<li><p>公开的仓库中有两个文件夹<code>theme-A/</code>和<code>theme-B/</code>，用于存放两套主题的静态文件</p>
+<li><p>在<code>用户名.github.io</code>仓库中有两个文件夹<code>theme-A/</code>和<code>theme-B/</code>，用于存放两套主题的静态文件</p>
 </li>
 <li><p>在GitHub的 Settings -&gt; Developer Settings -&gt; Personal access tokens -&gt; Tokens (classic) (<a target="_blank" rel="noopener" href="https://github.com/settings/tokens/new">链接</a>)生成一个token，填写Note，勾选<code>repo</code>和<code>workflow</code>然后生成</p>
 <p><img src="/images/20240121/token.png" alt="token"></p>
@@ -304,14 +410,14 @@ valine:
 on:
   workflow_dispatch:
   schedule:
-    - cron: &quot;0 2 * * *&quot;  # UTC时间02:00
+    - cron: &quot;0 2 * * *&quot;
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Determine Deployment Directory
         id: determine_directory
@@ -320,7 +426,7 @@ jobs:
           if [ $((day_of_week % 2)) -eq 0 ]; then
           echo &quot;::set-output name=directory::theme-B/&quot;
             else
-          echo &quot;::set-output name=directory::/&quot;
+          echo &quot;::set-output name=directory::theme-A/&quot;
           fi
           
       - name: Get Current Time
@@ -328,10 +434,10 @@ jobs:
         run: echo &quot;::set-output name=time::$(date +&#39;%Y-%m-%d %H:%M:%S&#39;)&quot;
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3 # 使用部署到 GitHub pages 的 action
+        uses: peaceiris/actions-gh-pages@v3.9.3 # 使用部署到 GitHub pages 的 action
         with:
-          publish_dir: $&#123;&#123; steps.determine_directory.outputs.directory &#125;&#125;
-          github_token: $&#123;&#123; secrets.DEPLOY_SECRET &#125;&#125;
+          publish_dir: $&#123;&#123; steps.determine_directory.outputs.directory &#125;&#125; 
+          github_token: $&#123;&#123; secrets.DEPLOY_SECRET &#125;&#125; # secret 名
           user_name: $&#123;&#123; secrets.MY_USER_NAME &#125;&#125;
           user_email: $&#123;&#123; secrets.MY_USER_EMAIL &#125;&#125;
           commit_message: &quot;Automated Deployment at $&#123;&#123; steps.current_time.outputs.time &#125;&#125;&quot; # 在 commit message 中添加当前时间
@@ -356,7 +462,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ffa2c4">资源</a>
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00a596">资源</a>
         </span>
         
         <span class="tag">
@@ -404,7 +510,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/birthday/" style="color: #00bcd4">birthday</a>
+            <a href="/tags/birthday/" style="color: #00a596">birthday</a>
         </span>
         
     </div>
@@ -454,12 +560,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #ffa2c4">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">日常</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #00bcd4">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ffa2c4">女生</a>
         </span>
         
     </div>
@@ -493,7 +599,7 @@ jobs:
     <div class="description">
         <div class="content" v-pre>
             
-            <p>官方给出了方案，但是只能显示<code>hitokoto</code>(正文)部分，不能显示<code>from</code>(出处)部分</p>
+            <p>原版只能显示<code>hitokoto</code>(正文)部分，不能显示<code>from</code>(出处)部分</p>
 <ol>
 <li>修改<code>themes\fluid\layout\_partials\plugins\typed.ejs</code>替换为如下内容</li>
 </ol>
@@ -570,7 +676,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/hexo/" style="color: #00a596">hexo</a>
+            <a href="/tags/hexo/" style="color: #ff7d73">hexo</a>
         </span>
         
         <span class="tag">
@@ -580,7 +686,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #03a9f4">资源</a>
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00bcd4">资源</a>
         </span>
         
     </div>
@@ -638,17 +744,17 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00bcd4">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #03a9f4">日常</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ffa2c4">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #00a596">女生</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E4%BA%BA%E8%AE%BE/" style="color: #03a9f4">人设</a>
+            <a href="/tags/%E4%BA%BA%E8%AE%BE/" style="color: #ff7d73">人设</a>
         </span>
         
     </div>
@@ -698,12 +804,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #03a9f4">日常</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #03a9f4">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ffa2c4">女生</a>
         </span>
         
     </div>
@@ -757,7 +863,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #03a9f4">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #00a596">女生</a>
         </span>
         
     </div>
@@ -856,83 +962,11 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%8A%80%E6%9C%AF/" style="color: #ffa2c4">技术</a>
+            <a href="/tags/%E6%8A%80%E6%9C%AF/" style="color: #03a9f4">技术</a>
         </span>
         
     </div>
     <a href="/2023/10/14/%E4%B8%BAHexo-Fluid%E7%9A%84%E6%96%87%E7%AB%A0%E8%AE%BE%E7%BD%AE%E7%BD%91%E6%A0%BC%E8%83%8C%E6%99%AF/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/10/05/%E9%85%8D%E7%BD%AEHexo-Fluid%E5%8F%8AValine%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
-        <h2 class="post-title">配置Hexo-Fluid及Valine时遇到的问题</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E8%B5%84%E6%BA%90/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                资源
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/10/5
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>一些小问题</p>
-<h2 id="关于Hexo-Fluid的评论"><a href="#关于Hexo-Fluid的评论" class="headerlink" title="关于Hexo Fluid的评论"></a>关于Hexo Fluid的评论</h2><p>因为出了一点Bug，本站的评论通过修改<code>Blog/themes/fluid/layout/post.ejs</code>实现。<br>将<code>post.ejs</code>中的<code>&lt;%- inject_point(&#39;postComments&#39;) %&gt;</code>替换为 你使用的评论系统 提供的html代码<br>以Utterance为例:</p>
-<pre><code class="html">&lt;script src=&quot;https://utteranc.es/client.js&quot;
-        repo=&quot;用户名/仓库地址&quot;
-        issue-term=&quot;pathname&quot;
-        theme=&quot;github-light&quot;
-        crossorigin=&quot;anonymous&quot;
-        async&gt;
-&lt;/script&gt;
-</code></pre>
-<h2 id="关于网站图标"><a href="#关于网站图标" class="headerlink" title="关于网站图标"></a>关于网站图标</h2><p>在<code>_config.fluid.yml</code>设置没反应，手动将网页图标重命名为<code>favicon.ico</code>，复制到<code>public</code>文件夹下</p>
-<h2 id="关于Valine"><a href="#关于Valine" class="headerlink" title="关于Valine"></a>关于Valine</h2><p>测试时发现LeanCloud提供的域名会屏蔽中国大陆的访问…<br>绑定自己的域名后就能正常访问…  </p>
-<p>在LeanCloud的<code>设置-域名绑定</code>选项绑定自己的子域名，然后在子域名的DNS上设置<code>CNAME</code>记录，解析到LeanCloud提供的域名，之后配置Valine时,使用绑定的子域名  </p>
-<p><del>不想打字了</del></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/hexo/" style="color: #ffa2c4">hexo</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/fluid/" style="color: #00bcd4">fluid</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #03a9f4">资源</a>
-        </span>
-        
-    </div>
-    <a href="/2023/10/05/%E9%85%8D%E7%BD%AEHexo-Fluid%E5%8F%8AValine%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -974,7 +1008,7 @@ jobs:
             
             <div class="friend-link">
                 
-                    <a href="https://onaniisyoujo.github.io">Shoujo</a>
+                    <a target="_blank" rel="noopener" href="https://onaniishoujo.github.io">Shoujo</a>
                 
             </div>
             
