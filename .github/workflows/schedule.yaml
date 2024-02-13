@@ -18,9 +18,9 @@ jobs:
           day_of_week=$(date +'%u')
           if [ $day_of_week -eq 5 ]; then
             echo "::set-output name=directory::Fluid/"
-          elif [ $day_of_week -eq 3 ]  || [ $day_of_week -eq 6 ];; then
+          elif [ $day_of_week -eq 3 ] || [ $day_of_week -eq 6 ]; then
             echo "::set-output name=directory::Particlex/"
-          elif [ $day_of_week -eq 4 ] then
+          elif [ $day_of_week -eq 4 ]; then
             echo "::set-output name=directory::Stellaris/"
           elif [ $day_of_week -eq 2 ] || [ $day_of_week -eq 7 ]; then
             echo "::set-output name=directory::ShokaX/"
@@ -36,7 +36,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.9.3
         with:
           publish_dir: ${{ steps.determine_directory.outputs.directory }}
-          github_token: ${{ secrets.DEPLOY_SECRET }} # secret 名
+          github_token: ${{ secrets.DEPLOY_SECRET }}
           user_name: ${{ secrets.MY_USER_NAME }}
           user_email: ${{ secrets.MY_USER_EMAIL }}
           commit_message: "Automated Deployment at ${{ steps.current_time.outputs.time }}"
