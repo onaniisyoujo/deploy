@@ -4,11 +4,38 @@
   
   
   <entry>
+    <title>使用Cloudflare Pages搭建图床</title>
+    <link href="/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/"/>
+    <url>/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</url>
+    
+    <content type="html"><![CDATA[<p>使用<code>Cloudflare Pages</code>搭建图床</p><p>除了图床也可以放各种各样的文件</p><p>限制：</p><ul><li><p>自定义域最多100个</p></li><li><p>每月最多部署500次</p></li><li><p>每个<code>Cloudflare Pages</code>最多20000个文件，单个文件最大<code>25 MiB</code></p></li></ul><p>新建Git仓库，上传你的文件；在仓库根目录中新建一个<code>_headers</code>文件，内容如下</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada">/*<br>  <span class="hljs-keyword">Access</span>-Control-Allow-Origin: *<br></code></pre></td></tr></table></figure><p>最好把<code>Access-Control-Allow-Origin: *</code>中的<code>*</code>替换为你的网站URL</p><p>不替换就是所有人都能跨域访问</p><p>然后把这个仓库部署到<code>Cloudflare Pages</code></p><hr><p>后来发现可以在<code>/functions</code>目录下配置<code>Cloudflare Workers</code>，也可以使用<code>_worker.js</code>文件，如果只允许几个特定的网站共用一个图床，理论上能够实现；但是 ChatGPT 的方案<strong>有问题</strong>，自己也不怎么会JavaScript，遂将代码抄录如下：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-keyword">async</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-params">request, env</span>) &#123;<br>    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(request); <span class="hljs-comment">// 默认转发请求</span><br>    <span class="hljs-keyword">const</span> origin = request.<span class="hljs-property">headers</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;Origin&quot;</span>);<br>    <span class="hljs-keyword">const</span> allowedOrigins = [<br>      <span class="hljs-comment">// 在这里添加其他允许的来源</span><br>    ];<br><br>    <span class="hljs-comment">// 检查请求的Origin是否在允许的列表中</span><br>    <span class="hljs-keyword">if</span> (allowedOrigins.<span class="hljs-title function_">includes</span>(origin)) &#123;<br>      <span class="hljs-comment">// 允许列表中的源，创建新的响应头并设置CORS策略</span><br>      <span class="hljs-keyword">const</span> newHeaders = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>(response.<span class="hljs-property">headers</span>);<br>      newHeaders.<span class="hljs-title function_">set</span>(<span class="hljs-string">&quot;Access-Control-Allow-Origin&quot;</span>, origin);<br>      newHeaders.<span class="hljs-title function_">set</span>(<span class="hljs-string">&quot;Vary&quot;</span>, <span class="hljs-string">&quot;Origin&quot;</span>);<br><br>      <span class="hljs-comment">// 返回新的响应对象</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Response</span>(response.<span class="hljs-property">body</span>, &#123;<br>        <span class="hljs-attr">status</span>: response.<span class="hljs-property">status</span>,<br>        <span class="hljs-attr">statusText</span>: response.<span class="hljs-property">statusText</span>,<br>        <span class="hljs-attr">headers</span>: newHeaders<br>      &#125;);<br>    &#125;<br><br>    <span class="hljs-comment">// 如果请求的Origin不在允许列表中，返回原始响应</span><br>    <span class="hljs-comment">// 这里不设置Access-Control-Allow-Origin头</span><br>    <span class="hljs-keyword">return</span> response;<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure><p><del>\\又水了一篇好开心\\</del></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>资源</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>资源</tag>
+      
+      <tag>Cloudflare</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hexo ParticleX及Diaspora主题使用Artitalk</title>
     <link href="/2024/02/02/Hexo-ParticleX%E5%8F%8ADiaspora%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8Artitalk/"/>
     <url>/2024/02/02/Hexo-ParticleX%E5%8F%8ADiaspora%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8Artitalk/</url>
     
-    <content type="html"><![CDATA[<p><code>Hexo Particle</code>X和<code>Hexo Diaspora</code>主题，如果使用<code>hexo new page &lt;页面名&gt; </code>，并在生成的<code>.md</code>文件配置Artitalk的代码，会出现奇怪的Bug</p><p>请教ChatGPT之后用下面的代码可以使用Artitalk</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script&gt;<br>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;DOMContentLoaded&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 找到class为content的div标签</span><br>    <span class="hljs-keyword">var</span> contentDiv = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.content&#x27;</span>);<br><br>    <span class="hljs-comment">// 动态创建div标签用于Artitalk</span><br>    <span class="hljs-keyword">var</span> artitalkDiv = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;div&#x27;</span>);<br>    artitalkDiv.<span class="hljs-property">id</span> = <span class="hljs-string">&#x27;artitalk_main&#x27;</span>; <span class="hljs-comment">// 设置ID为artitalk_main</span><br>    contentDiv.<span class="hljs-title function_">appendChild</span>(artitalkDiv); <span class="hljs-comment">// 将新创建的div添加到class为content的div内</span><br><br>    <span class="hljs-comment">// 创建script标签</span><br>    <span class="hljs-keyword">var</span> script = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;script&#x27;</span>);<br>    script.<span class="hljs-property">type</span> = <span class="hljs-string">&#x27;text/javascript&#x27;</span>;<br>    script.<span class="hljs-property">src</span> = <span class="hljs-string">&#x27;https://cdn.staticfile.org/artitalk/3.3.4/js/artitalk.js&#x27;</span>;<br><br>    <span class="hljs-comment">// 当脚本加载完成后初始化Artitalk</span><br>    script.<span class="hljs-property">onload</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-comment">// 确保Artitalk已加载</span><br>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-title class_">Artitalk</span> !== <span class="hljs-string">&#x27;undefined&#x27;</span>) &#123;<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Artitalk</span>(&#123;<br>          <span class="hljs-attr">appId</span>: <span class="hljs-string">&#x27;MMH0HmN9WNMhxXgccAiwt5qA-MdYXbMMI&#x27;</span>,<br>          <span class="hljs-attr">appKey</span>: <span class="hljs-string">&#x27;meCb4Dp0hSEmax5CgVfNrZST&#x27;</span>,<br>          <span class="hljs-attr">serverURL</span>: <span class="hljs-string">&#x27;https://api.miku.run.place&#x27;</span>,<br>          <span class="hljs-attr">color1</span>: <span class="hljs-string">&#x27;#8DC9D3&#x27;</span>,<br>          <span class="hljs-attr">color2</span>: <span class="hljs-string">&#x27;#FFBFD7&#x27;</span>,<br>        &#125;);<br>      &#125;<br>    &#125;;<br><br>    <span class="hljs-comment">// 将script标签添加到body中（也可以根据需要添加到head中）</span><br>    <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(script);<br>  &#125;);<br>&#125;)();<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure><p>把这些添加进生成的<code>index.md</code>文件中</p><p>这里是把Artitalk添加进<code>&lt;div class=&quot;content&quot;&gt;</code>内，可以根据需要改变class名</p><p>在Diaspora主题上有Bug，需要刷新页面才能显示Artitalk，暂时没想到怎么解决</p>]]></content>
+    <content type="html"><![CDATA[<p><code>Hexo Particle</code>X和<code>Hexo Diaspora</code>主题，如果使用<code>hexo new page &lt;页面名&gt; </code>，并在生成的<code>.md</code>文件配置Artitalk的代码，会出现奇怪的Bug</p><p>请教ChatGPT之后用下面的代码可以使用Artitalk</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script&gt;<br>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;DOMContentLoaded&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 找到class为content的div标签</span><br>    <span class="hljs-keyword">var</span> contentDiv = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.content&#x27;</span>);<br><br>    <span class="hljs-comment">// 动态创建div标签用于Artitalk</span><br>    <span class="hljs-keyword">var</span> artitalkDiv = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;div&#x27;</span>);<br>    artitalkDiv.<span class="hljs-property">id</span> = <span class="hljs-string">&#x27;artitalk_main&#x27;</span>; <span class="hljs-comment">// 设置ID为artitalk_main</span><br>    contentDiv.<span class="hljs-title function_">appendChild</span>(artitalkDiv); <span class="hljs-comment">// 将新创建的div添加到class为content的div内</span><br><br>    <span class="hljs-comment">// 创建script标签</span><br>    <span class="hljs-keyword">var</span> script = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;script&#x27;</span>);<br>    script.<span class="hljs-property">type</span> = <span class="hljs-string">&#x27;text/javascript&#x27;</span>;<br>    script.<span class="hljs-property">src</span> = <span class="hljs-string">&#x27;https://cdn.staticfile.org/artitalk/3.3.4/js/artitalk.js&#x27;</span>;<br><br>    <span class="hljs-comment">// 当脚本加载完成后初始化Artitalk</span><br>    script.<span class="hljs-property">onload</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-comment">// 确保Artitalk已加载</span><br>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-title class_">Artitalk</span> !== <span class="hljs-string">&#x27;undefined&#x27;</span>) &#123;<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Artitalk</span>(&#123;<br>          <span class="hljs-attr">appId</span>: <span class="hljs-string">&#x27;你的appId&#x27;</span>,<br>          <span class="hljs-attr">appKey</span>: <span class="hljs-string">&#x27;你的appKey&#x27;</span>,<br>          <span class="hljs-attr">serverURL</span>: <span class="hljs-string">&#x27;你的serverURL&#x27;</span>,<br>          <span class="hljs-attr">color1</span>: <span class="hljs-string">&#x27;#8DC9D3&#x27;</span>,<br>          <span class="hljs-attr">color2</span>: <span class="hljs-string">&#x27;#FFBFD7&#x27;</span>,<br>        &#125;);<br>      &#125;<br>    &#125;;<br><br>    <span class="hljs-comment">// 将script标签添加到body中（也可以根据需要添加到head中）</span><br>    <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(script);<br>  &#125;);<br>&#125;)();<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure><p>把这些添加进生成的<code>index.md</code>文件中</p><p>这里是把Artitalk添加进<code>&lt;div class=&quot;content&quot;&gt;</code>内，可以根据需要改变class名</p><p>在Diaspora主题上有Bug，需要刷新页面才能显示Artitalk，暂时没想到怎么解决</p>]]></content>
     
     
     <categories>
@@ -49,9 +76,9 @@
     
     <tags>
       
-      <tag>资源</tag>
-      
       <tag>hexo</tag>
+      
+      <tag>资源</tag>
       
     </tags>
     
@@ -153,11 +180,11 @@
     
     <tags>
       
-      <tag>资源</tag>
-      
       <tag>hexo</tag>
       
       <tag>fluid</tag>
+      
+      <tag>资源</tag>
       
     </tags>
     
@@ -296,11 +323,11 @@
     
     <tags>
       
-      <tag>资源</tag>
-      
       <tag>hexo</tag>
       
       <tag>fluid</tag>
+      
+      <tag>资源</tag>
       
     </tags>
     
@@ -327,11 +354,11 @@
     
     <tags>
       
-      <tag>资源</tag>
-      
       <tag>hexo</tag>
       
       <tag>fluid</tag>
+      
+      <tag>资源</tag>
       
     </tags>
     

@@ -88,6 +88,11 @@
             <span>&ensp;Diary</span>
         </a>
         
+        <a href="/brewski">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Inside</span>
+        </a>
+        
     </nav>
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
@@ -151,6 +156,15 @@
                     </div>
                 </a>
                 
+                <a href="/brewski">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Inside</div>
+                    </div>
+                </a>
+                
             </div>
         </transition>
     </nav>
@@ -179,6 +193,105 @@
 <div id="home-posts-wrap" true ref="homePostsWrap">
     <div id="home-posts">
         
+
+<div class="post">
+    <a href="/2023/10/14/%E4%B8%BAHexo-Fluid%E7%9A%84%E6%96%87%E7%AB%A0%E8%AE%BE%E7%BD%AE%E7%BD%91%E6%A0%BC%E8%83%8C%E6%99%AF/">
+        <h2 class="post-title">为Hexo-Fluid的文章设置网格背景</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B5%84%E6%BA%90/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                资源
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/10/14
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>效果图：<br><img src="/images/20231014/xiaoguo.png" alt="效果图"><br>两种方法，推荐第一种</p>
+<h2 id="使用自定义CSS实现"><a href="#使用自定义CSS实现" class="headerlink" title="使用自定义CSS实现"></a>使用自定义CSS实现</h2><ul>
+<li><del>代码是从<a target="_blank" rel="noopener" href="https://gridzzly.com/">Gridzzly.com</a>抄的</del>  </li>
+<li>推荐为暗色模式进行适配 <del>不然根本看不清</del></li>
+</ul>
+<ol>
+<li>新建CSS文件(不要通过自定义CSS导入)</li>
+</ol>
+<pre><code class="css">#board &#123;
+    width: 100%;
+    height: 100%;
+    background-image: url(&quot;data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%226mm%22%20height%3D%226mm%22%20viewPort%3D%220%200%205mm%205mm%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Cline%20x1%3D%220mm%22%20y1%3D%225mm%22%20x2%3D%226mm%22%20y2%3D%225mm%22%20stroke-width%3D%220.3mm%22%20stroke%3D%22%23d4d4d4%22%2F%3E%20%3Cline%20x1%3D%225mm%22%20y1%3D%220mm%22%20x2%3D%225mm%22%20y2%3D%226mm%22%20stroke-width%3D%220.3mm%22%20stroke%3D%22%23d4d4d4%22%2F%3E%20%3C%2Fsvg%3E&quot;);
+    background-position: 2px 2px;
+&#125;
+</code></pre>
+<ol start="2">
+<li>引入CSS</li>
+</ol>
+<pre><code class="html">&lt;link id=&quot;custom-css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/css/divback.css&quot;&gt;
+</code></pre>
+<p>建议通过Hexo注入器进行引入</p>
+<ol start="3">
+<li>修改<code>Blog\themes\fluid\layout\_partials\header\navigation.ejs</code> 目前是第62行，为了给a标签绑定<code>onclick=&quot;toggleCSS()&quot;</code></li>
+</ol>
+<pre><code class="html">&lt;a class=&quot;nav-link&quot; target=&quot;_self&quot; href=&quot;javascript:;&quot; aria-label=&quot;Color Toggle&quot; onclick=&quot;toggleCSS()&quot;&gt;
+</code></pre>
+<ol start="4">
+<li>导入自定义js</li>
+</ol>
+<pre><code class="javascript">function toggleCSS() &#123;
+      var linkElement = document.getElementById(&quot;custom-css&quot;);
+      if (linkElement.disabled) &#123;
+        linkElement.disabled = false; // 启用CSS文件
+      &#125; else &#123;
+        linkElement.disabled = true; // 禁用CSS文件
+      &#125;
+    &#125;
+</code></pre>
+<h2 id="使用Pattern-css实现"><a href="#使用Pattern-css实现" class="headerlink" title="使用Pattern.css实现"></a>使用Pattern.css实现</h2><ol>
+<li>在<code>layout.ejs</code>引入<code>Pattern.css</code></li>
+</ol>
+<pre><code class="html">&lt;link href=&quot;https://unpkg.com/pattern.css&quot; rel=&quot;stylesheet&quot;&gt;
+</code></pre>
+<ol start="2">
+<li>将<code>layout.ejs</code>和<code>post.ejs</code>两个文件中的<code>&lt;div id=&quot;board&quot;</code>(没有向右的尖括号)改为<code>&lt;div id=&quot;board&quot; class=&quot;pattern-dots-xl&quot;</code>(以.pattern-dots-xl为例，可以自己修改class的内容)</li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/hexo/" style="color: #00a596">hexo</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%8A%80%E6%9C%AF/" style="color: #00bcd4">技术</a>
+        </span>
+        
+    </div>
+    <a href="/2023/10/14/%E4%B8%BAHexo-Fluid%E7%9A%84%E6%96%87%E7%AB%A0%E8%AE%BE%E7%BD%AE%E7%BD%91%E6%A0%BC%E8%83%8C%E6%99%AF/" class="go-post">阅读全文</a>
+</div>
 
 <div class="post">
     <a href="/2023/10/05/%E9%85%8D%E7%BD%AEHexo-Fluid%E5%8F%8AValine%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
@@ -235,17 +348,17 @@
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #03a9f4">资源</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/hexo/" style="color: #00a596">hexo</a>
+            <a href="/tags/hexo/" style="color: #03a9f4">hexo</a>
         </span>
         
         <span class="tag">
             
             <a href="/tags/fluid/" style="color: #ffa2c4">fluid</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ff7d73">资源</a>
         </span>
         
     </div>
@@ -400,17 +513,17 @@ window.addEventListener(&quot;scroll&quot;, function() &#123;
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00a596">资源</a>
-        </span>
-        
-        <span class="tag">
-            
             <a href="/tags/hexo/" style="color: #00bcd4">hexo</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/fluid/" style="color: #03a9f4">fluid</a>
+            <a href="/tags/fluid/" style="color: #ffa2c4">fluid</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00bcd4">资源</a>
         </span>
         
     </div>
@@ -461,7 +574,7 @@ window.addEventListener(&quot;scroll&quot;, function() &#123;
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00bcd4">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #ff7d73">日常</a>
         </span>
         
         <span class="tag">
@@ -571,6 +684,13 @@ window.addEventListener(&quot;scroll&quot;, function() &#123;
             <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
         </div>
         
+        <div>
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div style="display:none;">本站总访问量<span id="busuanzi_value_site_pv"></span>次&nbsp;&nbsp;
+            访客数<span id="busuanzi_value_site_uv"></span>人</div>
+        </div>
+        
+        
     </div>
 </footer>
 
@@ -585,5 +705,5 @@ window.addEventListener(&quot;scroll&quot;, function() &#123;
     </div>
     <script src="/js/main.js"></script>
     
-<!-- hexo injector body_end start --><script src="/js/L2Dwidget.min.js"></script><script>function isMobile(){return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)}if(isMobile())var userFlag=250;else userFlag=450;L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2d/model.json"},display:{position:"right",width:userFlag,height:userFlag},mobile:{show:!0},log:!1});</script><!-- hexo injector body_end end --></body>
+<!-- hexo injector body_end start --><script src="/js/L2Dwidget.min.js"></script><script>document.addEventListener("DOMContentLoaded",function(){var o,e=navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)?250:450;o="onaniishoujo.github.io"==window.location.hostname?"https://miku1.pages.dev/live2d/model.json":"shoujo.pages.dev"==window.location.hostname?"https://miku2.pages.dev/live2d/model.json":"shoujo.netlify.app"==window.location.hostname?"https://miku3.pages.dev/live2d/model.json":"",L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:o},display:{position:"right",width:e,height:e},mobile:{show:!0},log:!1})});</script><!-- hexo injector body_end end --></body>
 </html>

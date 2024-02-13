@@ -86,6 +86,11 @@
             <span>&ensp;Diary</span>
         </a>
         
+        <a href="/brewski">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Inside</span>
+        </a>
+        
     </nav>
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
@@ -149,6 +154,15 @@
                     </div>
                 </a>
                 
+                <a href="/brewski">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Inside</div>
+                    </div>
+                </a>
+                
             </div>
         </transition>
     </nav>
@@ -165,18 +179,7 @@
         
         
         <span>
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                资源
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/hexo/" style="background: #00bcd4">
+            <a href="/tags/hexo/" style="background: #00a596">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -187,7 +190,7 @@
         
         
         <span>
-            <a href="/tags/fluid/" style="background: #ffa2c4">
+            <a href="/tags/fluid/" style="background: #00bcd4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -198,7 +201,18 @@
         
         
         <span>
-            <a href="/tags/%E6%8A%80%E6%9C%AF/" style="background: #00bcd4">
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                资源
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E6%8A%80%E6%9C%AF/" style="background: #ff7d73">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -209,44 +223,11 @@
         
         
         <span>
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="background: #ff7d73">
+            <a href="/tags/Cloudflare/" style="background: #03a9f4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
-                日常
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                女生
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E4%BA%BA%E8%AE%BE/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                人设
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/birthday/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                birthday
+                Cloudflare
             </a>
         </span>
         
@@ -262,6 +243,50 @@
         </span>
         
         
+        
+        
+        
+        <span>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="background: #00a596">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                日常
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                女生
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E4%BA%BA%E8%AE%BE/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                人设
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/birthday/" style="background: #00bcd4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                birthday
+            </a>
+        </span>
         
         
     </div>
@@ -293,12 +318,12 @@
                     
                     <span class="tag">
                         
-                        <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00bcd4">资源</a>
+                        <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ff7d73">资源</a>
                     </span>
                     
                     <span class="tag">
                         
-                        <a href="/tags/Github/" style="color: #03a9f4">Github</a>
+                        <a href="/tags/Github/" style="color: #ffa2c4">Github</a>
                     </span>
                     
                 </span>
@@ -324,6 +349,13 @@
             <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
         </div>
         
+        <div>
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div style="display:none;">本站总访问量<span id="busuanzi_value_site_pv"></span>次&nbsp;&nbsp;
+            访客数<span id="busuanzi_value_site_uv"></span>人</div>
+        </div>
+        
+        
     </div>
 </footer>
 
@@ -338,5 +370,5 @@
     </div>
     <script src="/js/main.js"></script>
     
-<!-- hexo injector body_end start --><script src="/js/L2Dwidget.min.js"></script><script>function isMobile(){return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)}if(isMobile())var userFlag=250;else userFlag=450;L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2d/model.json"},display:{position:"right",width:userFlag,height:userFlag},mobile:{show:!0},log:!1});</script><!-- hexo injector body_end end --></body>
+<!-- hexo injector body_end start --><script src="/js/L2Dwidget.min.js"></script><script>document.addEventListener("DOMContentLoaded",function(){var o,e=navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)?250:450;o="onaniishoujo.github.io"==window.location.hostname?"https://miku1.pages.dev/live2d/model.json":"shoujo.pages.dev"==window.location.hostname?"https://miku2.pages.dev/live2d/model.json":"shoujo.netlify.app"==window.location.hostname?"https://miku3.pages.dev/live2d/model.json":"",L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:o},display:{position:"right",width:e,height:e},mobile:{show:!0},log:!1})});</script><!-- hexo injector body_end end --></body>
 </html>
