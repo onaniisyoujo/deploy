@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>使用Github Actions自动切换网站主题 | 少女的Blog</title>
+    <title>about | 少女的Blog</title>
     <meta name="author" content="少女" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -180,108 +180,27 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>使用Github Actions自动切换网站主题</h1>
+        <h1>about</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/1/21
+            2023/8/30
         </span>
         
-        <span class="category">
-            <a href="/categories/%E8%B5%84%E6%BA%90/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                资源
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00bcd4">资源</a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Github/" style="color: #ff7d73">Github</a>
-            </span>
-            
-        </span>
         
     </div>
     
     <div class="content" v-pre>
-        <blockquote>
-<p>现在网站用了三套主题，可喜可贺</p>
-</blockquote>
-<p>使用<code>Github Actions</code>实现每天自动切换网站的主题</p>
-<p>比如周一、三、五、七使用<code>theme-A</code>，二、四、六使用<code>theme-B</code></p>
-<p>当然也可以添加<code>theme-C</code>、<code>theme-D</code>…</p>
-<ol>
-<li><p>在<code>用户名.github.io</code>仓库中有两个文件夹<code>theme-A/</code>和<code>theme-B/</code>，用于存放两套主题的静态文件</p>
-</li>
-<li><p>在GitHub的 Settings -&gt; Developer Settings -&gt; Personal access tokens -&gt; Tokens (classic) (<a target="_blank" rel="noopener" href="https://github.com/settings/tokens/new">链接</a>)生成一个token，填写Note，勾选<code>repo</code>和<code>workflow</code>然后生成</p>
-<p><img src="/images/20240121/token.png" alt="token"></p>
-</li>
-<li><p>在仓库的 Settings -&gt; Secrets and variables -&gt; Actions 添加刚才的token</p>
-<p><img src="/images/20240121/secret.png" alt="secret"></p>
-</li>
-<li><p>在GitHub仓库中新建<code>.github/workflows</code>，新建一个<code>.yaml</code>文件，文件名随意；可以先点<code>Run workflow</code>把静态文件部署到<code>gh-pages</code>分支</p>
-</li>
-</ol>
-<pre><code class="yaml">name: Update Blog
-
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: &quot;0 2 * * *&quot;
-
-jobs:
-  update:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Determine Deployment Directory
-        id: determine_directory
-        run: |
-          day_of_week=$(date +&#39;%u&#39;)
-          if [ $((day_of_week % 2)) -eq 0 ]; then
-          echo &quot;::set-output name=directory::theme-B/&quot;
-            else
-          echo &quot;::set-output name=directory::theme-A/&quot;
-          fi
-          
-      - name: Get Current Time
-        id: current_time
-        run: echo &quot;::set-output name=time::$(date +&#39;%Y-%m-%d %H:%M:%S&#39;)&quot;
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3.9.3 # 使用部署到 GitHub pages 的 action
-        with:
-          publish_dir: $&#123;&#123; steps.determine_directory.outputs.directory &#125;&#125; 
-          github_token: $&#123;&#123; secrets.DEPLOY_SECRET &#125;&#125; # secret 名
-          user_name: $&#123;&#123; secrets.MY_USER_NAME &#125;&#125;
-          user_email: $&#123;&#123; secrets.MY_USER_EMAIL &#125;&#125;
-          commit_message: &quot;Automated Deployment at $&#123;&#123; steps.current_time.outputs.time &#125;&#125;&quot; # 在 commit message 中添加当前时间
-</code></pre>
-<ol start="5">
-<li>在仓库的 Settings -&gt; Pages 设置<code>Build and deployment</code>的<code>Source</code>为<code>Deploy from a branch</code>，选择<code>gh-pages</code>分支，此时GitHub Pages将开始部署</li>
-</ol>
-<p><del>总之就挺神经病的</del></p>
-<p><del>写的方法我自己都看不懂</del></p>
-<p><del>感谢ChatGPT提供的GitHub Actions的源码</del></p>
+        <ul>
+<li>少女  </li>
+<li>永远16岁  </li>
+<li>主要性别: 女</li>
+<li>miku的老婆</li>
+</ul>
+<p>目前初三 <del>明年就高一了</del><br>喜欢初音未来、Python娘、动漫及代码<br><del>周末小概率更新</del></p>
 
     </div>
     
