@@ -144,45 +144,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用Github Actions自动切换网站主题</title>
-    <url>/2024/01/21/%E4%BD%BF%E7%94%A8Github-Actions%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E7%AB%99%E4%B8%BB%E9%A2%98/</url>
-    <content><![CDATA[<blockquote>
-<p>现在网站用了三套主题，可喜可贺</p>
-</blockquote>
-<p>使用<code>Github Actions</code>实现每天自动切换网站的主题</p>
-<p>比如周一、三、五、七使用<code>theme-A</code>，二、四、六使用<code>theme-B</code></p>
-<p>当然也可以添加<code>theme-C</code>、<code>theme-D</code>…</p>
-<ol>
-<li><p>在<code>用户名.github.io</code>仓库中有两个文件夹<code>theme-A/</code>和<code>theme-B/</code>，用于存放两套主题的静态文件</p>
-</li>
-<li><p>在GitHub的 Settings -&gt; Developer Settings -&gt; Personal access tokens -&gt; Tokens (classic) (<a href="https://github.com/settings/tokens/new">链接</a>)生成一个token，填写Note，勾选<code>repo</code>和<code>workflow</code>然后生成</p>
-<p><img src="/img/20240121/token.png" alt="token"></p>
-</li>
-<li><p>在仓库的 Settings -&gt; Secrets and variables -&gt; Actions 添加刚才的token</p>
-<p><img src="/img/20240121/secret.png" alt="secret"></p>
-</li>
-<li><p>在GitHub仓库中新建<code>.github/workflows</code>，新建一个<code>.yaml</code>文件，文件名随意；可以先点<code>Run workflow</code>把静态文件部署到<code>gh-pages</code>分支</p>
-</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Update</span> <span class="string">Blog</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">workflow_dispatch:</span></span><br><span class="line">  <span class="attr">schedule:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">cron:</span> <span class="string">&quot;0 2 * * *&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">update:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span> <span class="string">code</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Determine</span> <span class="string">Deployment</span> <span class="string">Directory</span></span><br><span class="line">        <span class="attr">id:</span> <span class="string">determine_directory</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          day_of_week=$(date +&#x27;%u&#x27;)</span></span><br><span class="line"><span class="string">          if [ $((day_of_week % 2)) -eq 0 ]; then</span></span><br><span class="line"><span class="string">          echo &quot;::set-output name=directory::theme-B/&quot;</span></span><br><span class="line"><span class="string">            else</span></span><br><span class="line"><span class="string">          echo &quot;::set-output name=directory::theme-A/&quot;</span></span><br><span class="line"><span class="string">          fi</span></span><br><span class="line"><span class="string"></span>          </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Get</span> <span class="string">Current</span> <span class="string">Time</span></span><br><span class="line">        <span class="attr">id:</span> <span class="string">current_time</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;::set-output name=time::$(date +&#x27;%Y-%m-%d %H:%M:%S&#x27;)&quot;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">peaceiris/actions-gh-pages@v3.9.3</span> <span class="comment"># 使用部署到 GitHub pages 的 action</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">publish_dir:</span> <span class="string">$&#123;&#123;</span> <span class="string">steps.determine_directory.outputs.directory</span> <span class="string">&#125;&#125;</span> </span><br><span class="line">          <span class="attr">github_token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.DEPLOY_SECRET</span> <span class="string">&#125;&#125;</span> <span class="comment"># secret 名</span></span><br><span class="line">          <span class="attr">user_name:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.MY_USER_NAME</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">user_email:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.MY_USER_EMAIL</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">commit_message:</span> <span class="string">&quot;Automated Deployment at $<span class="template-variable">&#123;&#123; steps.current_time.outputs.time &#125;&#125;</span>&quot;</span> <span class="comment"># 在 commit message 中添加当前时间</span></span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>在仓库的 Settings -&gt; Pages 设置<code>Build and deployment</code>的<code>Source</code>为<code>Deploy from a branch</code>，选择<code>gh-pages</code>分支，此时GitHub Pages将开始部署</li>
-</ol>
-<p><del>总之就挺神经病的</del></p>
-<p><del>写的方法我自己都看不懂</del></p>
-<p><del>感谢ChatGPT提供的GitHub Actions的源码</del></p>
-]]></content>
-      <categories>
-        <category>资源</category>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>资源</tag>
-        <tag>Github</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>姐姐♡喜欢</title>
     <url>/2023/11/26/%E5%A7%90%E5%A7%90%E2%99%A1%E5%96%9C%E6%AC%A2/</url>
     <content><![CDATA[<p>好喜欢姐姐  </p>
@@ -274,31 +235,12 @@
       </tags>
   </entry>
   <entry>
-    <title>配置Hexo-Fluid及Valine时遇到的问题</title>
-    <url>/2023/10/05/%E9%85%8D%E7%BD%AEHexo-Fluid%E5%8F%8AValine%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>一些小问题</p>
-<h2 id="关于Hexo-Fluid的评论"><a href="#关于Hexo-Fluid的评论" class="headerlink" title="关于Hexo Fluid的评论"></a>关于Hexo Fluid的评论</h2><p>因为出了一点Bug，本站的评论通过修改<code>Blog/themes/fluid/layout/post.ejs</code>实现。<br>将<code>post.ejs</code>中的<code>&lt;%- inject_point(&#39;postComments&#39;) %&gt;</code>替换为 你使用的评论系统 提供的html代码<br>以Utterance为例:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://utteranc.es/client.js&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">repo</span>=<span class="string">&quot;用户名/仓库地址&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">issue-term</span>=<span class="string">&quot;pathname&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">theme</span>=<span class="string">&quot;github-light&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">async</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="关于网站图标"><a href="#关于网站图标" class="headerlink" title="关于网站图标"></a>关于网站图标</h2><p>在<code>_config.fluid.yml</code>设置没反应，手动将网页图标重命名为<code>favicon.ico</code>，复制到<code>public</code>文件夹下</p>
-<h2 id="关于Valine"><a href="#关于Valine" class="headerlink" title="关于Valine"></a>关于Valine</h2><p>测试时发现LeanCloud提供的域名会屏蔽中国大陆的访问…<br>绑定自己的域名后就能正常访问…  </p>
-<p>在LeanCloud的<code>设置-域名绑定</code>选项绑定自己的子域名，然后在子域名的DNS上设置<code>CNAME</code>记录，解析到LeanCloud提供的域名，之后配置Valine时,使用绑定的子域名  </p>
-<p><del>不想打字了</del></p>
-]]></content>
-      <categories>
-        <category>资源</category>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>fluid</tag>
-        <tag>资源</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>魔改Hexo Fluid</title>
     <url>/2023/10/05/%E9%AD%94%E6%94%B9Hexo-Fluid/</url>
     <content><![CDATA[<p>整理一下本少女在使用hexo fluid时用到的代码  </p>
+<h2 id="视频Banner"><a href="#视频Banner" class="headerlink" title="视频Banner"></a>视频Banner</h2><p>将<code>themes/fluid/layout/_partials/header/banner.ejs</code>修改为以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">var banner_img = page.banner_img || theme.index.banner_img</span><br><span class="line">var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_img_height)</span><br><span class="line">var banner_mask_alpha = parseFloat(page.banner_mask_alpha || theme.index.banner_mask_alpha)</span><br><span class="line">var subtitle = page.subtitle || page.title</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;div id=&quot;banner&quot; class=&quot;banner&quot; style=&quot;background: url(&#x27;&lt;%- url_for(banner_img) %&gt;&#x27;) no-repeat center center; background-size: cover;&quot;&gt;</span><br><span class="line">  &lt;video autoplay loop muted playsinline poster=&quot;&lt;%- url_for(banner_img) %&gt;&quot;</span><br><span class="line">         style=&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;&quot;&gt;</span><br><span class="line">    &lt;source src=&quot;[你的视频背景地址]&quot; type=&quot;video/mp4&quot;&gt;</span><br><span class="line">  &lt;/video&gt;</span><br><span class="line">  &lt;div class=&quot;full-bg-img&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;mask flex-center&quot; style=&quot;background-color: rgba(0, 0, 0, &lt;%= parseFloat(banner_mask_alpha) %&gt;)&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;banner-text text-center fade-in-up&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;h2&quot;&gt;</span><br><span class="line">          &lt;% if(theme.fun_features.typing.enable &amp;&amp; in_scope(theme.fun_features.typing.scope)) &#123; %&gt;</span><br><span class="line">            &lt;span id=&quot;subtitle&quot; data-typed-text=&quot;&lt;%= subtitle %&gt;&quot;&gt;&lt;/span&gt;</span><br><span class="line">          &lt;% &#125; else &#123; %&gt;</span><br><span class="line">            &lt;span id=&quot;subtitle&quot;&gt;&lt;%- subtitle %&gt;&lt;/span&gt;</span><br><span class="line">          &lt;% &#125; %&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;% if (is_post()) &#123; %&gt;</span><br><span class="line">          &lt;%- inject_point(&#x27;postMetaTop&#x27;) %&gt;</span><br><span class="line">        &lt;% &#125; %&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">      &lt;% if (theme.scroll_down_arrow.enable &amp;&amp; theme.scroll_down_arrow.banner_height_limit &lt;= banner_img_height &amp;&amp; page.layout !== &#x27;404&#x27;) &#123; %&gt;</span><br><span class="line">        &lt;div class=&quot;scroll-down-bar&quot;&gt;</span><br><span class="line">          &lt;i class=&quot;iconfont icon-arrowdown&quot;&gt;&lt;/i&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;% &#125; %&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
 <h2 id="添加自定义字体"><a href="#添加自定义字体" class="headerlink" title="添加自定义字体"></a>添加自定义字体</h2><ol>
 <li>通过自定义CSS引入字体</li>
 </ol>
@@ -343,6 +285,67 @@
         <tag>hexo</tag>
         <tag>fluid</tag>
         <tag>资源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>配置Hexo-Fluid及Valine时遇到的问题</title>
+    <url>/2023/10/05/%E9%85%8D%E7%BD%AEHexo-Fluid%E5%8F%8AValine%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>一些小问题</p>
+<h2 id="关于Hexo-Fluid的评论"><a href="#关于Hexo-Fluid的评论" class="headerlink" title="关于Hexo Fluid的评论"></a>关于Hexo Fluid的评论</h2><p>因为出了一点Bug，本站的评论通过修改<code>Blog/themes/fluid/layout/post.ejs</code>实现。<br>将<code>post.ejs</code>中的<code>&lt;%- inject_point(&#39;postComments&#39;) %&gt;</code>替换为 你使用的评论系统 提供的html代码<br>以Utterance为例:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://utteranc.es/client.js&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">repo</span>=<span class="string">&quot;用户名/仓库地址&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">issue-term</span>=<span class="string">&quot;pathname&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">theme</span>=<span class="string">&quot;github-light&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">async</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="关于网站图标"><a href="#关于网站图标" class="headerlink" title="关于网站图标"></a>关于网站图标</h2><p>在<code>_config.fluid.yml</code>设置没反应，手动将网页图标重命名为<code>favicon.ico</code>，复制到<code>public</code>文件夹下</p>
+<h2 id="关于Valine"><a href="#关于Valine" class="headerlink" title="关于Valine"></a>关于Valine</h2><p>测试时发现LeanCloud提供的域名会屏蔽中国大陆的访问…<br>绑定自己的域名后就能正常访问…  </p>
+<p>在LeanCloud的<code>设置-域名绑定</code>选项绑定自己的子域名，然后在子域名的DNS上设置<code>CNAME</code>记录，解析到LeanCloud提供的域名，之后配置Valine时,使用绑定的子域名  </p>
+<p><del>不想打字了</del></p>
+]]></content>
+      <categories>
+        <category>资源</category>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>fluid</tag>
+        <tag>资源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Github Actions自动切换网站主题</title>
+    <url>/2024/01/21/%E4%BD%BF%E7%94%A8Github-Actions%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E7%AB%99%E4%B8%BB%E9%A2%98/</url>
+    <content><![CDATA[<blockquote>
+<p>现在网站用了六套主题，可喜可贺</p>
+</blockquote>
+<p>使用<code>Github Actions</code>实现每天自动切换网站的主题</p>
+<p>比如周一、三、五、七使用<code>theme-A</code>，二、四、六使用<code>theme-B</code></p>
+<p>当然也可以添加<code>theme-C</code>、<code>theme-D</code>…</p>
+<ol>
+<li><p>在<code>用户名.github.io</code>仓库中有两个文件夹<code>theme-A/</code>和<code>theme-B/</code>，用于存放两套主题的静态文件</p>
+</li>
+<li><p>在GitHub的 Settings -&gt; Developer Settings -&gt; Personal access tokens -&gt; Tokens (classic) (<a href="https://github.com/settings/tokens/new">链接</a>)生成一个token，填写Note，勾选<code>repo</code>和<code>workflow</code>然后生成</p>
+<p><img src="/img/20240121/token.png" alt="token"></p>
+</li>
+<li><p>在仓库的 Settings -&gt; Secrets and variables -&gt; Actions 添加刚才的token</p>
+<p><img src="/img/20240121/secret.png" alt="secret"></p>
+</li>
+<li><p>在GitHub仓库中新建<code>.github/workflows</code>，新建一个<code>.yaml</code>文件，文件名随意；可以先点<code>Run workflow</code>把静态文件部署到<code>gh-pages</code>分支</p>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Update</span> <span class="string">Blog</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">workflow_dispatch:</span></span><br><span class="line">  <span class="attr">schedule:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">cron:</span> <span class="string">&quot;0 2 * * *&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">update:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span> <span class="string">code</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Determine</span> <span class="string">Deployment</span> <span class="string">Directory</span></span><br><span class="line">        <span class="attr">id:</span> <span class="string">determine_directory</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          day_of_week=$(date +&#x27;%u&#x27;)</span></span><br><span class="line"><span class="string">          if [ $((day_of_week % 2)) -eq 0 ]; then</span></span><br><span class="line"><span class="string">          echo &quot;::set-output name=directory::theme-B/&quot;</span></span><br><span class="line"><span class="string">            else</span></span><br><span class="line"><span class="string">          echo &quot;::set-output name=directory::theme-A/&quot;</span></span><br><span class="line"><span class="string">          fi</span></span><br><span class="line"><span class="string"></span>          </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Get</span> <span class="string">Current</span> <span class="string">Time</span></span><br><span class="line">        <span class="attr">id:</span> <span class="string">current_time</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;::set-output name=time::$(date +&#x27;%Y-%m-%d %H:%M:%S&#x27;)&quot;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">peaceiris/actions-gh-pages@v3.9.3</span> <span class="comment"># 使用部署到 GitHub pages 的 action</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">publish_dir:</span> <span class="string">$&#123;&#123;</span> <span class="string">steps.determine_directory.outputs.directory</span> <span class="string">&#125;&#125;</span> </span><br><span class="line">          <span class="attr">github_token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.DEPLOY_SECRET</span> <span class="string">&#125;&#125;</span> <span class="comment"># secret 名</span></span><br><span class="line">          <span class="attr">user_name:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.MY_USER_NAME</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">user_email:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.MY_USER_EMAIL</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">commit_message:</span> <span class="string">&quot;Automated Deployment at $<span class="template-variable">&#123;&#123; steps.current_time.outputs.time &#125;&#125;</span>&quot;</span> <span class="comment"># 在 commit message 中添加当前时间</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>在仓库的 Settings -&gt; Pages 设置<code>Build and deployment</code>的<code>Source</code>为<code>Deploy from a branch</code>，选择<code>gh-pages</code>分支，此时GitHub Pages将开始部署</li>
+</ol>
+<p><del>总之就挺神经病的</del></p>
+<p><del>写的方法我自己都看不懂</del></p>
+<p><del>感谢ChatGPT提供的GitHub Actions的源码</del></p>
+]]></content>
+      <categories>
+        <category>资源</category>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>资源</tag>
+        <tag>Github</tag>
       </tags>
   </entry>
 </search>

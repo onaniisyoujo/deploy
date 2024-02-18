@@ -25,7 +25,7 @@
             <category>Github</category>
             <pubDate>Sun, 21 Jan 2024 20:43:54 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
-&lt;p&gt;现在网站用了三套主题，可喜可贺&lt;/p&gt;
+&lt;p&gt;现在网站用了六套主题，可喜可贺&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;使用 &lt;code&gt;Github Actions&lt;/code&gt;  实现每天自动切换网站的主题&lt;/p&gt;
 &lt;p&gt;比如周一、三、五、七使用 &lt;code&gt;theme-A&lt;/code&gt; ，二、四、六使用 &lt;code&gt;theme-B&lt;/code&gt;&lt;/p&gt;

@@ -208,7 +208,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/hexo/" style="color: #00bcd4">hexo</a>
+                <a href="/tags/hexo/" style="color: #ff7d73">hexo</a>
             </span>
             
             <span class="tag">
@@ -218,7 +218,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ff7d73">资源</a>
+                <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00bcd4">资源</a>
             </span>
             
         </span>
@@ -227,6 +227,44 @@
     
     <div class="content" v-pre>
         <p>整理一下本少女在使用hexo fluid时用到的代码  </p>
+<h2 id="视频Banner"><a href="#视频Banner" class="headerlink" title="视频Banner"></a>视频Banner</h2><p>将<code>themes/fluid/layout/_partials/header/banner.ejs</code>修改为以下内容：</p>
+<pre><code class="ejs">&lt;%
+var banner_img = page.banner_img || theme.index.banner_img
+var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_img_height)
+var banner_mask_alpha = parseFloat(page.banner_mask_alpha || theme.index.banner_mask_alpha)
+var subtitle = page.subtitle || page.title
+%&gt;
+
+&lt;div id=&quot;banner&quot; class=&quot;banner&quot; style=&quot;background: url(&#39;&lt;%- url_for(banner_img) %&gt;&#39;) no-repeat center center; background-size: cover;&quot;&gt;
+  &lt;video autoplay loop muted playsinline poster=&quot;&lt;%- url_for(banner_img) %&gt;&quot;
+         style=&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;&quot;&gt;
+    &lt;source src=&quot;[你的视频背景地址]&quot; type=&quot;video/mp4&quot;&gt;
+  &lt;/video&gt;
+  &lt;div class=&quot;full-bg-img&quot;&gt;
+    &lt;div class=&quot;mask flex-center&quot; style=&quot;background-color: rgba(0, 0, 0, &lt;%= parseFloat(banner_mask_alpha) %&gt;)&quot;&gt;
+      &lt;div class=&quot;banner-text text-center fade-in-up&quot;&gt;
+        &lt;div class=&quot;h2&quot;&gt;
+          &lt;% if(theme.fun_features.typing.enable &amp;&amp; in_scope(theme.fun_features.typing.scope)) &#123; %&gt;
+            &lt;span id=&quot;subtitle&quot; data-typed-text=&quot;&lt;%= subtitle %&gt;&quot;&gt;&lt;/span&gt;
+          &lt;% &#125; else &#123; %&gt;
+            &lt;span id=&quot;subtitle&quot;&gt;&lt;%- subtitle %&gt;&lt;/span&gt;
+          &lt;% &#125; %&gt;
+        &lt;/div&gt;
+
+        &lt;% if (is_post()) &#123; %&gt;
+          &lt;%- inject_point(&#39;postMetaTop&#39;) %&gt;
+        &lt;% &#125; %&gt;
+      &lt;/div&gt;
+
+      &lt;% if (theme.scroll_down_arrow.enable &amp;&amp; theme.scroll_down_arrow.banner_height_limit &lt;= banner_img_height &amp;&amp; page.layout !== &#39;404&#39;) &#123; %&gt;
+        &lt;div class=&quot;scroll-down-bar&quot;&gt;
+          &lt;i class=&quot;iconfont icon-arrowdown&quot;&gt;&lt;/i&gt;
+        &lt;/div&gt;
+      &lt;% &#125; %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 <h2 id="添加自定义字体"><a href="#添加自定义字体" class="headerlink" title="添加自定义字体"></a>添加自定义字体</h2><ol>
 <li>通过自定义CSS引入字体</li>
 </ol>

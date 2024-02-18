@@ -635,3 +635,10 @@ $(function() {
     console.log("%c Github %c","background:#24272A; color:#ffffff","","https://github.com/Fechin/hexo-theme-diaspora")
 })
 
+// 自定义artitalk
+$(document).ready(function () {
+    if(location.href.indexOf("#reloaded") === -1 && location.href.indexOf("shuoshuo") !== -1){
+        location.href=location.href+"#reloaded";
+        location.reload();
+    }
+})

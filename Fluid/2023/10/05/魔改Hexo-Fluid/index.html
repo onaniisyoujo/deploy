@@ -6,7 +6,7 @@
 
 
 
-<head><!-- hexo injector head_begin start --><link id="custom-css" rel="stylesheet" type="text/css" href="/css/divback.css"><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 6; pointer-events: none;" ></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><!-- hexo injector head_begin end -->
+<head><!-- hexo injector head_begin start --><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 6; pointer-events: none;" ></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><link id="custom-css" rel="stylesheet" type="text/css" href="/css/divback.css"><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/myicon.jpg">
   <link rel="icon" href="/img/myicon.jpg">
@@ -17,19 +17,19 @@
   <meta name="author" content="オナニー少女">
   <meta name="keywords" content="">
   
-    <meta name="description" content="整理一下本少女在使用hexo fluid时用到的代码   添加自定义字体 通过自定义CSS引入字体  123456@font-face &amp;#123;  font-family: &amp;#x27;FontName&amp;#x27;;  &#x2F;*换成你自己的字体名及路径*&#x2F;  src: url(&amp;#x27;&#x2F;font&#x2F;font.ttf&amp;#x27;) format(&amp;#x27;truetype&amp;#x27;);  fo">
+    <meta name="description" content="整理一下本少女在使用hexo fluid时用到的代码   视频Banner将themes&#x2F;fluid&#x2F;layout&#x2F;_partials&#x2F;header&#x2F;banner.ejs修改为以下内容： 123456789101112131415161718192021222324252627282930313233343536&lt;%var banner_img &#x3D; page.banner_img || th">
 <meta property="og:type" content="article">
 <meta property="og:title" content="魔改Hexo Fluid">
 <meta property="og:url" content="https://onaniisyoujo.github.io/2023/10/05/%E9%AD%94%E6%94%B9Hexo-Fluid/index.html">
 <meta property="og:site_name" content="少女的Blog">
-<meta property="og:description" content="整理一下本少女在使用hexo fluid时用到的代码   添加自定义字体 通过自定义CSS引入字体  123456@font-face &amp;#123;  font-family: &amp;#x27;FontName&amp;#x27;;  &#x2F;*换成你自己的字体名及路径*&#x2F;  src: url(&amp;#x27;&#x2F;font&#x2F;font.ttf&amp;#x27;) format(&amp;#x27;truetype&amp;#x27;);  fo">
+<meta property="og:description" content="整理一下本少女在使用hexo fluid时用到的代码   视频Banner将themes&#x2F;fluid&#x2F;layout&#x2F;_partials&#x2F;header&#x2F;banner.ejs修改为以下内容： 123456789101112131415161718192021222324252627282930313233343536&lt;%var banner_img &#x3D; page.banner_img || th">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-05T12:23:53.000Z">
-<meta property="article:modified_time" content="2023-12-03T05:03:11.597Z">
+<meta property="article:modified_time" content="2024-02-13T04:48:38.749Z">
 <meta property="article:author" content="オナニー少女">
+<meta property="article:tag" content="资源">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="fluid">
-<meta property="article:tag" content="资源">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -228,8 +228,11 @@
 
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('https://res.cloudinary.com/dsfrgrq3w/image/upload/v1700994213/head_q2tmqs.jpg') no-repeat center center; background-size: cover;">
+<div id="banner" class="banner" style="background: url('https://res.cloudinary.com/dsfrgrq3w/image/upload/v1700994213/head_q2tmqs.jpg') no-repeat center center; background-size: cover;">
+  <video autoplay loop muted playsinline poster="https://res.cloudinary.com/dsfrgrq3w/image/upload/v1700994213/head_q2tmqs.jpg"
+         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    <source src="https://t.mwm.moe/acg/acg" type="video/mp4">
+  </video>
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -258,7 +261,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          4.2k 字
         
       </span>
     
@@ -269,7 +272,7 @@
         
         
         
-          20 分钟
+          36 分钟
         
       </span>
     
@@ -319,7 +322,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于：2023年12月3日 下午
+                    本文最后更新于：2024年2月13日 下午
                   
                 
               </p>
@@ -328,6 +331,9 @@
               <div class="markdown-body">
                 
                 <p>整理一下本少女在使用hexo fluid时用到的代码  </p>
+<h2 id="视频Banner"><a href="#视频Banner" class="headerlink" title="视频Banner"></a>视频Banner</h2><p>将<code>themes/fluid/layout/_partials/header/banner.ejs</code>修改为以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs ejs">&lt;%<br>var banner_img = page.banner_img || theme.index.banner_img<br>var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_img_height)<br>var banner_mask_alpha = parseFloat(page.banner_mask_alpha || theme.index.banner_mask_alpha)<br>var subtitle = page.subtitle || page.title<br>%&gt;<br><br>&lt;div id=&quot;banner&quot; class=&quot;banner&quot; style=&quot;background: url(&#x27;&lt;%- url_for(banner_img) %&gt;&#x27;) no-repeat center center; background-size: cover;&quot;&gt;<br>  &lt;video autoplay loop muted playsinline poster=&quot;&lt;%- url_for(banner_img) %&gt;&quot;<br>         style=&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;&quot;&gt;<br>    &lt;source src=&quot;[你的视频背景地址]&quot; type=&quot;video/mp4&quot;&gt;<br>  &lt;/video&gt;<br>  &lt;div class=&quot;full-bg-img&quot;&gt;<br>    &lt;div class=&quot;mask flex-center&quot; style=&quot;background-color: rgba(0, 0, 0, &lt;%= parseFloat(banner_mask_alpha) %&gt;)&quot;&gt;<br>      &lt;div class=&quot;banner-text text-center fade-in-up&quot;&gt;<br>        &lt;div class=&quot;h2&quot;&gt;<br>          &lt;% if(theme.fun_features.typing.enable &amp;&amp; in_scope(theme.fun_features.typing.scope)) &#123; %&gt;<br>            &lt;span id=&quot;subtitle&quot; data-typed-text=&quot;&lt;%= subtitle %&gt;&quot;&gt;&lt;/span&gt;<br>          &lt;% &#125; else &#123; %&gt;<br>            &lt;span id=&quot;subtitle&quot;&gt;&lt;%- subtitle %&gt;&lt;/span&gt;<br>          &lt;% &#125; %&gt;<br>        &lt;/div&gt;<br><br>        &lt;% if (is_post()) &#123; %&gt;<br>          &lt;%- inject_point(&#x27;postMetaTop&#x27;) %&gt;<br>        &lt;% &#125; %&gt;<br>      &lt;/div&gt;<br><br>      &lt;% if (theme.scroll_down_arrow.enable &amp;&amp; theme.scroll_down_arrow.banner_height_limit &lt;= banner_img_height &amp;&amp; page.layout !== &#x27;404&#x27;) &#123; %&gt;<br>        &lt;div class=&quot;scroll-down-bar&quot;&gt;<br>          &lt;i class=&quot;iconfont icon-arrowdown&quot;&gt;&lt;/i&gt;<br>        &lt;/div&gt;<br>      &lt;% &#125; %&gt;<br>    &lt;/div&gt;<br>  &lt;/div&gt;<br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
 <h2 id="添加自定义字体"><a href="#添加自定义字体" class="headerlink" title="添加自定义字体"></a>添加自定义字体</h2><ol>
 <li>通过自定义CSS引入字体</li>
 </ol>
@@ -403,11 +409,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/%E8%B5%84%E6%BA%90/" class="print-no-link">#资源</a>
+      
         <a href="/tags/hexo/" class="print-no-link">#hexo</a>
       
         <a href="/tags/fluid/" class="print-no-link">#fluid</a>
-      
-        <a href="/tags/%E8%B5%84%E6%BA%90/" class="print-no-link">#资源</a>
       
     </div>
   
