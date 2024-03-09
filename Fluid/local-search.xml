@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>在Deno Deploy部署Hexo博客</title>
+    <link href="/2024/03/09/%E5%9C%A8Deno-Deploy%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/"/>
+    <url>/2024/03/09/%E5%9C%A8Deno-Deploy%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/</url>
+    
+    <content type="html"><![CDATA[<p>默认分配一个<code>project_name.deno.dev</code>域名，速度还可以</p><p>类似Cloudflare Pages</p><p>需要准备一个GitHub账号，使用GitHub登陆<a href="https://dash.deno.com/signin">Deno</a></p><ol><li><p>Deno Deploy中新建一个<code>Project</code>，选择<code>Create an empty project</code></p><p><img src="/img/20240309/denop.png" alt="project"></p></li><li><p>在博客的GitHub仓库中新建一个workflow，内容如下：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">workflow_dispatch:</span><br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span> <span class="hljs-string">gh-pages</span>  <span class="hljs-comment"># 根据需要设置触发条件</span><br><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">deploy:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Clone</span> <span class="hljs-string">repository</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v4</span><br>        <span class="hljs-attr">with:</span> <br>          <span class="hljs-attr">ref:</span> <span class="hljs-string">&#x27;gh-pages&#x27;</span>  <span class="hljs-comment"># 根据需要修改为你的分支名</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">Deno</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">denoland/setup-deno@v1</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">deno-version:</span> <span class="hljs-string">v1.x</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">deployctl</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">&quot;deno install --allow-all --no-check -r -f https://deno.land/x/deploy/deployctl.ts&quot;</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Upload</span> <span class="hljs-string">to</span> <span class="hljs-string">Deno</span> <span class="hljs-string">Deploy</span><br>        <span class="hljs-attr">env:</span> <br>          <span class="hljs-attr">DENO_TOKEN:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.DENO_TOKEN</span> <span class="hljs-string">&#125;&#125;</span>  <span class="hljs-comment"># 使用设置的secrets名</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">&quot;DENO_DEPLOY_TOKEN=$DENO_TOKEN deployctl deploy --project=&lt;project_name&gt; https://deno.land/std@0.208.0/http/file_server.ts&quot;</span>  <span class="hljs-comment"># 将&lt;project_name&gt;替换为你在Deno新建的项目名</span><br></code></pre></td></tr></table></figure></li><li><p>在<a href="https://dash.deno.com/account#access-tokens">https://dash.deno.com/account#access-tokens</a>生成一个Access Token，添加进博客GitHub仓库的secrets中，名字可以用上面的<code>DENO_TOKEN</code>（也可以用别的名字）</p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>资源</category>
+      
+      <category>hexo</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>资源</tag>
+      
+      <tag>Github</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>使用Cloudflare Pages搭建图床</title>
     <link href="/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/"/>
     <url>/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</url>

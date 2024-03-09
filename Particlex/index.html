@@ -195,6 +195,101 @@
         
 
 <div class="post">
+    <a href="/2024/03/09/%E5%9C%A8Deno-Deploy%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/">
+        <h2 class="post-title">在Deno Deploy部署Hexo博客</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B5%84%E6%BA%90/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                资源
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/3/9
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>默认分配一个<code>project_name.deno.dev</code>域名，速度还可以</p>
+<p>类似Cloudflare Pages</p>
+<p>需要准备一个GitHub账号，使用GitHub登陆<a target="_blank" rel="noopener" href="https://dash.deno.com/signin">Deno</a></p>
+<ol>
+<li><p>Deno Deploy中新建一个<code>Project</code>，选择<code>Create an empty project</code></p>
+<p><img src="/images/20240309/denop.png" alt="project"></p>
+</li>
+<li><p>在博客的GitHub仓库中新建一个workflow，内容如下：</p>
+<pre><code class="yaml">name: Deploy
+on:
+  workflow_dispatch:
+  push:
+    branches: gh-pages  # 根据需要设置触发条件
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+        with: 
+          ref: &#39;gh-pages&#39;  # 根据需要修改为你的分支名
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Install deployctl
+        run: &quot;deno install --allow-all --no-check -r -f https://deno.land/x/deploy/deployctl.ts&quot;
+
+      - name: Upload to Deno Deploy
+        env: 
+          DENO_TOKEN: $&#123;&#123; secrets.DENO_TOKEN &#125;&#125;  # 使用设置的secrets名
+        run: &quot;DENO_DEPLOY_TOKEN=$DENO_TOKEN deployctl deploy --project=&lt;project_name&gt; https://deno.land/std@0.208.0/http/file_server.ts&quot;  # 将&lt;project_name&gt;替换为你在Deno新建的项目名
+</code></pre>
+</li>
+<li><p>在<a target="_blank" rel="noopener" href="https://dash.deno.com/account#access-tokens">https://dash.deno.com/account#access-tokens</a>生成一个Access Token，添加进博客GitHub仓库的secrets中，名字可以用上面的<code>DENO_TOKEN</code>（也可以用别的名字）</p>
+</li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ffa2c4">资源</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Github/" style="color: #00a596">Github</a>
+        </span>
+        
+    </div>
+    <a href="/2024/03/09/%E5%9C%A8Deno-Deploy%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/">
         <h2 class="post-title">使用Cloudflare Pages搭建图床</h2>
     </a>
@@ -285,12 +380,12 @@
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ff7d73">资源</a>
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00a596">资源</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Cloudflare/" style="color: #03a9f4">Cloudflare</a>
+            <a href="/tags/Cloudflare/" style="color: #ffa2c4">Cloudflare</a>
         </span>
         
     </div>
@@ -379,7 +474,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ffa2c4">资源</a>
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ff7d73">资源</a>
         </span>
         
     </div>
@@ -465,7 +560,7 @@ valine:
         
         <span class="tag">
             
-            <a href="/tags/hexo/" style="color: #ffa2c4">hexo</a>
+            <a href="/tags/hexo/" style="color: #03a9f4">hexo</a>
         </span>
         
         <span class="tag">
@@ -579,12 +674,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ff7d73">资源</a>
+            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00a596">资源</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Github/" style="color: #00bcd4">Github</a>
+            <a href="/tags/Github/" style="color: #03a9f4">Github</a>
         </span>
         
     </div>
@@ -677,12 +772,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00bcd4">日常</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ffa2c4">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ff7d73">女生</a>
         </span>
         
     </div>
@@ -793,17 +888,17 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/hexo/" style="color: #00bcd4">hexo</a>
+            <a href="/tags/hexo/" style="color: #03a9f4">hexo</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/fluid/" style="color: #ff7d73">fluid</a>
         </span>
         
         <span class="tag">
             
             <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00a596">资源</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/fluid/" style="color: #03a9f4">fluid</a>
         </span>
         
     </div>
@@ -861,7 +956,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #ffa2c4">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">日常</a>
         </span>
         
         <span class="tag">
@@ -871,7 +966,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E4%BA%BA%E8%AE%BE/" style="color: #ff7d73">人设</a>
+            <a href="/tags/%E4%BA%BA%E8%AE%BE/" style="color: #00a596">人设</a>
         </span>
         
     </div>
@@ -921,70 +1016,16 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #ff7d73">日常</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #03a9f4">女生</a>
-        </span>
-        
-    </div>
-    <a href="/2023/10/26/%E6%83%B3%E7%A9%BFLolita/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/10/14/%E8%B0%81%E8%83%BD%E5%B8%AE%E6%88%91%E6%89%BE%E4%B8%AA%E5%A5%B3%E6%9C%8B%E5%8F%8B/">
-        <h2 class="post-title">谁能帮我找个女朋友</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%97%A5%E5%B8%B8/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                日常
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/10/14
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>谁能帮我找个女朋友<br>要高中大姐姐</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
             <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #03a9f4">日常</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ff7d73">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #00a596">女生</a>
         </span>
         
     </div>
-    <a href="/2023/10/14/%E8%B0%81%E8%83%BD%E5%B8%AE%E6%88%91%E6%89%BE%E4%B8%AA%E5%A5%B3%E6%9C%8B%E5%8F%8B/" class="go-post">阅读全文</a>
+    <a href="/2023/10/26/%E6%83%B3%E7%A9%BFLolita/" class="go-post">阅读全文</a>
 </div>
 
 

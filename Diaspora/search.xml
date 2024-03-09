@@ -20,6 +20,51 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo ParticleX及Diaspora主题使用Artitalk</title>
+    <url>/2024/02/02/Hexo-ParticleX%E5%8F%8ADiaspora%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8Artitalk/</url>
+    <content><![CDATA[<p><code>Hexo Particle</code>X和<code>Hexo Diaspora</code>主题，如果使用<code>hexo new page &lt;页面名&gt; </code>，并在生成的<code>.md</code>文件配置Artitalk的代码，会出现奇怪的Bug</p>
+<p>请教ChatGPT之后用下面的代码可以使用Artitalk</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 找到class为content的div标签</span></span><br><span class="line">    <span class="keyword">var</span> contentDiv = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.content&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动态创建div标签用于Artitalk</span></span><br><span class="line">    <span class="keyword">var</span> artitalkDiv = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">    artitalkDiv.<span class="property">id</span> = <span class="string">&#x27;artitalk_main&#x27;</span>; <span class="comment">// 设置ID为artitalk_main</span></span><br><span class="line">    contentDiv.<span class="title function_">appendChild</span>(artitalkDiv); <span class="comment">// 将新创建的div添加到class为content的div内</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建script标签</span></span><br><span class="line">    <span class="keyword">var</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">    script.<span class="property">type</span> = <span class="string">&#x27;text/javascript&#x27;</span>;</span><br><span class="line">    script.<span class="property">src</span> = <span class="string">&#x27;https://cdn.staticfile.org/artitalk/3.3.4/js/artitalk.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当脚本加载完成后初始化Artitalk</span></span><br><span class="line">    script.<span class="property">onload</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 确保Artitalk已加载</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="title class_">Artitalk</span> !== <span class="string">&#x27;undefined&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Artitalk</span>(&#123;</span><br><span class="line">          <span class="attr">appId</span>: <span class="string">&#x27;你的appId&#x27;</span>,</span><br><span class="line">          <span class="attr">appKey</span>: <span class="string">&#x27;你的appKey&#x27;</span>,</span><br><span class="line">          <span class="attr">serverURL</span>: <span class="string">&#x27;你的serverURL&#x27;</span>,</span><br><span class="line">          <span class="attr">color1</span>: <span class="string">&#x27;#8DC9D3&#x27;</span>,</span><br><span class="line">          <span class="attr">color2</span>: <span class="string">&#x27;#FFBFD7&#x27;</span>,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将script标签添加到body中（也可以根据需要添加到head中）</span></span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>把这些添加进生成的<code>index.md</code>文件中</p>
+<p>这里是把Artitalk添加进<code>&lt;div class=&quot;content&quot;&gt;</code>内，可以根据需要改变class名</p>
+<p>在Diaspora主题上有Bug，需要刷新页面才能显示Artitalk，暂时没想到怎么解决</p>
+]]></content>
+      <categories>
+        <category>资源</category>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>资源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo ParticleX添加Valine评论</title>
+    <url>/2024/01/21/Hexo-ParticleX%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/</url>
+    <content><![CDATA[<ol>
+<li>在<code>themes\particlex\layout\comment.ejs</code>的最后添加以下代码：(可使用CDN)</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;% if (theme.valine.enable) &#123; %&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcdn.net/ajax/libs/valine/1.5.1/Valine.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">new</span> <span class="title class_">Valine</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 请使用你自己的设置</span></span></span><br><span class="line"><span class="language-javascript">        <span class="attr">el</span>: <span class="string">&#x27;#vcomments&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">appId</span>: <span class="string">&#x27;&lt;%- theme.valine.appId %&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">appKey</span>: <span class="string">&#x27;&lt;%- theme.valine.appKey %&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">avatar</span>: <span class="string">&#x27;mp&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">path</span>: <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">pathname</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">serverURLs</span>: <span class="string">&#x27;&lt;%- theme.valine.serverURLs %&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>从<code>themes\particlex\layout\post.ejs</code>的倒数第三行开始加入以下代码：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;% if (theme.valine.enable) &#123; %&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;comment&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;vcomments&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>themes\particlex\_config.yml</code>加入Valine的配置项</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Valine</span></span><br><span class="line"><span class="attr">valine:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">appId:</span> <span class="comment"># 你的appId</span></span><br><span class="line">    <span class="attr">appKey:</span> <span class="comment"># 你的appKey</span></span><br><span class="line">    <span class="attr">serverURLs:</span> <span class="comment"># 你的serverURLs</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>所以ParticleX为什么不支持Valine<br>高亮好像不支持ejs所以代码块上写的html</p>
+]]></content>
+      <categories>
+        <category>资源</category>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>资源</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello, World!</title>
     <url>/2023/08/30/hello-world/</url>
     <content><![CDATA[<h1 id="初音ミク16岁生日快乐！！！"><a href="#初音ミク16岁生日快乐！！！" class="headerlink" title="初音ミク16岁生日快乐！！！"></a>初音ミク16岁生日快乐！！！</h1><h1 id="同时纪念少女的小站正式建成"><a href="#同时纪念少女的小站正式建成" class="headerlink" title="同时纪念少女的小站正式建成"></a>同时纪念少女的小站正式建成</h1><h1 id="2023-08-31-00-00-JST"><a href="#2023-08-31-00-00-JST" class="headerlink" title="2023.08.31 00:00 (JST)"></a>2023.08.31 00:00 (JST)</h1><p>Hello, World!</p>
@@ -65,71 +110,37 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo ParticleX添加Valine评论</title>
-    <url>/2024/01/21/Hexo-ParticleX%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/</url>
-    <content><![CDATA[<ol>
-<li>在<code>themes\particlex\layout\comment.ejs</code>的最后添加以下代码：(可使用CDN)</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;% if (theme.valine.enable) &#123; %&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcdn.net/ajax/libs/valine/1.5.1/Valine.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">new</span> <span class="title class_">Valine</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 请使用你自己的设置</span></span></span><br><span class="line"><span class="language-javascript">        <span class="attr">el</span>: <span class="string">&#x27;#vcomments&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">appId</span>: <span class="string">&#x27;&lt;%- theme.valine.appId %&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">appKey</span>: <span class="string">&#x27;&lt;%- theme.valine.appKey %&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">avatar</span>: <span class="string">&#x27;mp&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">path</span>: <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">pathname</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">serverURLs</span>: <span class="string">&#x27;&lt;%- theme.valine.serverURLs %&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><p>从<code>themes\particlex\layout\post.ejs</code>的倒数第三行开始加入以下代码：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;% if (theme.valine.enable) &#123; %&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;comment&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;vcomments&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+    <title>使用Cloudflare Pages搭建图床</title>
+    <url>/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</url>
+    <content><![CDATA[<p>使用<code>Cloudflare Pages</code>搭建图床</p>
+<p>除了图床也可以放各种各样的文件</p>
+<p>限制：</p>
+<ul>
+<li><p>自定义域最多100个</p>
 </li>
-<li><p>在<code>themes\particlex\_config.yml</code>加入Valine的配置项</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Valine</span></span><br><span class="line"><span class="attr">valine:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">appId:</span> <span class="comment"># 你的appId</span></span><br><span class="line">    <span class="attr">appKey:</span> <span class="comment"># 你的appKey</span></span><br><span class="line">    <span class="attr">serverURLs:</span> <span class="comment"># 你的serverURLs</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>所以ParticleX为什么不支持Valine<br>高亮好像不支持ejs所以代码块上写的html</p>
-]]></content>
-      <categories>
-        <category>资源</category>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>资源</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo ParticleX及Diaspora主题使用Artitalk</title>
-    <url>/2024/02/02/Hexo-ParticleX%E5%8F%8ADiaspora%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8Artitalk/</url>
-    <content><![CDATA[<p><code>Hexo Particle</code>X和<code>Hexo Diaspora</code>主题，如果使用<code>hexo new page &lt;页面名&gt; </code>，并在生成的<code>.md</code>文件配置Artitalk的代码，会出现奇怪的Bug</p>
-<p>请教ChatGPT之后用下面的代码可以使用Artitalk</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 找到class为content的div标签</span></span><br><span class="line">    <span class="keyword">var</span> contentDiv = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.content&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动态创建div标签用于Artitalk</span></span><br><span class="line">    <span class="keyword">var</span> artitalkDiv = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">    artitalkDiv.<span class="property">id</span> = <span class="string">&#x27;artitalk_main&#x27;</span>; <span class="comment">// 设置ID为artitalk_main</span></span><br><span class="line">    contentDiv.<span class="title function_">appendChild</span>(artitalkDiv); <span class="comment">// 将新创建的div添加到class为content的div内</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建script标签</span></span><br><span class="line">    <span class="keyword">var</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">    script.<span class="property">type</span> = <span class="string">&#x27;text/javascript&#x27;</span>;</span><br><span class="line">    script.<span class="property">src</span> = <span class="string">&#x27;https://cdn.staticfile.org/artitalk/3.3.4/js/artitalk.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当脚本加载完成后初始化Artitalk</span></span><br><span class="line">    script.<span class="property">onload</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 确保Artitalk已加载</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="title class_">Artitalk</span> !== <span class="string">&#x27;undefined&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Artitalk</span>(&#123;</span><br><span class="line">          <span class="attr">appId</span>: <span class="string">&#x27;你的appId&#x27;</span>,</span><br><span class="line">          <span class="attr">appKey</span>: <span class="string">&#x27;你的appKey&#x27;</span>,</span><br><span class="line">          <span class="attr">serverURL</span>: <span class="string">&#x27;你的serverURL&#x27;</span>,</span><br><span class="line">          <span class="attr">color1</span>: <span class="string">&#x27;#8DC9D3&#x27;</span>,</span><br><span class="line">          <span class="attr">color2</span>: <span class="string">&#x27;#FFBFD7&#x27;</span>,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将script标签添加到body中（也可以根据需要添加到head中）</span></span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>把这些添加进生成的<code>index.md</code>文件中</p>
-<p>这里是把Artitalk添加进<code>&lt;div class=&quot;content&quot;&gt;</code>内，可以根据需要改变class名</p>
-<p>在Diaspora主题上有Bug，需要刷新页面才能显示Artitalk，暂时没想到怎么解决</p>
-]]></content>
-      <categories>
-        <category>资源</category>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>资源</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>少女的人设</title>
-    <url>/2023/11/05/%E5%B0%91%E5%A5%B3%E7%9A%84%E4%BA%BA%E8%AE%BE/</url>
-    <content><![CDATA[<ul>
-<li>姓名: 少女  </li>
-<li>性别: 女  </li>
-<li>年龄: 16  </li>
-<li>身高: 159.5cm  </li>
-<li>体重: <span class="heimu">女孩子的体重是秘密!!</span>  </li>
-<li>胸围: 95D  </li>
-<li>生日: 2007.08.31  </li>
-<li>喜欢的人&#x2F;物: 初音未来&amp;&amp;美少女&amp;&amp;Python  <div style="text-align:center;"><p><del>才，才不是为了你才特意写的自我介绍啦</del></p><p><strong>世界第一可爱美少女</strong></p></div></li>
+<li><p>每月最多部署500次</p>
+</li>
+<li><p>每个<code>Cloudflare Pages</code>最多20000个文件，单个文件最大<code>25 MiB</code></p>
+</li>
 </ul>
+<p>新建Git仓库，上传你的文件；在仓库根目录中新建一个<code>_headers</code>文件，内容如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line">  Access-Control-Allow-Origin: *</span><br></pre></td></tr></table></figure>
+
+<p>最好把<code>Access-Control-Allow-Origin: *</code>中的<code>*</code>替换为你的网站URL</p>
+<p>不替换就是所有人都能跨域访问</p>
+<p>然后把这个仓库部署到<code>Cloudflare Pages</code></p>
+<hr>
+<p>后来发现可以在<code>/functions</code>目录下配置<code>Cloudflare Workers</code>，也可以使用<code>_worker.js</code>文件，如果只允许几个特定的网站共用一个图床，理论上能够实现；但是 ChatGPT 的方案<strong>有问题</strong>，自己也不怎么会JavaScript，遂将代码抄录如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(request); <span class="comment">// 默认转发请求</span></span><br><span class="line">    <span class="keyword">const</span> origin = request.<span class="property">headers</span>.<span class="title function_">get</span>(<span class="string">&quot;Origin&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> allowedOrigins = [</span><br><span class="line">      <span class="comment">// 在这里添加其他允许的来源</span></span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查请求的Origin是否在允许的列表中</span></span><br><span class="line">    <span class="keyword">if</span> (allowedOrigins.<span class="title function_">includes</span>(origin)) &#123;</span><br><span class="line">      <span class="comment">// 允许列表中的源，创建新的响应头并设置CORS策略</span></span><br><span class="line">      <span class="keyword">const</span> newHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>(response.<span class="property">headers</span>);</span><br><span class="line">      newHeaders.<span class="title function_">set</span>(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, origin);</span><br><span class="line">      newHeaders.<span class="title function_">set</span>(<span class="string">&quot;Vary&quot;</span>, <span class="string">&quot;Origin&quot;</span>);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 返回新的响应对象</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(response.<span class="property">body</span>, &#123;</span><br><span class="line">        <span class="attr">status</span>: response.<span class="property">status</span>,</span><br><span class="line">        <span class="attr">statusText</span>: response.<span class="property">statusText</span>,</span><br><span class="line">        <span class="attr">headers</span>: newHeaders</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果请求的Origin不在允许列表中，返回原始响应</span></span><br><span class="line">    <span class="comment">// 这里不设置Access-Control-Allow-Origin头</span></span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><del>\\又水了一篇好开心\\</del></p>
 ]]></content>
       <categories>
-        <category>日常</category>
+        <category>资源</category>
       </categories>
       <tags>
-        <tag>日常</tag>
-        <tag>女生</tag>
-        <tag>人设</tag>
+        <tag>资源</tag>
+        <tag>Cloudflare</tag>
       </tags>
   </entry>
   <entry>
@@ -172,6 +183,32 @@
       </tags>
   </entry>
   <entry>
+    <title>在Deno Deploy部署Hexo博客</title>
+    <url>/2024/03/09/%E5%9C%A8Deno-Deploy%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>默认分配一个<code>project_name.deno.dev</code>域名，速度还可以</p>
+<p>类似Cloudflare Pages</p>
+<p>需要准备一个GitHub账号，使用GitHub登陆<a href="https://dash.deno.com/signin">Deno</a></p>
+<ol>
+<li><p>Deno Deploy中新建一个<code>Project</code>，选择<code>Create an empty project</code></p>
+<p><img src="/img/20240309/denop.png" alt="project"></p>
+</li>
+<li><p>在博客的GitHub仓库中新建一个workflow，内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">workflow_dispatch:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span> <span class="string">gh-pages</span>  <span class="comment"># 根据需要设置触发条件</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Clone</span> <span class="string">repository</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line">        <span class="attr">with:</span> </span><br><span class="line">          <span class="attr">ref:</span> <span class="string">&#x27;gh-pages&#x27;</span>  <span class="comment"># 根据需要修改为你的分支名</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">Deno</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">denoland/setup-deno@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">deno-version:</span> <span class="string">v1.x</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">deployctl</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">&quot;deno install --allow-all --no-check -r -f https://deno.land/x/deploy/deployctl.ts&quot;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Upload</span> <span class="string">to</span> <span class="string">Deno</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">env:</span> </span><br><span class="line">          <span class="attr">DENO_TOKEN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.DENO_TOKEN</span> <span class="string">&#125;&#125;</span>  <span class="comment"># 使用设置的secrets名</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">&quot;DENO_DEPLOY_TOKEN=$DENO_TOKEN deployctl deploy --project=&lt;project_name&gt; https://deno.land/std@0.208.0/http/file_server.ts&quot;</span>  <span class="comment"># 将&lt;project_name&gt;替换为你在Deno新建的项目名</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<a href="https://dash.deno.com/account#access-tokens">https://dash.deno.com/account#access-tokens</a>生成一个Access Token，添加进博客GitHub仓库的secrets中，名字可以用上面的<code>DENO_TOKEN</code>（也可以用别的名字）</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>资源</category>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>资源</tag>
+        <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>姐姐♡喜欢</title>
     <url>/2023/11/26/%E5%A7%90%E5%A7%90%E2%99%A1%E5%96%9C%E6%AC%A2/</url>
     <content><![CDATA[<p>好喜欢姐姐  </p>
@@ -183,6 +220,29 @@
       <tags>
         <tag>日常</tag>
         <tag>女生</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>少女的人设</title>
+    <url>/2023/11/05/%E5%B0%91%E5%A5%B3%E7%9A%84%E4%BA%BA%E8%AE%BE/</url>
+    <content><![CDATA[<ul>
+<li>姓名: 少女  </li>
+<li>性别: 女  </li>
+<li>年龄: 16  </li>
+<li>身高: 159.5cm  </li>
+<li>体重: <span class="heimu">女孩子的体重是秘密!!</span>  </li>
+<li>胸围: 95D  </li>
+<li>生日: 2007.08.31  </li>
+<li>喜欢的人&#x2F;物: 初音未来&amp;&amp;美少女&amp;&amp;Python  <div style="text-align:center;"><p><del>才，才不是为了你才特意写的自我介绍啦</del></p><p><strong>世界第一可爱美少女</strong></p></div></li>
+</ul>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>女生</tag>
+        <tag>人设</tag>
       </tags>
   </entry>
   <entry>
@@ -215,6 +275,18 @@
       </tags>
   </entry>
   <entry>
+    <title>生日快乐</title>
+    <url>/2023/12/15/%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/</url>
+    <content><![CDATA[<p>生日快乐，我的15岁</p>
+<p>许个愿——当然不能说出来啦！</p>
+<p><code>12/15/2023</code></p>
+<p><img src="/img/myicon.jpg" alt="birthday"></p>
+]]></content>
+      <tags>
+        <tag>birthday</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>谁能帮我找个女朋友</title>
     <url>/2023/10/14/%E8%B0%81%E8%83%BD%E5%B8%AE%E6%88%91%E6%89%BE%E4%B8%AA%E5%A5%B3%E6%9C%8B%E5%8F%8B/</url>
     <content><![CDATA[<p>谁能帮我找个女朋友<br>要高中大姐姐</p>
@@ -225,18 +297,6 @@
       <tags>
         <tag>日常</tag>
         <tag>女生</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>生日快乐</title>
-    <url>/2023/12/15/%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/</url>
-    <content><![CDATA[<p>生日快乐，我的15岁</p>
-<p>许个愿——当然不能说出来啦！</p>
-<p><code>12/15/2023</code></p>
-<p><img src="/img/myicon.jpg" alt="birthday"></p>
-]]></content>
-      <tags>
-        <tag>birthday</tag>
       </tags>
   </entry>
   <entry>
@@ -312,40 +372,6 @@
         <tag>hexo</tag>
         <tag>fluid</tag>
         <tag>资源</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Cloudflare Pages搭建图床</title>
-    <url>/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</url>
-    <content><![CDATA[<p>使用<code>Cloudflare Pages</code>搭建图床</p>
-<p>除了图床也可以放各种各样的文件</p>
-<p>限制：</p>
-<ul>
-<li><p>自定义域最多100个</p>
-</li>
-<li><p>每月最多部署500次</p>
-</li>
-<li><p>每个<code>Cloudflare Pages</code>最多20000个文件，单个文件最大<code>25 MiB</code></p>
-</li>
-</ul>
-<p>新建Git仓库，上传你的文件；在仓库根目录中新建一个<code>_headers</code>文件，内容如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line">  Access-Control-Allow-Origin: *</span><br></pre></td></tr></table></figure>
-
-<p>最好把<code>Access-Control-Allow-Origin: *</code>中的<code>*</code>替换为你的网站URL</p>
-<p>不替换就是所有人都能跨域访问</p>
-<p>然后把这个仓库部署到<code>Cloudflare Pages</code></p>
-<hr>
-<p>后来发现可以在<code>/functions</code>目录下配置<code>Cloudflare Workers</code>，也可以使用<code>_worker.js</code>文件，如果只允许几个特定的网站共用一个图床，理论上能够实现；但是 ChatGPT 的方案<strong>有问题</strong>，自己也不怎么会JavaScript，遂将代码抄录如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(request); <span class="comment">// 默认转发请求</span></span><br><span class="line">    <span class="keyword">const</span> origin = request.<span class="property">headers</span>.<span class="title function_">get</span>(<span class="string">&quot;Origin&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> allowedOrigins = [</span><br><span class="line">      <span class="comment">// 在这里添加其他允许的来源</span></span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查请求的Origin是否在允许的列表中</span></span><br><span class="line">    <span class="keyword">if</span> (allowedOrigins.<span class="title function_">includes</span>(origin)) &#123;</span><br><span class="line">      <span class="comment">// 允许列表中的源，创建新的响应头并设置CORS策略</span></span><br><span class="line">      <span class="keyword">const</span> newHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>(response.<span class="property">headers</span>);</span><br><span class="line">      newHeaders.<span class="title function_">set</span>(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, origin);</span><br><span class="line">      newHeaders.<span class="title function_">set</span>(<span class="string">&quot;Vary&quot;</span>, <span class="string">&quot;Origin&quot;</span>);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 返回新的响应对象</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(response.<span class="property">body</span>, &#123;</span><br><span class="line">        <span class="attr">status</span>: response.<span class="property">status</span>,</span><br><span class="line">        <span class="attr">statusText</span>: response.<span class="property">statusText</span>,</span><br><span class="line">        <span class="attr">headers</span>: newHeaders</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果请求的Origin不在允许列表中，返回原始响应</span></span><br><span class="line">    <span class="comment">// 这里不设置Access-Control-Allow-Origin头</span></span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><del>\\又水了一篇好开心\\</del></p>
-]]></content>
-      <categories>
-        <category>资源</category>
-      </categories>
-      <tags>
-        <tag>资源</tag>
-        <tag>Cloudflare</tag>
       </tags>
   </entry>
 </search>
