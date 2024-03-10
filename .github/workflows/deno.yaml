@@ -1,9 +1,10 @@
-name: Deploy
+name: Deno Deploy
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - gh-pages
+  deployment
+
+#  push:
+#    branches:
+#      - gh-pages
 
 jobs:
   deploy:
