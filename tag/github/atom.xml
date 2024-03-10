@@ -4,12 +4,12 @@
     <title>少女的Blog • Posts by &#34;github&#34; tag</title>
     <link href="https://onaniishoujo.github.io" />
     <updated>2024-03-09T12:24:18.000Z</updated>
+    <category term="资源" />
     <category term="hexo" />
     <category term="fluid" />
-    <category term="资源" />
     <category term="技术" />
-    <category term="Cloudflare" />
     <category term="Github" />
+    <category term="Cloudflare" />
     <category term="日常" />
     <category term="女生" />
     <category term="人设" />
@@ -24,7 +24,7 @@
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Deno Deploy 中新建一个 &lt;code&gt;Project&lt;/code&gt; ，选择 &lt;code&gt;Create an empty project&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/20240309/denop.png&#34; alt=&#34;project&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/20240309/denop.webp&#34; alt=&#34;project&#34; /&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;在博客的 GitHub 仓库中新建一个 workflow，内容如下：&lt;/p&gt;

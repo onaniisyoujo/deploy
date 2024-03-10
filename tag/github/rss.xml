@@ -7,12 +7,12 @@
         <language>zh-CN</language>
         <pubDate>Sat, 09 Mar 2024 20:24:18 +0800</pubDate>
         <lastBuildDate>Sat, 09 Mar 2024 20:24:18 +0800</lastBuildDate>
+        <category>资源</category>
         <category>hexo</category>
         <category>fluid</category>
-        <category>资源</category>
         <category>技术</category>
-        <category>Cloudflare</category>
         <category>Github</category>
+        <category>Cloudflare</category>
         <category>日常</category>
         <category>女生</category>
         <category>人设</category>
@@ -30,7 +30,7 @@
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Deno Deploy 中新建一个 &lt;code&gt;Project&lt;/code&gt; ，选择 &lt;code&gt;Create an empty project&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/20240309/denop.png&#34; alt=&#34;project&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/20240309/denop.webp&#34; alt=&#34;project&#34; /&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;在博客的 GitHub 仓库中新建一个 workflow，内容如下：&lt;/p&gt;
