@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>使用Cloudflare Pages搭建图床 | 少女的Blog</title>
+    <title>about | 少女的Blog</title>
     <meta name="author" content="少女" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -180,97 +180,27 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>使用Cloudflare Pages搭建图床</h1>
+        <h1>about</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/2/8
+            2023/8/30
         </span>
         
-        <span class="category">
-            <a href="/categories/%E8%B5%84%E6%BA%90/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                资源
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00bcd4">资源</a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Cloudflare/" style="color: #ff7d73">Cloudflare</a>
-            </span>
-            
-        </span>
         
     </div>
     
     <div class="content" v-pre>
-        <p>使用<code>Cloudflare Pages</code>搭建图床</p>
-<p>除了图床也可以放各种各样的文件</p>
-<p>限制：</p>
-<ul>
-<li><p>自定义域最多100个</p>
-</li>
-<li><p>每月最多部署500次</p>
-</li>
-<li><p>每个<code>Cloudflare Pages</code>最多20000个文件，单个文件最大<code>25 MiB</code></p>
-</li>
+        <ul>
+<li>少女  </li>
+<li>永远16岁  </li>
+<li>主要性别: 女</li>
+<li>miku的老婆</li>
 </ul>
-<p>新建Git仓库，上传你的文件；在仓库根目录中新建一个<code>_headers</code>文件，内容如下</p>
-<pre><code>/*
-  Access-Control-Allow-Origin: *
-</code></pre>
-<p>最好把<code>Access-Control-Allow-Origin: *</code>中的<code>*</code>替换为你的网站URL</p>
-<p>不替换就是所有人都能跨域访问</p>
-<p>然后把这个仓库部署到<code>Cloudflare Pages</code></p>
-<hr>
-<p>后来发现可以在<code>/functions</code>目录下配置<code>Cloudflare Workers</code>，也可以使用<code>_worker.js</code>文件，如果只允许几个特定的网站共用一个图床，理论上能够实现；但是 ChatGPT 的方案<strong>有问题</strong>，自己也不怎么会JavaScript，遂将代码抄录如下：</p>
-<pre><code class="javascript">export default &#123;
-  async fetch(request, env) &#123;
-    const response = await fetch(request); // 默认转发请求
-    const origin = request.headers.get(&quot;Origin&quot;);
-    const allowedOrigins = [
-      // 在这里添加其他允许的来源
-    ];
-
-    // 检查请求的Origin是否在允许的列表中
-    if (allowedOrigins.includes(origin)) &#123;
-      // 允许列表中的源，创建新的响应头并设置CORS策略
-      const newHeaders = new Headers(response.headers);
-      newHeaders.set(&quot;Access-Control-Allow-Origin&quot;, origin);
-      newHeaders.set(&quot;Vary&quot;, &quot;Origin&quot;);
-
-      // 返回新的响应对象
-      return new Response(response.body, &#123;
-        status: response.status,
-        statusText: response.statusText,
-        headers: newHeaders
-      &#125;);
-    &#125;
-
-    // 如果请求的Origin不在允许列表中，返回原始响应
-    // 这里不设置Access-Control-Allow-Origin头
-    return response;
-  &#125;,
-&#125;
-</code></pre>
-<p><del>\\又水了一篇好开心\\</del></p>
+<p>目前初三 <del>明年就高一了</del><br>喜欢初音未来、Python娘、动漫及代码<br><del>周末小概率更新</del></p>
 
     </div>
     
