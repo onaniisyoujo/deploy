@@ -10,13 +10,13 @@
 </ol>
 ]]></content>
       <categories>
-        <category>资源</category>
-        <category>hexo</category>
+        <category>Code</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>fluid</tag>
-        <tag>资源</tag>
+        <tag>Hexo</tag>
+        <tag>Fluid</tag>
+        <tag>Code</tag>
       </tags>
   </entry>
   <entry>
@@ -31,11 +31,11 @@
 <p>在Diaspora主题上有Bug，需要刷新页面才能显示Artitalk，暂时没想到怎么解决</p>
 ]]></content>
       <categories>
-        <category>资源</category>
-        <category>hexo</category>
+        <category>Code</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>资源</tag>
+        <tag>Code</tag>
       </tags>
   </entry>
   <entry>
@@ -56,12 +56,12 @@
 <p>所以ParticleX为什么不支持Valine<br>高亮好像不支持ejs所以代码块上写的html</p>
 ]]></content>
       <categories>
-        <category>资源</category>
-        <category>hexo</category>
+        <category>Code</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>资源</tag>
+        <tag>Hexo</tag>
+        <tag>Code</tag>
       </tags>
   </entry>
   <entry>
@@ -71,7 +71,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>为Hexo-Fluid的文章设置网格背景</title>
+    <title>为Hexo Fluid的文章设置网格背景</title>
     <url>/2023/10/14/%E4%B8%BAHexo-Fluid%E7%9A%84%E6%96%87%E7%AB%A0%E8%AE%BE%E7%BD%AE%E7%BD%91%E6%A0%BC%E8%83%8C%E6%99%AF/</url>
     <content><![CDATA[<p>效果图：<br><img src="/img/20231014/xiaoguo.png" alt="效果图"><br>两种方法，推荐第一种</p>
 <h2 id="使用自定义CSS实现"><a href="#使用自定义CSS实现" class="headerlink" title="使用自定义CSS实现"></a>使用自定义CSS实现</h2><ul>
@@ -101,12 +101,12 @@
 </ol>
 ]]></content>
       <categories>
-        <category>资源</category>
-        <category>hexo</category>
+        <category>Code</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>技术</tag>
+        <tag>Hexo</tag>
+        <tag>Code</tag>
       </tags>
   </entry>
   <entry>
@@ -136,10 +136,10 @@
 <p><del>\\又水了一篇好开心\\</del></p>
 ]]></content>
       <categories>
-        <category>资源</category>
+        <category>Code</category>
       </categories>
       <tags>
-        <tag>资源</tag>
+        <tag>Code</tag>
         <tag>Cloudflare</tag>
       </tags>
   </entry>
@@ -147,7 +147,7 @@
     <title>使用Github Actions自动切换网站主题</title>
     <url>/2024/01/21/%E4%BD%BF%E7%94%A8Github-Actions%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E7%AB%99%E4%B8%BB%E9%A2%98/</url>
     <content><![CDATA[<blockquote>
-<p>现在网站用了六套主题，可喜可贺</p>
+<p>现在网站用了六套主题，周一用Diaspora，周二和周日用ShokaX，周三和周六用Particlex，周四用Stellaris，周五用Fluid，里站用Brewski，可喜可贺</p>
 </blockquote>
 <p>使用<code>Github Actions</code>实现每天自动切换网站的主题</p>
 <p>比如周一、三、五、七使用<code>theme-A</code>，二、四、六使用<code>theme-B</code></p>
@@ -174,11 +174,11 @@
 <p><del>感谢ChatGPT提供的GitHub Actions的源码</del></p>
 ]]></content>
       <categories>
-        <category>资源</category>
-        <category>hexo</category>
+        <category>Code</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>资源</tag>
+        <tag>Code</tag>
         <tag>Github</tag>
       </tags>
   </entry>
@@ -200,12 +200,45 @@
 </ol>
 ]]></content>
       <categories>
-        <category>资源</category>
-        <category>hexo</category>
+        <category>Code</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>资源</tag>
+        <tag>Code</tag>
         <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何使用Toga制作奇怪的安卓App</title>
+    <url>/2024/03/22/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Toga%E5%88%B6%E4%BD%9C%E5%A5%87%E6%80%AA%E7%9A%84%E5%AE%89%E5%8D%93App/</url>
+    <content><![CDATA[<p>使用Python的Toga框架，快速制作一些”奇怪的”安卓App</p>
+<p><del>比如给某位幸运的同学做个 同城约*</del>  <del>哈哈哈哈</del></p>
+<h4 id="安装框架"><a href="#安装框架" class="headerlink" title="安装框架"></a>安装框架</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install briefcase</span><br></pre></td></tr></table></figure>
+
+<h4 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">briefcase new</span><br></pre></td></tr></table></figure>
+
+<h4 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h4><p>在<code>src</code>目录中找到<code>app.py</code>，这里给一个插入图片的示例，图片文件要放在<code>src/应用名/resources</code>目录下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> toga</span><br><span class="line"><span class="keyword">from</span> toga.style <span class="keyword">import</span> Pack</span><br><span class="line"><span class="keyword">from</span> toga.style.pack <span class="keyword">import</span> COLUMN</span><br><span class="line"><span class="keyword">from</span> toga.images <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyApp</span>(toga.App):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">startup</span>(<span class="params">self</span>):</span><br><span class="line">        main_box = toga.Box(style=Pack(direction=COLUMN))</span><br><span class="line"></span><br><span class="line">        image = Image(<span class="string">&#x27;./resources/hi.jpg&#x27;</span>)</span><br><span class="line">        image_view = toga.ImageView(image, style=Pack(flex=<span class="number">1</span>))</span><br><span class="line">        main_box.add(image_view)</span><br><span class="line"></span><br><span class="line">        self.main_window = toga.MainWindow(title=self.formal_name)</span><br><span class="line">        self.main_window.content = main_box</span><br><span class="line">        self.main_window.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="keyword">return</span> MyApp()</span><br></pre></td></tr></table></figure>
+
+<h4 id="打包Apk"><a href="#打包Apk" class="headerlink" title="打包Apk"></a>打包Apk</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">briefcase create android</span><br><span class="line">briefcase build android</span><br></pre></td></tr></table></figure>
+
+<p>到这里会打包一个Apk，这个时候就可以安装了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">briefcase package android</span><br></pre></td></tr></table></figure>
+
+<p>上面这个命令会生成一个<code>.aab</code>文件，个人感觉没什么用</p>
+<h4 id="发给某幸运儿"><a href="#发给某幸运儿" class="headerlink" title="发给某幸运儿"></a><del>发给某幸运儿</del></h4><p><del>然后就被骂了哈哈哈哈哈哈</del></p>
+<p>这里还有一个展示html页面的代码，Windows11测试通过，安卓没试过</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> toga</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyApp</span>(toga.App):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">startup</span>(<span class="params">self</span>):</span><br><span class="line">        webview = toga.WebView()</span><br><span class="line">        web=<span class="string">r&quot;&quot;&quot;&lt;h1&gt;这里放你的html内容&lt;/h1&gt;&quot;&quot;&quot;</span></span><br><span class="line">        webview.set_content(<span class="string">&quot;example.com&quot;</span>, web)</span><br><span class="line"></span><br><span class="line">        self.main_window = toga.MainWindow(title=self.formal_name)</span><br><span class="line">        self.main_window.content = webview</span><br><span class="line">        self.main_window.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="keyword">return</span> MyApp()</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Code</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Code</tag>
+        <tag>Python</tag>
+        <tag>Toga</tag>
       </tags>
   </entry>
   <entry>
@@ -213,6 +246,7 @@
     <url>/2023/11/26/%E5%A7%90%E5%A7%90%E2%99%A1%E5%96%9C%E6%AC%A2/</url>
     <content><![CDATA[<p>好喜欢姐姐  </p>
 <p>想给姐姐生孩子  </p>
+<p>人家就是好喜欢被姐姐控制的感觉呜呜呜</p>
 ]]></content>
       <categories>
         <category>日常</category>
@@ -300,28 +334,6 @@
       </tags>
   </entry>
   <entry>
-    <title>配置Hexo-Fluid及Valine时遇到的问题</title>
-    <url>/2023/10/05/%E9%85%8D%E7%BD%AEHexo-Fluid%E5%8F%8AValine%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>一些小问题</p>
-<h2 id="关于Hexo-Fluid的评论"><a href="#关于Hexo-Fluid的评论" class="headerlink" title="关于Hexo Fluid的评论"></a>关于Hexo Fluid的评论</h2><p>因为出了一点Bug，本站的评论通过修改<code>Blog/themes/fluid/layout/post.ejs</code>实现。<br>将<code>post.ejs</code>中的<code>&lt;%- inject_point(&#39;postComments&#39;) %&gt;</code>替换为 你使用的评论系统 提供的html代码<br>以Utterance为例:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://utteranc.es/client.js&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">repo</span>=<span class="string">&quot;用户名/仓库地址&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">issue-term</span>=<span class="string">&quot;pathname&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">theme</span>=<span class="string">&quot;github-light&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">async</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="关于网站图标"><a href="#关于网站图标" class="headerlink" title="关于网站图标"></a>关于网站图标</h2><p>在<code>_config.fluid.yml</code>设置没反应，手动将网页图标重命名为<code>favicon.ico</code>，复制到<code>public</code>文件夹下</p>
-<h2 id="关于Valine"><a href="#关于Valine" class="headerlink" title="关于Valine"></a>关于Valine</h2><p>测试时发现LeanCloud提供的域名会屏蔽中国大陆的访问…<br>绑定自己的域名后就能正常访问…  </p>
-<p>在LeanCloud的<code>设置-域名绑定</code>选项绑定自己的子域名，然后在子域名的DNS上设置<code>CNAME</code>记录，解析到LeanCloud提供的域名，之后配置Valine时,使用绑定的子域名  </p>
-<p><del>不想打字了</del></p>
-]]></content>
-      <categories>
-        <category>资源</category>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>fluid</tag>
-        <tag>资源</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>魔改Hexo Fluid</title>
     <url>/2023/10/05/%E9%AD%94%E6%94%B9Hexo-Fluid/</url>
     <content><![CDATA[<p>整理一下本少女在使用hexo fluid时用到的代码  </p>
@@ -362,15 +374,21 @@
 <h2 id="滚动条"><a href="#滚动条" class="headerlink" title="滚动条"></a>滚动条</h2><p>自定义CSS</p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line">::-webkit-scrollbar &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">::-webkit-scrollbar-thumb &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#e58a8a</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">-webkit-linear-gradient</span>( <span class="number">45deg</span>, <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.4</span>) <span class="number">25%</span>, transparent <span class="number">25%</span>, transparent <span class="number">50%</span>, <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.4</span>) <span class="number">50%</span>, <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.4</span>) <span class="number">75%</span>, transparent <span class="number">75%</span>, transparent);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">2em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">::-webkit-scrollbar-corner &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">::-moz-selection &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#e58a8a</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>先写这些~</p>
+<h2 id="关于Hexo-Fluid的评论"><a href="#关于Hexo-Fluid的评论" class="headerlink" title="关于Hexo Fluid的评论"></a>关于Hexo Fluid的评论</h2><p>因为出了一点Bug，本站的评论通过修改<code>Blog/themes/fluid/layout/post.ejs</code>实现。<br>将<code>post.ejs</code>中的<code>&lt;%- inject_point(&#39;postComments&#39;) %&gt;</code>替换为 你使用的评论系统 提供的html代码<br>以Utterance为例:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://utteranc.es/client.js&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">repo</span>=<span class="string">&quot;用户名/仓库地址&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">issue-term</span>=<span class="string">&quot;pathname&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">theme</span>=<span class="string">&quot;github-light&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">async</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="关于网站图标"><a href="#关于网站图标" class="headerlink" title="关于网站图标"></a>关于网站图标</h2><p>在<code>_config.fluid.yml</code>设置没反应，手动将网页图标重命名为<code>favicon.ico</code>，复制到<code>public</code>文件夹下</p>
+<h2 id="关于Valine"><a href="#关于Valine" class="headerlink" title="关于Valine"></a>关于Valine</h2><p>测试时发现LeanCloud提供的域名会屏蔽中国大陆的访问…<br>绑定自己的域名后就能正常访问…  </p>
+<p>在LeanCloud的<code>设置-域名绑定</code>选项绑定自己的子域名，然后在子域名的DNS上设置<code>CNAME</code>记录，解析到LeanCloud提供的域名，之后配置Valine时,使用绑定的子域名  </p>
+<p><del>不想打字了</del></p>
 ]]></content>
       <categories>
-        <category>资源</category>
-        <category>hexo</category>
+        <category>Code</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>fluid</tag>
+        <tag>Hexo</tag>
+        <tag>Fluid</tag>
         <tag>资源</tag>
       </tags>
   </entry>

@@ -7,21 +7,23 @@
         <language>zh-CN</language>
         <pubDate>Thu, 08 Feb 2024 23:10:56 +0800</pubDate>
         <lastBuildDate>Thu, 08 Feb 2024 23:10:56 +0800</lastBuildDate>
-        <category>资源</category>
-        <category>hexo</category>
-        <category>fluid</category>
-        <category>技术</category>
-        <category>Github</category>
+        <category>Hexo</category>
+        <category>Fluid</category>
+        <category>Code</category>
         <category>Cloudflare</category>
+        <category>Github</category>
+        <category>Python</category>
+        <category>Toga</category>
         <category>日常</category>
         <category>女生</category>
         <category>人设</category>
         <category>birthday</category>
+        <category>资源</category>
         <item>
             <guid isPermalink="true">https://onaniishoujo.github.io/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</guid>
             <title>使用Cloudflare Pages搭建图床</title>
             <link>https://onaniishoujo.github.io/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</link>
-            <category>资源</category>
+            <category>Code</category>
             <category>Cloudflare</category>
             <pubDate>Thu, 08 Feb 2024 23:10:56 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;使用 &lt;code&gt;Cloudflare Pages&lt;/code&gt;  搭建图床&lt;/p&gt;

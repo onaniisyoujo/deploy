@@ -195,17 +195,126 @@
         
 
 <div class="post">
+    <a href="/2024/03/22/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Toga%E5%88%B6%E4%BD%9C%E5%A5%87%E6%80%AA%E7%9A%84%E5%AE%89%E5%8D%93App/">
+        <h2 class="post-title">如何使用Toga制作奇怪的安卓App</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Code/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Code
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/3/22
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>使用Python的Toga框架，快速制作一些”奇怪的”安卓App</p>
+<p><del>比如给某位幸运的同学做个 同城约*</del>  <del>哈哈哈哈</del></p>
+<h4 id="安装框架"><a href="#安装框架" class="headerlink" title="安装框架"></a>安装框架</h4><pre><code class="bash">pip install briefcase
+</code></pre>
+<h4 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h4><pre><code class="bash">briefcase new
+</code></pre>
+<h4 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h4><p>在<code>src</code>目录中找到<code>app.py</code>，这里给一个插入图片的示例，图片文件要放在<code>src/应用名/resources</code>目录下</p>
+<pre><code class="python">import toga
+from toga.style import Pack
+from toga.style.pack import COLUMN
+from toga.images import Image
+
+class MyApp(toga.App):
+    def startup(self):
+        main_box = toga.Box(style=Pack(direction=COLUMN))
+
+        image = Image(&#39;./resources/hi.jpg&#39;)
+        image_view = toga.ImageView(image, style=Pack(flex=1))
+        main_box.add(image_view)
+
+        self.main_window = toga.MainWindow(title=self.formal_name)
+        self.main_window.content = main_box
+        self.main_window.show()
+
+def main():
+    return MyApp()
+</code></pre>
+<h4 id="打包Apk"><a href="#打包Apk" class="headerlink" title="打包Apk"></a>打包Apk</h4><pre><code class="bash">briefcase create android
+briefcase build android
+</code></pre>
+<p>到这里会打包一个Apk，这个时候就可以安装了</p>
+<pre><code class="bash">briefcase package android
+</code></pre>
+<p>上面这个命令会生成一个<code>.aab</code>文件，个人感觉没什么用</p>
+<h4 id="发给某幸运儿"><a href="#发给某幸运儿" class="headerlink" title="发给某幸运儿"></a><del>发给某幸运儿</del></h4><p><del>然后就被骂了哈哈哈哈哈哈</del></p>
+<p>这里还有一个展示html页面的代码，Windows11测试通过，安卓没试过</p>
+<pre><code class="python">import toga
+
+class MyApp(toga.App):
+    def startup(self):
+        webview = toga.WebView()
+        web=r&quot;&quot;&quot;&lt;h1&gt;这里放你的html内容&lt;/h1&gt;&quot;&quot;&quot;
+        webview.set_content(&quot;example.com&quot;, web)
+
+        self.main_window = toga.MainWindow(title=self.formal_name)
+        self.main_window.content = webview
+        self.main_window.show()
+
+def main():
+    return MyApp()
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Code/" style="color: #03a9f4">Code</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Python/" style="color: #00bcd4">Python</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Toga/" style="color: #ff7d73">Toga</a>
+        </span>
+        
+    </div>
+    <a href="/2024/03/22/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Toga%E5%88%B6%E4%BD%9C%E5%A5%87%E6%80%AA%E7%9A%84%E5%AE%89%E5%8D%93App/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2024/03/09/%E5%9C%A8Deno-Deploy%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/">
         <h2 class="post-title">在Deno Deploy部署Hexo博客</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E8%B5%84%E6%BA%90/">
+            <a href="/categories/Code/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                资源
+                Code
             </a>
         </span>
         
@@ -277,12 +386,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ffa2c4">资源</a>
+            <a href="/tags/Code/" style="color: #00a596">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Github/" style="color: #00a596">Github</a>
+            <a href="/tags/Github/" style="color: #ffa2c4">Github</a>
         </span>
         
     </div>
@@ -296,11 +405,11 @@ jobs:
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E8%B5%84%E6%BA%90/">
+            <a href="/categories/Code/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                资源
+                Code
             </a>
         </span>
         
@@ -380,12 +489,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00a596">资源</a>
+            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Cloudflare/" style="color: #ffa2c4">Cloudflare</a>
+            <a href="/tags/Cloudflare/" style="color: #ff7d73">Cloudflare</a>
         </span>
         
     </div>
@@ -399,11 +508,11 @@ jobs:
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E8%B5%84%E6%BA%90/">
+            <a href="/categories/Code/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                资源
+                Code
             </a>
         </span>
         
@@ -474,7 +583,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #ff7d73">资源</a>
+            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
         </span>
         
     </div>
@@ -488,11 +597,11 @@ jobs:
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E8%B5%84%E6%BA%90/">
+            <a href="/categories/Code/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                资源
+                Code
             </a>
         </span>
         
@@ -560,12 +669,12 @@ valine:
         
         <span class="tag">
             
-            <a href="/tags/hexo/" style="color: #03a9f4">hexo</a>
+            <a href="/tags/Hexo/" style="color: #ffa2c4">Hexo</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00a596">资源</a>
+            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
         </span>
         
     </div>
@@ -579,11 +688,11 @@ valine:
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E8%B5%84%E6%BA%90/">
+            <a href="/categories/Code/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                资源
+                Code
             </a>
         </span>
         
@@ -600,7 +709,7 @@ valine:
         <div class="content" v-pre>
             
             <blockquote>
-<p>现在网站用了六套主题，可喜可贺</p>
+<p>现在网站用了六套主题，周一用Diaspora，周二和周日用ShokaX，周三和周六用Particlex，周四用Stellaris，周五用Fluid，里站用Brewski，可喜可贺</p>
 </blockquote>
 <p>使用<code>Github Actions</code>实现每天自动切换网站的主题</p>
 <p>比如周一、三、五、七使用<code>theme-A</code>，二、四、六使用<code>theme-B</code></p>
@@ -674,7 +783,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00a596">资源</a>
+            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
         </span>
         
         <span class="tag">
@@ -758,6 +867,7 @@ jobs:
             
             <p>好喜欢姐姐  </p>
 <p>想给姐姐生孩子  </p>
+<p>人家就是好喜欢被姐姐控制的感觉呜呜呜</p>
 
             
         </div>
@@ -772,12 +882,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00bcd4">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">日常</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ff7d73">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ffa2c4">女生</a>
         </span>
         
     </div>
@@ -791,11 +901,11 @@ jobs:
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E8%B5%84%E6%BA%90/">
+            <a href="/categories/Code/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                资源
+                Code
             </a>
         </span>
         
@@ -888,17 +998,17 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/hexo/" style="color: #03a9f4">hexo</a>
+            <a href="/tags/Hexo/" style="color: #ffa2c4">Hexo</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/fluid/" style="color: #ff7d73">fluid</a>
+            <a href="/tags/Fluid/" style="color: #00a596">Fluid</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #00a596">资源</a>
+            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
         </span>
         
     </div>
@@ -956,76 +1066,21 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00bcd4">日常</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #03a9f4">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ff7d73">女生</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E4%BA%BA%E8%AE%BE/" style="color: #00a596">人设</a>
+            <a href="/tags/%E4%BA%BA%E8%AE%BE/" style="color: #03a9f4">人设</a>
         </span>
         
     </div>
     <a href="/2023/11/05/%E5%B0%91%E5%A5%B3%E7%9A%84%E4%BA%BA%E8%AE%BE/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/10/26/%E6%83%B3%E7%A9%BFLolita/">
-        <h2 class="post-title">想穿Lolita</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%97%A5%E5%B8%B8/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                日常
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/10/26
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>我想穿lolita<br>但是lolita好贵 买不起</p>
-<p>我不穿lolita也很可爱</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #03a9f4">日常</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #00a596">女生</a>
-        </span>
-        
-    </div>
-    <a href="/2023/10/26/%E6%83%B3%E7%A9%BFLolita/" class="go-post">阅读全文</a>
 </div>
 
 
