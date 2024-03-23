@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>about | 少女的Blog</title>
+    <title>如何使用Toga制作奇怪的安卓App | 少女的Blog</title>
     <meta name="author" content="少女" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -180,27 +180,103 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>about</h1>
+        <h1>如何使用Toga制作奇怪的安卓App</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/8/30
+            2024/3/22
         </span>
         
+        <span class="category">
+            <a href="/categories/Code/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Code
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Code/" style="color: #00bcd4">Code</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Python/" style="color: #00a596">Python</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Toga/" style="color: #ff7d73">Toga</a>
+            </span>
+            
+        </span>
         
     </div>
     
     <div class="content" v-pre>
-        <ul>
-<li>少女  </li>
-<li>永远16岁  </li>
-<li>主要性别: 女</li>
-<li>miku的老婆</li>
-</ul>
-<p>目前初三 <del>明年就高一了</del><br>喜欢初音未来、Python娘、动漫及代码<br><del>周末小概率更新</del></p>
+        <p>使用Python的Toga框架，快速制作一些”奇怪的”安卓App</p>
+<p><del>比如给某位幸运的同学做个 同城约*</del>  <del>哈哈哈哈</del></p>
+<h4 id="安装框架"><a href="#安装框架" class="headerlink" title="安装框架"></a>安装框架</h4><pre><code class="bash">pip install briefcase
+</code></pre>
+<h4 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h4><pre><code class="bash">briefcase new
+</code></pre>
+<h4 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h4><p>在<code>src</code>目录中找到<code>app.py</code>，这里给一个插入图片的示例，图片文件要放在<code>src/应用名/resources</code>目录下</p>
+<pre><code class="python">import toga
+from toga.style import Pack
+from toga.style.pack import COLUMN
+from toga.images import Image
+
+class MyApp(toga.App):
+    def startup(self):
+        main_box = toga.Box(style=Pack(direction=COLUMN))
+
+        image = Image(&#39;./resources/hi.jpg&#39;)
+        image_view = toga.ImageView(image, style=Pack(flex=1))
+        main_box.add(image_view)
+
+        self.main_window = toga.MainWindow(title=self.formal_name)
+        self.main_window.content = main_box
+        self.main_window.show()
+
+def main():
+    return MyApp()
+</code></pre>
+<h4 id="打包Apk"><a href="#打包Apk" class="headerlink" title="打包Apk"></a>打包Apk</h4><pre><code class="bash">briefcase create android
+briefcase build android
+</code></pre>
+<p>到这里会打包一个Apk，这个时候就可以安装了</p>
+<pre><code class="bash">briefcase package android
+</code></pre>
+<p>上面这个命令会生成一个<code>.aab</code>文件，个人感觉没什么用</p>
+<h4 id="发给某幸运儿"><a href="#发给某幸运儿" class="headerlink" title="发给某幸运儿"></a><del>发给某幸运儿</del></h4><p><del>然后就被骂了哈哈哈哈哈哈</del></p>
+<p>这里还有一个展示html页面的代码，Windows11测试通过，安卓没试过</p>
+<pre><code class="python">import toga
+
+class MyApp(toga.App):
+    def startup(self):
+        webview = toga.WebView()
+        web=r&quot;&quot;&quot;&lt;h1&gt;这里放你的html内容&lt;/h1&gt;&quot;&quot;&quot;
+        webview.set_content(&quot;example.com&quot;, web)
+
+        self.main_window = toga.MainWindow(title=self.formal_name)
+        self.main_window.content = webview
+        self.main_window.show()
+
+def main():
+    return MyApp()
+</code></pre>
 
     </div>
     
