@@ -27,12 +27,12 @@ jobs:
           else # For Monday
             echo "::set-output name=directory::Diaspora/"
           fi
-          
+
       - name: Get Current Time
         id: current_time
         run: echo "::set-output name=time::$(date +'%Y-%m-%d %H:%M:%S')"
 
-      - name: Deploy
+      - name: Deno
         uses: peaceiris/actions-gh-pages@v3.9.3
         with:
           publish_dir: ${{ steps.determine_directory.outputs.directory }}
@@ -40,3 +40,21 @@ jobs:
           user_name: ${{ secrets.MY_USER_NAME }}
           user_email: ${{ secrets.MY_USER_EMAIL }}
           commit_message: "Automated Deployment at ${{ steps.current_time.outputs.time }}"
+
+      - name: Clone repository
+        uses: actions/checkout@v4
+        with: 
+          ref: 'gh-pages'
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Install deployctl
+        run: "deno install --allow-all --no-check -r -f https://deno.land/x/deploy/deployctl.ts"
+
+      - name: Upload to Deno Deploy
+        env: 
+          DENO_TOKEN: ${{ secrets.DENO_TOKEN }}
+        run: "DENO_DEPLOY_TOKEN=$DENO_TOKEN deployctl deploy --project=shoujo https://deno.land/std@0.208.0/http/file_server.ts"
