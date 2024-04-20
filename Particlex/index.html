@@ -195,6 +195,109 @@
         
 
 <div class="post">
+    <a href="/2024/04/06/Ubuntu%E9%85%8D%E7%BD%AEAndroid-SDK%E5%B9%B6%E4%BD%BF%E7%94%A8Cordova/">
+        <h2 class="post-title">Ubuntu配置Android SDK并使用Cordova</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Code/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Code
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/4/6
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>在Ubuntu 20.04.6 LTS上配置Android SDK，并使用Cordova打包Android App</p>
+<p>这里使用Github的Codespace</p>
+<p><del>用Goorm IDE发现存储空间不够，在Codespace上又重装了一遍</del></p>
+<h3 id="配置Cordova"><a href="#配置Cordova" class="headerlink" title="配置Cordova"></a>配置Cordova</h3><pre><code class="bash">sudo apt update
+npm install cordova -g
+npm update cordova -g
+cordova create &lt;文件夹名&gt; &lt;包名&gt; &lt;软件名&gt;
+cd &lt;文件夹名&gt;
+cordova platform add android --save
+</code></pre>
+<p>预览命令：</p>
+<pre><code class="bash">cordova serve
+</code></pre>
+<h3 id="配置JDK"><a href="#配置JDK" class="headerlink" title="配置JDK"></a>配置JDK</h3><p>Codespace自带JDK 21，但是好像有bug，JDK 17能正常使用</p>
+<pre><code class="bash">sudo apt install openjdk-17-jdk
+</code></pre>
+<p>安装JDK 17后需要设置JDK的环境变量，不然就是用的JDK 21的环境变量</p>
+<pre><code class="bash">export JAVA_HOME=/usr/local/sdkman/candidates/java/17.0.10-ms  #jdk17的位置
+</code></pre>
+<h3 id="配置Android-SDK"><a href="#配置Android-SDK" class="headerlink" title="配置Android SDK"></a>配置Android SDK</h3><pre><code class="bash">wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+unzip commandlinetools-linux-11076708_latest.zip
+</code></pre>
+<p>添加环境变量：</p>
+<pre><code class="bash">vim ~/.bashrc
+</code></pre>
+<p>在<code>.bashrc</code>中添加下面三行：</p>
+<pre><code class="bash">export ANDROID_SDK_ROOT=/path/to/your/sdk  #你的sdk位置
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+export PATH=$PATH:$ANDROID_SDK_ROOT/bin
+</code></pre>
+<p>重新打开终端，输入</p>
+<pre><code class="bash">sdkmanager &quot;platform-tools&quot; &quot;platforms;android-33&quot; &quot;build-tools;33.0.2&quot; --sdk_root=$ANDROID_SDK_ROOT
+</code></pre>
+<h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><pre><code class="bash">cordova build android
+</code></pre>
+<h3 id="错误及解决方式"><a href="#错误及解决方式" class="headerlink" title="错误及解决方式"></a>错误及解决方式</h3><p><code>Error: LinkageError occurred while loading main class com.android.sdklib.tool.sdkmanager.SdkManagerCli        java.lang.UnsupportedClassVersionError: com/android/sdklib/tool/sdkmanager/SdkManagerCli has been compiled by a more recent version of the Java Runtime (class file version 61.0), this version of the Java Runtime only recognizes class file versions up to 55.0</code></p>
+<p>解决方法：</p>
+<pre><code class="bash">sdkmanager &quot;build-tools;33.0.2&quot; --sdk_root=$ANDROID_SDK_ROOT
+</code></pre>
+<p><code>Could not open settings generic class cache for settings file &#39;/workspaces/android/app/platforms/android/settings.gradle&#39; (/home/codespace/.gradle/caches/7.6/scripts/dqjrgsw17c62wbpoagod92e1e). &gt; BUG! exception in phase &#39;semantic analysis&#39; in source unit &#39;_BuildScript_&#39; Unsupported class file major version 65</code></p>
+<p>解决方法：</p>
+<p>将<code>$JAVA_HOME</code>设置为JDK 17的目录</p>
+<p><code>Execution failed for task &#39;:app:mergeLibDexDebug&#39;. &gt; Could not resolve all files for configuration &#39;:app:debugRuntimeClasspath&#39;.   &gt; Failed to transform debug (project :CordovaLib) to match attributes &#123;artifactType=android-dex, asm-transformed-variant=NONE, com.android.build.api.attributes.AgpVersionAttr=7.4.2, com.android.build.api.attributes.BuildTypeAttr=debug, com.android.build.gradle.internal.attributes.VariantAttr=debug, dexing-enable-desugaring=true, dexing-enable-jacoco-instrumentation=false, dexing-is-debuggable=true, dexing-min-sdk=24, org.gradle.libraryelements=classes, org.gradle.usage=java-runtime&#125;.      &gt; Execution failed for DexingNoClasspathTransform: /workspaces/android/app/platforms/android/CordovaLib/build/intermediates/runtime_library_classes_dir/debug.         &gt; Error while dexing.</code></p>
+<p>解决办法：</p>
+<p><del>解决上面两个就没这个了</del></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Android/" style="color: #ff7d73">Android</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Linux/" style="color: #ffa2c4">Linux</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Github/" style="color: #00bcd4">Github</a>
+        </span>
+        
+    </div>
+    <a href="/2024/04/06/Ubuntu%E9%85%8D%E7%BD%AEAndroid-SDK%E5%B9%B6%E4%BD%BF%E7%94%A8Cordova/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2024/03/22/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Toga%E5%88%B6%E4%BD%9C%E5%A5%87%E6%80%AA%E7%9A%84%E5%AE%89%E5%8D%93App/">
         <h2 class="post-title">如何使用Toga制作奇怪的安卓App</h2>
     </a>
@@ -286,7 +389,7 @@ def main():
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #03a9f4">Code</a>
+            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
         </span>
         
         <span class="tag">
@@ -296,7 +399,7 @@ def main():
         
         <span class="tag">
             
-            <a href="/tags/Toga/" style="color: #ff7d73">Toga</a>
+            <a href="/tags/Toga/" style="color: #03a9f4">Toga</a>
         </span>
         
     </div>
@@ -335,6 +438,7 @@ def main():
 <p>需要准备一个GitHub账号，使用GitHub登陆<a target="_blank" rel="noopener" href="https://dash.deno.com/signin">Deno</a></p>
 <ol>
 <li><p>Deno Deploy中新建一个<code>Project</code>，选择<code>Create an empty project</code></p>
+<p>如果找不到<code>Create an empty project</code>，这里有链接：<a target="_blank" rel="noopener" href="https://dash.deno.com/new">New Project - Deploy (deno.com)</a></p>
 <p><img src="/images/20240309/denop.png" alt="project"></p>
 </li>
 <li><p>在博客的GitHub仓库中新建一个workflow，内容如下：</p>
@@ -366,7 +470,7 @@ jobs:
       - name: Upload to Deno Deploy
         env: 
           DENO_TOKEN: $&#123;&#123; secrets.DENO_TOKEN &#125;&#125;  # 使用设置的secrets名
-        run: &quot;DENO_DEPLOY_TOKEN=$DENO_TOKEN deployctl deploy --project=&lt;project_name&gt; https://deno.land/std@0.208.0/http/file_server.ts&quot;  # 将&lt;project_name&gt;替换为你在Deno新建的项目名
+        run: &quot;DENO_DEPLOY_TOKEN=$DENO_TOKEN deployctl deploy --prod --project=&lt;project_name&gt; https://deno.land/std@0.208.0/http/file_server.ts&quot;  # 将&lt;project_name&gt;替换为你在Deno新建的项目名
 </code></pre>
 </li>
 <li><p>在<a target="_blank" rel="noopener" href="https://dash.deno.com/account#access-tokens">https://dash.deno.com/account#access-tokens</a>生成一个Access Token，添加进博客GitHub仓库的secrets中，名字可以用上面的<code>DENO_TOKEN</code>（也可以用别的名字）</p>
@@ -386,12 +490,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #00a596">Code</a>
+            <a href="/tags/Code/" style="color: #03a9f4">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Github/" style="color: #03a9f4">Github</a>
+            <a href="/tags/Github/" style="color: #00a596">Github</a>
         </span>
         
     </div>
@@ -425,11 +529,15 @@ jobs:
     <div class="description">
         <div class="content" v-pre>
             
-            <p>使用<code>Cloudflare Pages</code>搭建图床</p>
+            <blockquote>
+<p>⚠️警告⚠️</p>
+<p><code>pages.dev</code>域名被移动运营商污染，请谨慎使用！</p>
+</blockquote>
+<p>使用<code>Cloudflare Pages</code>搭建图床</p>
 <p>除了图床也可以放各种各样的文件</p>
 <p>限制：</p>
 <ul>
-<li><p>自定义域最多100个</p>
+<li><p>最多100个<code>pages.dev</code>域名</p>
 </li>
 <li><p>每月最多部署500次</p>
 </li>
@@ -489,12 +597,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
+            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Cloudflare/" style="color: #ffa2c4">Cloudflare</a>
+            <a href="/tags/Cloudflare/" style="color: #00bcd4">Cloudflare</a>
         </span>
         
     </div>
@@ -583,7 +691,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #03a9f4">Code</a>
+            <a href="/tags/Code/" style="color: #ffa2c4">Code</a>
         </span>
         
     </div>
@@ -669,7 +777,7 @@ valine:
         
         <span class="tag">
             
-            <a href="/tags/Hexo/" style="color: #03a9f4">Hexo</a>
+            <a href="/tags/Hexo/" style="color: #ffa2c4">Hexo</a>
         </span>
         
         <span class="tag">
@@ -882,12 +990,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00bcd4">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #03a9f4">日常</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #00a596">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ff7d73">女生</a>
         </span>
         
     </div>
@@ -998,12 +1106,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/Hexo/" style="color: #00bcd4">Hexo</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Code/" style="color: #ffa2c4">Code</a>
+            <a href="/tags/Hexo/" style="color: #03a9f4">Hexo</a>
         </span>
         
         <span class="tag">
@@ -1011,76 +1114,13 @@ jobs:
             <a href="/tags/Fluid/" style="color: #00a596">Fluid</a>
         </span>
         
+        <span class="tag">
+            
+            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
+        </span>
+        
     </div>
     <a href="/2023/11/26/Hexo-Fluid%E6%B7%BB%E5%8A%A0%E4%B8%80%E8%A8%80%E5%8F%8A%E5%87%BA%E5%A4%84/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/11/05/%E5%B0%91%E5%A5%B3%E7%9A%84%E4%BA%BA%E8%AE%BE/">
-        <h2 class="post-title">少女的人设</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%97%A5%E5%B8%B8/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                日常
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/11/5
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <ul>
-<li>姓名: 少女  </li>
-<li>性别: 女  </li>
-<li>年龄: 16  </li>
-<li>身高: 159.5cm  </li>
-<li>体重: <span class="heimu">女孩子的体重是秘密!!</span>  </li>
-<li>胸围: 95D  </li>
-<li>生日: 2007.08.31  </li>
-<li>喜欢的人&#x2F;物: 初音未来&amp;&amp;美少女&amp;&amp;Python  <div style="text-align:center;"><p><del>才，才不是为了你才特意写的自我介绍啦</del></p><p><strong>世界第一可爱美少女</strong></p></div></li>
-</ul>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #ff7d73">日常</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #03a9f4">女生</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E4%BA%BA%E8%AE%BE/" style="color: #ffa2c4">人设</a>
-        </span>
-        
-    </div>
-    <a href="/2023/11/05/%E5%B0%91%E5%A5%B3%E7%9A%84%E4%BA%BA%E8%AE%BE/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -1171,5 +1211,5 @@ jobs:
     </div>
     <script src="/js/main.js"></script>
     
-<!-- hexo injector body_end start --><script src="/js/L2Dwidget.min.js"></script><script>document.addEventListener("DOMContentLoaded",function(){var o,e=navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)?250:450;o="onaniishoujo.github.io"==window.location.hostname?"https://miku1.pages.dev/live2d/model.json":"shoujo.pages.dev"==window.location.hostname?"https://miku2.pages.dev/live2d/model.json":"shoujo.netlify.app"==window.location.hostname?"https://miku3.pages.dev/live2d/model.json":"",L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:o},display:{position:"right",width:e,height:e},mobile:{show:!0},log:!1})});</script><!-- hexo injector body_end end --></body>
+<!-- hexo injector body_end start --><script src="/js/L2Dwidget.min.js"></script><script>L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:false,debug:false,model:{jsonPath:"/live2d/model.json"},display:{position:"right",width:450,height:450},mobile:{show:false},log:true});</script><!-- hexo injector body_end end --></body>
 </html>

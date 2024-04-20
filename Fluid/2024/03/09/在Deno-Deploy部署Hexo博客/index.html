@@ -6,7 +6,7 @@
 
 
 
-<head><!-- hexo injector head_begin start --><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 6; pointer-events: none;" ></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><link id="custom-css" rel="stylesheet" type="text/css" href="/css/divback.css"><!-- hexo injector head_begin end -->
+<head><!-- hexo injector head_begin start --><link id="custom-css" rel="stylesheet" type="text/css" href="/css/divback.css"><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 6; pointer-events: none;" ></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/myicon.jpg">
   <link rel="icon" href="/img/myicon.jpg">
@@ -17,16 +17,16 @@
   <meta name="author" content="オナニー少女">
   <meta name="keywords" content="">
   
-    <meta name="description" content="默认分配一个project_name.deno.dev域名，速度还可以 类似Cloudflare Pages 需要准备一个GitHub账号，使用GitHub登陆Deno  Deno Deploy中新建一个Project，选择Create an empty project   在博客的GitHub仓库中新建一个workflow，内容如下： 123456789101112131415161718192">
+    <meta name="description" content="默认分配一个project_name.deno.dev域名，速度还可以 类似Cloudflare Pages 需要准备一个GitHub账号，使用GitHub登陆Deno  Deno Deploy中新建一个Project，选择Create an empty project 如果找不到Create an empty project，这里有链接：New Project - Deploy (deno.co">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Deno Deploy部署Hexo博客">
 <meta property="og:url" content="https://onaniisyoujo.github.io/2024/03/09/%E5%9C%A8Deno-Deploy%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="少女的Blog">
-<meta property="og:description" content="默认分配一个project_name.deno.dev域名，速度还可以 类似Cloudflare Pages 需要准备一个GitHub账号，使用GitHub登陆Deno  Deno Deploy中新建一个Project，选择Create an empty project   在博客的GitHub仓库中新建一个workflow，内容如下： 123456789101112131415161718192">
+<meta property="og:description" content="默认分配一个project_name.deno.dev域名，速度还可以 类似Cloudflare Pages 需要准备一个GitHub账号，使用GitHub登陆Deno  Deno Deploy中新建一个Project，选择Create an empty project 如果找不到Create an empty project，这里有链接：New Project - Deploy (deno.co">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://onaniisyoujo.github.io/img/20240309/denop.png">
 <meta property="article:published_time" content="2024-03-09T12:24:18.000Z">
-<meta property="article:modified_time" content="2024-03-22T13:44:52.755Z">
+<meta property="article:modified_time" content="2024-04-20T15:18:53.633Z">
 <meta property="article:author" content="オナニー少女">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="Github">
@@ -261,7 +261,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          970 字
+          1k 字
         
       </span>
     
@@ -322,7 +322,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于：2024年3月22日 晚上
+                    本文最后更新于：2024年4月20日 晚上
                   
                 
               </p>
@@ -335,10 +335,11 @@
 <p>需要准备一个GitHub账号，使用GitHub登陆<a target="_blank" rel="noopener" href="https://dash.deno.com/signin">Deno</a></p>
 <ol>
 <li><p>Deno Deploy中新建一个<code>Project</code>，选择<code>Create an empty project</code></p>
+<p>如果找不到<code>Create an empty project</code>，这里有链接：<a target="_blank" rel="noopener" href="https://dash.deno.com/new">New Project - Deploy (deno.com)</a></p>
 <p><img src="/img/20240309/denop.png" srcset="/img/loading.gif" lazyload alt="project"></p>
 </li>
 <li><p>在博客的GitHub仓库中新建一个workflow，内容如下：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">workflow_dispatch:</span><br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span> <span class="hljs-string">gh-pages</span>  <span class="hljs-comment"># 根据需要设置触发条件</span><br><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">deploy:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Clone</span> <span class="hljs-string">repository</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v4</span><br>        <span class="hljs-attr">with:</span> <br>          <span class="hljs-attr">ref:</span> <span class="hljs-string">&#x27;gh-pages&#x27;</span>  <span class="hljs-comment"># 根据需要修改为你的分支名</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">Deno</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">denoland/setup-deno@v1</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">deno-version:</span> <span class="hljs-string">v1.x</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">deployctl</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">&quot;deno install --allow-all --no-check -r -f https://deno.land/x/deploy/deployctl.ts&quot;</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Upload</span> <span class="hljs-string">to</span> <span class="hljs-string">Deno</span> <span class="hljs-string">Deploy</span><br>        <span class="hljs-attr">env:</span> <br>          <span class="hljs-attr">DENO_TOKEN:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.DENO_TOKEN</span> <span class="hljs-string">&#125;&#125;</span>  <span class="hljs-comment"># 使用设置的secrets名</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">&quot;DENO_DEPLOY_TOKEN=$DENO_TOKEN deployctl deploy --project=&lt;project_name&gt; https://deno.land/std@0.208.0/http/file_server.ts&quot;</span>  <span class="hljs-comment"># 将&lt;project_name&gt;替换为你在Deno新建的项目名</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">workflow_dispatch:</span><br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span> <span class="hljs-string">gh-pages</span>  <span class="hljs-comment"># 根据需要设置触发条件</span><br><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">deploy:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Clone</span> <span class="hljs-string">repository</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v4</span><br>        <span class="hljs-attr">with:</span> <br>          <span class="hljs-attr">ref:</span> <span class="hljs-string">&#x27;gh-pages&#x27;</span>  <span class="hljs-comment"># 根据需要修改为你的分支名</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">Deno</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">denoland/setup-deno@v1</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">deno-version:</span> <span class="hljs-string">v1.x</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">deployctl</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">&quot;deno install --allow-all --no-check -r -f https://deno.land/x/deploy/deployctl.ts&quot;</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Upload</span> <span class="hljs-string">to</span> <span class="hljs-string">Deno</span> <span class="hljs-string">Deploy</span><br>        <span class="hljs-attr">env:</span> <br>          <span class="hljs-attr">DENO_TOKEN:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.DENO_TOKEN</span> <span class="hljs-string">&#125;&#125;</span>  <span class="hljs-comment"># 使用设置的secrets名</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">&quot;DENO_DEPLOY_TOKEN=$DENO_TOKEN deployctl deploy --prod --project=&lt;project_name&gt; https://deno.land/std@0.208.0/http/file_server.ts&quot;</span>  <span class="hljs-comment"># 将&lt;project_name&gt;替换为你在Deno新建的项目名</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>在<a target="_blank" rel="noopener" href="https://dash.deno.com/account#access-tokens">https://dash.deno.com/account#access-tokens</a>生成一个Access Token，添加进博客GitHub仓库的secrets中，名字可以用上面的<code>DENO_TOKEN</code>（也可以用别的名字）</p>
 </li>
@@ -786,5 +787,5 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-<!-- hexo injector body_end start --><script src="/js/L2Dwidget.min.js"></script><script>document.addEventListener("DOMContentLoaded",function(){var o,e=navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)?250:450;o="onaniishoujo.github.io"==window.location.hostname?"https://miku1.pages.dev/live2d/model.json":"shoujo.pages.dev"==window.location.hostname?"https://miku2.pages.dev/live2d/model.json":"shoujo.netlify.app"==window.location.hostname?"https://miku3.pages.dev/live2d/model.json":"",L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:o},display:{position:"right",width:e,height:e},mobile:{show:!0},log:!1})});</script><!-- hexo injector body_end end --></body>
+<!-- hexo injector body_end start --><script src="/js/L2Dwidget.min.js"></script><script>L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:false,debug:false,model:{jsonPath:"/live2d/model.json"},display:{position:"right",width:450,height:450},mobile:{show:false},log:true});</script><!-- hexo injector body_end end --></body>
 </html>

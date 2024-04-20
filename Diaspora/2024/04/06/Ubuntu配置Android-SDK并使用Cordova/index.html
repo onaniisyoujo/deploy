@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ubuntu配置Android SDK并使用Cordova - 少女的Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    
+    <meta name="description" content="在Ubuntu 20.04.6 LTS上配置Android SDK，并使用Cordova打包Android App
+这里使用Github的Codespace
+用Goorm IDE发现存储空间不够，在,"> 
+    <meta name="author" content="少女"> 
+    
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Ubuntu配置Android SDK并使用Cordova - 少女的Blog"/>
+    <meta name="twitter:description" content="在Ubuntu 20.04.6 LTS上配置Android SDK，并使用Cordova打包Android App
+这里使用Github的Codespace
+用Goorm IDE发现存储空间不够，在,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="少女的Blog"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="Ubuntu配置Android SDK并使用Cordova - 少女的Blog"/>
+    <meta property="og:description" content="在Ubuntu 20.04.6 LTS上配置Android SDK，并使用Cordova打包Android App
+这里使用Github的Codespace
+用Goorm IDE发现存储空间不够，在,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/style.min.css" /><style>body { font-family: "LXGW WenKai", sans-serif; }</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">少女的Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://onaniishoujo.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Ubuntu配置Android SDK并使用Cordova</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Ubuntu配置Android SDK并使用Cordova</h1>
+        <div class="stuff">
+            <span>四月 06, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>在Ubuntu 20.04.6 LTS上配置Android SDK，并使用Cordova打包Android App</p>
+<p>这里使用Github的Codespace</p>
+<p><del>用Goorm IDE发现存储空间不够，在Codespace上又重装了一遍</del></p>
+<h3 id="配置Cordova"><a href="#配置Cordova" class="headerlink" title="配置Cordova"></a>配置Cordova</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">npm install cordova -g</span><br><span class="line">npm update cordova -g</span><br><span class="line">cordova create &lt;文件夹名&gt; &lt;包名&gt; &lt;软件名&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;文件夹名&gt;</span><br><span class="line">cordova platform add android --save</span><br></pre></td></tr></table></figure>
+
+<p>预览命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova serve</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="配置JDK"><a href="#配置JDK" class="headerlink" title="配置JDK"></a>配置JDK</h3><p>Codespace自带JDK 21，但是好像有bug，JDK 17能正常使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install openjdk-17-jdk</span><br></pre></td></tr></table></figure>
+
+<p>安装JDK 17后需要设置JDK的环境变量，不然就是用的JDK 21的环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/local/sdkman/candidates/java/17.0.10-ms  <span class="comment">#jdk17的位置</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置Android-SDK"><a href="#配置Android-SDK" class="headerlink" title="配置Android SDK"></a>配置Android SDK</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip</span><br><span class="line">unzip commandlinetools-linux-11076708_latest.zip</span><br></pre></td></tr></table></figure>
+
+<p>添加环境变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>在<code>.bashrc</code>中添加下面三行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ANDROID_SDK_ROOT=/path/to/your/sdk  <span class="comment">#你的sdk位置</span></span><br><span class="line"><span class="built_in">export</span> ANDROID_HOME=<span class="variable">$ANDROID_SDK_ROOT</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$ANDROID_SDK_ROOT</span>/bin</span><br></pre></td></tr></table></figure>
+
+<p>重新打开终端，输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sdkmanager <span class="string">&quot;platform-tools&quot;</span> <span class="string">&quot;platforms;android-33&quot;</span> <span class="string">&quot;build-tools;33.0.2&quot;</span> --sdk_root=<span class="variable">$ANDROID_SDK_ROOT</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova build android</span><br></pre></td></tr></table></figure>
+
+<h3 id="错误及解决方式"><a href="#错误及解决方式" class="headerlink" title="错误及解决方式"></a>错误及解决方式</h3><p><code>Error: LinkageError occurred while loading main class com.android.sdklib.tool.sdkmanager.SdkManagerCli        java.lang.UnsupportedClassVersionError: com/android/sdklib/tool/sdkmanager/SdkManagerCli has been compiled by a more recent version of the Java Runtime (class file version 61.0), this version of the Java Runtime only recognizes class file versions up to 55.0</code></p>
+<p>解决方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sdkmanager <span class="string">&quot;build-tools;33.0.2&quot;</span> --sdk_root=<span class="variable">$ANDROID_SDK_ROOT</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>Could not open settings generic class cache for settings file &#39;/workspaces/android/app/platforms/android/settings.gradle&#39; (/home/codespace/.gradle/caches/7.6/scripts/dqjrgsw17c62wbpoagod92e1e). &gt; BUG! exception in phase &#39;semantic analysis&#39; in source unit &#39;_BuildScript_&#39; Unsupported class file major version 65</code></p>
+<p>解决方法：</p>
+<p>将<code>$JAVA_HOME</code>设置为JDK 17的目录</p>
+<p><code>Execution failed for task &#39;:app:mergeLibDexDebug&#39;. &gt; Could not resolve all files for configuration &#39;:app:debugRuntimeClasspath&#39;.   &gt; Failed to transform debug (project :CordovaLib) to match attributes &#123;artifactType=android-dex, asm-transformed-variant=NONE, com.android.build.api.attributes.AgpVersionAttr=7.4.2, com.android.build.api.attributes.BuildTypeAttr=debug, com.android.build.gradle.internal.attributes.VariantAttr=debug, dexing-enable-desugaring=true, dexing-enable-jacoco-instrumentation=false, dexing-is-debuggable=true, dexing-min-sdk=24, org.gradle.libraryelements=classes, org.gradle.usage=java-runtime&#125;.      &gt; Execution failed for DexingNoClasspathTransform: /workspaces/android/app/platforms/android/CordovaLib/build/intermediates/runtime_library_classes_dir/debug.         &gt; Error while dexing.</code></p>
+<p>解决办法：</p>
+<p><del>解决上面两个就没这个了</del></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                </ul>
+            
+        </div>
+        
+        <div id="gitalk-container" class="comment link">查看评论</div>
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+<!-- hexo injector body_end start --><script src="/js/L2Dwidget.min.js"></script><script>document.addEventListener("DOMContentLoaded",function(){var o,e=navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)?250:450;o="onaniishoujo.github.io"==window.location.hostname?"https://miku1.pages.dev/live2d/model.json":"shoujo.pages.dev"==window.location.hostname?"https://miku2.pages.dev/live2d/model.json":"shoujo.netlify.app"==window.location.hostname?"https://miku3.pages.dev/live2d/model.json":"",L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:o},display:{position:"right",width:e,height:e},mobile:{show:!0},log:!1})});</script><!-- hexo injector body_end end --></body>
+
+<script src="https://cdn.staticfile.org/twikoo/1.6.31/twikoo.all.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
