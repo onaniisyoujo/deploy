@@ -4,18 +4,18 @@
     <title>少女的Blog • Posts by &#34;github&#34; tag</title>
     <link href="https://onaniishoujo.github.io" />
     <updated>2024-04-06T09:48:53.000Z</updated>
-    <category term="Android" />
-    <category term="Linux" />
-    <category term="Github" />
     <category term="Hexo" />
     <category term="Fluid" />
     <category term="Code" />
+    <category term="Github" />
     <category term="Cloudflare" />
     <category term="日常" />
     <category term="女生" />
     <category term="人设" />
     <category term="birthday" />
     <category term="资源" />
+    <category term="Android" />
+    <category term="Linux" />
     <category term="Python" />
     <category term="Toga" />
     <entry>
@@ -45,9 +45,9 @@
 &lt;p&gt;解决办法：&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;解决上面两个就没这个了&lt;/s&gt;&lt;/p&gt;
 </content>
+        <category term="Github" />
         <category term="Android" />
         <category term="Linux" />
-        <category term="Github" />
         <updated>2024-04-06T09:48:53.000Z</updated>
     </entry>
     <entry>
@@ -71,8 +71,8 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 </content>
-        <category term="Github" />
         <category term="Code" />
+        <category term="Github" />
         <updated>2024-03-09T12:24:18.000Z</updated>
     </entry>
     <entry>
@@ -108,8 +108,8 @@
 &lt;p&gt;&lt;s&gt;写的方法我自己都看不懂&lt;/s&gt;&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;感谢 ChatGPT 提供的 GitHub Actions 的源码&lt;/s&gt;&lt;/p&gt;
 </content>
-        <category term="Github" />
         <category term="Code" />
+        <category term="Github" />
         <updated>2024-01-21T12:43:54.000Z</updated>
     </entry>
 </feed>
