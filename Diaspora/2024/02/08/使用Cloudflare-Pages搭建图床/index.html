@@ -64,7 +64,7 @@ pages.dev域名被移动运营商污染，请谨慎使用！
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
-<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/style.min.css" /><style>body { font-family: "LXGW WenKai", sans-serif; }</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head>
+<!-- hexo injector head_end start --><script>fetch("https://onaniishoujo.deno.dev/").then(e=>e.json()).then(e=>{document.getElementById("counter_uv").innerHTML=e.uv,document.getElementById("counter_pv").innerHTML=e.pv});</script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/style.min.css" /><style>body { font-family: "LXGW WenKai", sans-serif; }</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head>
 
 <body class="loading">
     <span id="config-title" style="display:none">少女的Blog</span>
@@ -113,17 +113,18 @@ pages.dev域名被移动运营商污染，请谨慎使用！
 <li><p>每个<code>Cloudflare Pages</code>最多20000个文件，单个文件最大<code>25 MiB</code></p>
 </li>
 </ul>
-<p>新建Git仓库，上传你的文件；在仓库根目录中新建一个<code>_headers</code>文件，内容如下</p>
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><ol>
+<li><p>新建Git仓库，上传你的文件</p>
+<p>在仓库根目录中新建一个<code>_headers</code>文件，内容如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">  Access-Control-Allow-Origin: *</span><br></pre></td></tr></table></figure>
 
-<p>最好把<code>Access-Control-Allow-Origin: *</code>中的<code>*</code>替换为你的网站URL</p>
+<p>注意：最好把<code>Access-Control-Allow-Origin: *</code>中的<code>*</code>替换为你的网站URL</p>
 <p>不替换就是所有人都能跨域访问</p>
-<p>然后把这个仓库部署到<code>Cloudflare Pages</code></p>
-<hr>
-<p>后来发现可以在<code>/functions</code>目录下配置<code>Cloudflare Workers</code>，也可以使用<code>_worker.js</code>文件，如果只允许几个特定的网站共用一个图床，理论上能够实现；但是 ChatGPT 的方案<strong>有问题</strong>，自己也不怎么会JavaScript，遂将代码抄录如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(request); <span class="comment">// 默认转发请求</span></span><br><span class="line">    <span class="keyword">const</span> origin = request.<span class="property">headers</span>.<span class="title function_">get</span>(<span class="string">&quot;Origin&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> allowedOrigins = [</span><br><span class="line">      <span class="comment">// 在这里添加其他允许的来源</span></span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查请求的Origin是否在允许的列表中</span></span><br><span class="line">    <span class="keyword">if</span> (allowedOrigins.<span class="title function_">includes</span>(origin)) &#123;</span><br><span class="line">      <span class="comment">// 允许列表中的源，创建新的响应头并设置CORS策略</span></span><br><span class="line">      <span class="keyword">const</span> newHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>(response.<span class="property">headers</span>);</span><br><span class="line">      newHeaders.<span class="title function_">set</span>(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, origin);</span><br><span class="line">      newHeaders.<span class="title function_">set</span>(<span class="string">&quot;Vary&quot;</span>, <span class="string">&quot;Origin&quot;</span>);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 返回新的响应对象</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(response.<span class="property">body</span>, &#123;</span><br><span class="line">        <span class="attr">status</span>: response.<span class="property">status</span>,</span><br><span class="line">        <span class="attr">statusText</span>: response.<span class="property">statusText</span>,</span><br><span class="line">        <span class="attr">headers</span>: newHeaders</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果请求的Origin不在允许列表中，返回原始响应</span></span><br><span class="line">    <span class="comment">// 这里不设置Access-Control-Allow-Origin头</span></span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><del>\\又水了一篇好开心\\</del></p>
+</li>
+<li><p>新建一个<code>Cloudflare Pages</code>，选择上面仓库的某个分支并部署</p>
+<p>此时你就得到了一个图床</p>
+</li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
