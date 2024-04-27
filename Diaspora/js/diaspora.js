@@ -610,7 +610,7 @@ $(function() {
 					comment = $('#gitalk-container');
 					gitalk = twikoo.init({
 					  el: '#gitalk-container',
-					  envId: 'https://mikukatsune.netlify.app/.netlify/functions/twikoo',
+					  envId: 'https://shoujo-twikoo.hf.space',
 					  path: location.pathname,
 					})
 					$(".comment").removeClass("link")

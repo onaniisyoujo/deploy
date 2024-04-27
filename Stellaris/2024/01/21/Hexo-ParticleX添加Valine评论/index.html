@@ -124,13 +124,13 @@
     </script><script src="\js\main.js" type="text/javascript" async="" data-no-instant="true"></script><script type="text/javascript" src="\js\check_outdated_browser.js" data-no-instant="true"></script><script data-no-instant="true">
         function load_twikoo() {
             if (!document.querySelectorAll("#twikoo_container")[0]) return;
-            stellar.loadScript('https://cdn.staticfile.net/twikoo/1.6.31/twikoo.all.min.js', {defer: true}).then(function () {
+            stellar.loadScript('https://cdn.staticfile.net/twikoo/1.6.32/twikoo.all.min.js', {defer: true}).then(function () {
                 const el = document.getElementById("twikoo_container");
                 var path = el.getAttribute('comment_id');
                 if (!path) {
                     path = decodeURI(window.location.pathname);
                 }
-                twikoo.init(Object.assign({"js":"https://cdn.staticfile.net/twikoo/1.6.31/twikoo.all.min.js","envId":"https://mikukatsune.netlify.app/.netlify/functions/twikoo"}, {
+                twikoo.init(Object.assign({"js":"https://cdn.staticfile.net/twikoo/1.6.32/twikoo.all.min.js","envId":"https://shoujo-twikoo.hf.space"}, {
                     el: '#twikoo_container',
                     path: path,
                 }));
