@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>在Deno Deploy部署Hexo博客 | 少女的Blog</title>
+    <title>Deno Deploy的妙用 | 少女的Blog</title>
     <meta name="author" content="少女" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -44,7 +44,7 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/style.min.css" /><style>body { font-family: "LXGW WenKai", Lexend, "Noto Sans SC", sans-serif; }</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start --><script>fetch("https://onaniishoujo.deno.dev/").then(e=>e.json()).then(e=>{document.getElementById("counter_uv").innerHTML=e.uv,document.getElementById("counter_pv").innerHTML=e.pv});</script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/style.min.css" /><style>body { font-family: "LXGW WenKai", Lexend, "Noto Sans SC", sans-serif; }</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 <body>
     <div id="layout">
         <transition name="fade">
@@ -180,7 +180,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>在Deno Deploy部署Hexo博客</h1>
+        <h1>Deno Deploy的妙用</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -208,7 +208,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Code/" style="color: #ffa2c4">Code</a>
+                <a href="/tags/Code/" style="color: #ff7d73">Code</a>
             </span>
             
             <span class="tag">
@@ -221,7 +221,7 @@
     </div>
     
     <div class="content" v-pre>
-        <p>默认分配一个<code>project_name.deno.dev</code>域名，速度还可以</p>
+        <h2 id="搭建Hexo博客"><a href="#搭建Hexo博客" class="headerlink" title="搭建Hexo博客"></a>搭建Hexo博客</h2><p>默认分配一个<code>project_name.deno.dev</code>域名，速度还可以</p>
 <p>类似Cloudflare Pages</p>
 <p>需要准备一个GitHub账号，使用GitHub登陆<a target="_blank" rel="noopener" href="https://dash.deno.com/signin">Deno</a></p>
 <ol>
@@ -264,6 +264,66 @@ jobs:
 <li><p>在<a target="_blank" rel="noopener" href="https://dash.deno.com/account#access-tokens">https://dash.deno.com/account#access-tokens</a>生成一个Access Token，添加进博客GitHub仓库的secrets中，名字可以用上面的<code>DENO_TOKEN</code>（也可以用别的名字）</p>
 </li>
 </ol>
+<h2 id="访问量统计"><a href="#访问量统计" class="headerlink" title="访问量统计"></a>访问量统计</h2><p>使用Deno KV实现了一个类似不蒜子计数的功能</p>
+<h6 id="Deno-Deploy端的配置"><a href="#Deno-Deploy端的配置" class="headerlink" title="Deno Deploy端的配置"></a>Deno Deploy端的配置</h6><p>需要确保Deno KV中已经有<code>user</code>和<code>new</code>两组数据，没有可以先创建出来</p>
+<p>新建一个Playground，代码如下（请替换<code>url_set</code>的内容）</p>
+<pre><code class="ts">import &#123; Hash, encode &#125; from &quot;https://deno.land/x/checksum@1.2.0/mod.ts&quot;;
+const kv = await Deno.openKv();
+const url_set = [&#39;这里替换为该Deploy项目的地址&#39;, &#39;后面这几个是你的网站地址(可以只填一个)&#39;, &#39;&#39;, &#39;&#39;]
+
+Deno.serve(async (request: Request, info: Deno.ServeHandlerInfo) =&gt; &#123;
+  if (request.url != url_set[0]+&#39;/&#39; &amp;&amp; request.url != url_set[0]) &#123;
+    return new Response(&#39;403 Forbidden&#39;,&#123;status: 403&#125;);
+  &#125;
+  var flag;
+  for (const pair of request.headers.entries()) &#123;
+    if (pair[0] == &#39;referer&#39;) &#123;
+      for (const url of url_set) &#123;
+        if (pair[1].includes(url)) &#123;
+          var h = new Headers();
+          h.append(&#39;Access-Control-Allow-Origin&#39;, url);
+          flag = true;
+          break;
+        &#125;
+      &#125;
+    &#125;
+  &#125;
+  if (!flag) &#123;
+    return new Response(&#39;403 Forbidden&#39;,&#123;status: 403&#125;);
+  &#125;
+
+  await kv.atomic().sum([&quot;visitors&quot;], 1n).commit();
+  const count = await kv.get([&quot;visitors&quot;]);
+
+  const ip = info.remoteAddr.hostname;
+  const ip_md5 = new Hash(&quot;md5&quot;).digest(encode(ip)).hex();
+
+  const user_array = await kv.get([&quot;user&quot;]);
+  if (user_array.value.indexOf(ip_md5) == -1) &#123;
+    const ex_array = user_array.value.concat(ip_md5)
+    await kv.set([&quot;user&quot;], ex_array)
+    await kv.atomic().sum([&quot;new&quot;], 1n).commit();
+  &#125;
+  const pv = await kv.get([&quot;new&quot;]);
+
+  const result = `\&#123;&quot;uv&quot;: $&#123;count.value&#125;, &quot;pv&quot;:$&#123;pv.value&#125;\&#125;`;
+  return new Response(result, &#123;headers: h&#125;);
+&#125;);
+</code></pre>
+<h6 id="前端的配置"><a href="#前端的配置" class="headerlink" title="前端的配置"></a>前端的配置</h6><p>html部分：</p>
+<pre><code class="html">总访客&lt;span id=&quot;counter_uv&quot;&gt;&lt;/span&gt;人
+总访问量&lt;span id=&quot;counter_pv&quot;&gt;&lt;/span&gt;次
+</code></pre>
+<p>js部分：</p>
+<pre><code class="javascript">fetch(&#39;url&#39;) // 将url设置为你的Deno Deploy地址
+    .then(response =&gt; &#123;
+        return response.json();
+    &#125;)
+    .then(data =&gt; &#123;
+        document.getElementById(&#39;counter_uv&#39;).innerHTML = data.uv;
+        document.getElementById(&#39;counter_pv&#39;).innerHTML = data.pv;
+    &#125;)
+</code></pre>
 
     </div>
     
@@ -297,8 +357,8 @@ jobs:
         
         <div>
             <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div id="bsz">本站总访问量<span id="busuanzi_value_site_pv"></span>次&nbsp;&nbsp;
-            访客数<span id="busuanzi_value_site_uv"></span>人</div>
+            <div id="bsz">本站总访问量<span id="counter_pv">???</span>次&nbsp;&nbsp;
+            访客数<span id="counter_uv">???</span>人</div>
         </div>
         
         

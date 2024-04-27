@@ -40,7 +40,7 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/style.min.css" /><style>body { font-family: "LXGW WenKai", Lexend, "Noto Sans SC", sans-serif; }</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start --><script>fetch("https://onaniishoujo.deno.dev/").then(e=>e.json()).then(e=>{document.getElementById("counter_uv").innerHTML=e.uv,document.getElementById("counter_pv").innerHTML=e.pv});</script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/style.min.css" /><style>body { font-family: "LXGW WenKai", Lexend, "Noto Sans SC", sans-serif; }</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 <body>
     <div id="layout">
         <transition name="fade">
@@ -280,17 +280,17 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/bin
         
         <span class="tag">
             
-            <a href="/tags/Android/" style="color: #ff7d73">Android</a>
+            <a href="/tags/Github/" style="color: #ff7d73">Github</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Android/" style="color: #00a596">Android</a>
         </span>
         
         <span class="tag">
             
             <a href="/tags/Linux/" style="color: #ffa2c4">Linux</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Github/" style="color: #00bcd4">Github</a>
         </span>
         
     </div>
@@ -389,7 +389,7 @@ def main():
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
+            <a href="/tags/Code/" style="color: #ffa2c4">Code</a>
         </span>
         
         <span class="tag">
@@ -407,8 +407,8 @@ def main():
 </div>
 
 <div class="post">
-    <a href="/2024/03/09/%E5%9C%A8Deno-Deploy%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/">
-        <h2 class="post-title">在Deno Deploy部署Hexo博客</h2>
+    <a href="/2024/03/09/Deno-Deploy%E7%9A%84%E5%A6%99%E7%94%A8/">
+        <h2 class="post-title">Deno Deploy的妙用</h2>
     </a>
     <div class="category-and-date">
         
@@ -433,7 +433,7 @@ def main():
     <div class="description">
         <div class="content" v-pre>
             
-            <p>默认分配一个<code>project_name.deno.dev</code>域名，速度还可以</p>
+            <h2 id="搭建Hexo博客"><a href="#搭建Hexo博客" class="headerlink" title="搭建Hexo博客"></a>搭建Hexo博客</h2><p>默认分配一个<code>project_name.deno.dev</code>域名，速度还可以</p>
 <p>类似Cloudflare Pages</p>
 <p>需要准备一个GitHub账号，使用GitHub登陆<a target="_blank" rel="noopener" href="https://dash.deno.com/signin">Deno</a></p>
 <ol>
@@ -476,6 +476,66 @@ jobs:
 <li><p>在<a target="_blank" rel="noopener" href="https://dash.deno.com/account#access-tokens">https://dash.deno.com/account#access-tokens</a>生成一个Access Token，添加进博客GitHub仓库的secrets中，名字可以用上面的<code>DENO_TOKEN</code>（也可以用别的名字）</p>
 </li>
 </ol>
+<h2 id="访问量统计"><a href="#访问量统计" class="headerlink" title="访问量统计"></a>访问量统计</h2><p>使用Deno KV实现了一个类似不蒜子计数的功能</p>
+<h6 id="Deno-Deploy端的配置"><a href="#Deno-Deploy端的配置" class="headerlink" title="Deno Deploy端的配置"></a>Deno Deploy端的配置</h6><p>需要确保Deno KV中已经有<code>user</code>和<code>new</code>两组数据，没有可以先创建出来</p>
+<p>新建一个Playground，代码如下（请替换<code>url_set</code>的内容）</p>
+<pre><code class="ts">import &#123; Hash, encode &#125; from &quot;https://deno.land/x/checksum@1.2.0/mod.ts&quot;;
+const kv = await Deno.openKv();
+const url_set = [&#39;这里替换为该Deploy项目的地址&#39;, &#39;后面这几个是你的网站地址(可以只填一个)&#39;, &#39;&#39;, &#39;&#39;]
+
+Deno.serve(async (request: Request, info: Deno.ServeHandlerInfo) =&gt; &#123;
+  if (request.url != url_set[0]+&#39;/&#39; &amp;&amp; request.url != url_set[0]) &#123;
+    return new Response(&#39;403 Forbidden&#39;,&#123;status: 403&#125;);
+  &#125;
+  var flag;
+  for (const pair of request.headers.entries()) &#123;
+    if (pair[0] == &#39;referer&#39;) &#123;
+      for (const url of url_set) &#123;
+        if (pair[1].includes(url)) &#123;
+          var h = new Headers();
+          h.append(&#39;Access-Control-Allow-Origin&#39;, url);
+          flag = true;
+          break;
+        &#125;
+      &#125;
+    &#125;
+  &#125;
+  if (!flag) &#123;
+    return new Response(&#39;403 Forbidden&#39;,&#123;status: 403&#125;);
+  &#125;
+
+  await kv.atomic().sum([&quot;visitors&quot;], 1n).commit();
+  const count = await kv.get([&quot;visitors&quot;]);
+
+  const ip = info.remoteAddr.hostname;
+  const ip_md5 = new Hash(&quot;md5&quot;).digest(encode(ip)).hex();
+
+  const user_array = await kv.get([&quot;user&quot;]);
+  if (user_array.value.indexOf(ip_md5) == -1) &#123;
+    const ex_array = user_array.value.concat(ip_md5)
+    await kv.set([&quot;user&quot;], ex_array)
+    await kv.atomic().sum([&quot;new&quot;], 1n).commit();
+  &#125;
+  const pv = await kv.get([&quot;new&quot;]);
+
+  const result = `\&#123;&quot;uv&quot;: $&#123;count.value&#125;, &quot;pv&quot;:$&#123;pv.value&#125;\&#125;`;
+  return new Response(result, &#123;headers: h&#125;);
+&#125;);
+</code></pre>
+<h6 id="前端的配置"><a href="#前端的配置" class="headerlink" title="前端的配置"></a>前端的配置</h6><p>html部分：</p>
+<pre><code class="html">总访客&lt;span id=&quot;counter_uv&quot;&gt;&lt;/span&gt;人
+总访问量&lt;span id=&quot;counter_pv&quot;&gt;&lt;/span&gt;次
+</code></pre>
+<p>js部分：</p>
+<pre><code class="javascript">fetch(&#39;url&#39;) // 将url设置为你的Deno Deploy地址
+    .then(response =&gt; &#123;
+        return response.json();
+    &#125;)
+    .then(data =&gt; &#123;
+        document.getElementById(&#39;counter_uv&#39;).innerHTML = data.uv;
+        document.getElementById(&#39;counter_pv&#39;).innerHTML = data.pv;
+    &#125;)
+</code></pre>
 
             
         </div>
@@ -495,11 +555,11 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/Github/" style="color: #00a596">Github</a>
+            <a href="/tags/Github/" style="color: #ffa2c4">Github</a>
         </span>
         
     </div>
-    <a href="/2024/03/09/%E5%9C%A8Deno-Deploy%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/" class="go-post">阅读全文</a>
+    <a href="/2024/03/09/Deno-Deploy%E7%9A%84%E5%A6%99%E7%94%A8/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -544,45 +604,19 @@ jobs:
 <li><p>每个<code>Cloudflare Pages</code>最多20000个文件，单个文件最大<code>25 MiB</code></p>
 </li>
 </ul>
-<p>新建Git仓库，上传你的文件；在仓库根目录中新建一个<code>_headers</code>文件，内容如下</p>
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><ol>
+<li><p>新建Git仓库，上传你的文件</p>
+<p>在仓库根目录中新建一个<code>_headers</code>文件，内容如下</p>
 <pre><code>/*
   Access-Control-Allow-Origin: *
 </code></pre>
-<p>最好把<code>Access-Control-Allow-Origin: *</code>中的<code>*</code>替换为你的网站URL</p>
+<p>注意：最好把<code>Access-Control-Allow-Origin: *</code>中的<code>*</code>替换为你的网站URL</p>
 <p>不替换就是所有人都能跨域访问</p>
-<p>然后把这个仓库部署到<code>Cloudflare Pages</code></p>
-<hr>
-<p>后来发现可以在<code>/functions</code>目录下配置<code>Cloudflare Workers</code>，也可以使用<code>_worker.js</code>文件，如果只允许几个特定的网站共用一个图床，理论上能够实现；但是 ChatGPT 的方案<strong>有问题</strong>，自己也不怎么会JavaScript，遂将代码抄录如下：</p>
-<pre><code class="javascript">export default &#123;
-  async fetch(request, env) &#123;
-    const response = await fetch(request); // 默认转发请求
-    const origin = request.headers.get(&quot;Origin&quot;);
-    const allowedOrigins = [
-      // 在这里添加其他允许的来源
-    ];
-
-    // 检查请求的Origin是否在允许的列表中
-    if (allowedOrigins.includes(origin)) &#123;
-      // 允许列表中的源，创建新的响应头并设置CORS策略
-      const newHeaders = new Headers(response.headers);
-      newHeaders.set(&quot;Access-Control-Allow-Origin&quot;, origin);
-      newHeaders.set(&quot;Vary&quot;, &quot;Origin&quot;);
-
-      // 返回新的响应对象
-      return new Response(response.body, &#123;
-        status: response.status,
-        statusText: response.statusText,
-        headers: newHeaders
-      &#125;);
-    &#125;
-
-    // 如果请求的Origin不在允许列表中，返回原始响应
-    // 这里不设置Access-Control-Allow-Origin头
-    return response;
-  &#125;,
-&#125;
-</code></pre>
-<p><del>\\又水了一篇好开心\\</del></p>
+</li>
+<li><p>新建一个<code>Cloudflare Pages</code>，选择上面仓库的某个分支并部署</p>
+<p>此时你就得到了一个图床</p>
+</li>
+</ol>
 
             
         </div>
@@ -597,12 +631,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
+            <a href="/tags/Code/" style="color: #03a9f4">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Cloudflare/" style="color: #00bcd4">Cloudflare</a>
+            <a href="/tags/Cloudflare/" style="color: #00a596">Cloudflare</a>
         </span>
         
     </div>
@@ -691,7 +725,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #ffa2c4">Code</a>
+            <a href="/tags/Code/" style="color: #03a9f4">Code</a>
         </span>
         
     </div>
@@ -777,12 +811,12 @@ valine:
         
         <span class="tag">
             
-            <a href="/tags/Hexo/" style="color: #ffa2c4">Hexo</a>
+            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #00a596">Code</a>
+            <a href="/tags/Hexo/" style="color: #03a9f4">Hexo</a>
         </span>
         
     </div>
@@ -891,12 +925,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #ffa2c4">Code</a>
+            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Github/" style="color: #00a596">Github</a>
+            <a href="/tags/Github/" style="color: #03a9f4">Github</a>
         </span>
         
     </div>
@@ -939,7 +973,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/birthday/" style="color: #ff7d73">birthday</a>
+            <a href="/tags/birthday/" style="color: #00a596">birthday</a>
         </span>
         
     </div>
@@ -990,12 +1024,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #03a9f4">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">日常</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ff7d73">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ffa2c4">女生</a>
         </span>
         
     </div>
@@ -1106,17 +1140,17 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/Hexo/" style="color: #03a9f4">Hexo</a>
+            <a href="/tags/Code/" style="color: #00a596">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Fluid/" style="color: #00a596">Fluid</a>
+            <a href="/tags/Hexo/" style="color: #00bcd4">Hexo</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
+            <a href="/tags/Fluid/" style="color: #03a9f4">Fluid</a>
         </span>
         
     </div>
@@ -1192,8 +1226,8 @@ jobs:
         
         <div>
             <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div id="bsz">本站总访问量<span id="busuanzi_value_site_pv"></span>次&nbsp;&nbsp;
-            访客数<span id="busuanzi_value_site_uv"></span>人</div>
+            <div id="bsz">本站总访问量<span id="counter_pv">???</span>次&nbsp;&nbsp;
+            访客数<span id="counter_uv">???</span>人</div>
         </div>
         
         
