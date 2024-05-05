@@ -608,11 +608,11 @@ $(function() {
 				// if($('#gitalk-container').data('enable') == true){
 					Diaspora.loading(),
 					comment = $('#gitalk-container');
-					gitalk = twikoo.init({
+					gitalk = window.init({
 					  el: '#gitalk-container',
-					  envId: 'https://shoujo-twikoo.hf.space',
-					  path: location.pathname,
-					})
+					  serverURL: 'https://waline-1-g2450170.deta.app/',
+					  reaction: true,
+					});
 					$(".comment").removeClass("link")
 				//	gitalk.render('gitalk-container')
 					Diaspora.loaded();
@@ -633,12 +633,4 @@ $(function() {
     }
 		
     console.log("%c Github %c","background:#24272A; color:#ffffff","","https://github.com/Fechin/hexo-theme-diaspora")
-})
-
-// 自定义artitalk
-$(document).ready(function () {
-    if(location.href.indexOf("#reloaded") === -1 && location.href.indexOf("shuoshuo") !== -1){
-        location.href=location.href+"#reloaded";
-        location.reload();
-    }
 })

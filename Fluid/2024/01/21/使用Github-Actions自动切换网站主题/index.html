@@ -6,7 +6,7 @@
 
 
 
-<head><!-- hexo injector head_begin start --><link id="custom-css" rel="stylesheet" type="text/css" href="/css/divback.css"><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 6; pointer-events: none;" ></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><!-- hexo injector head_begin end -->
+<head><!-- hexo injector head_begin start --><link id="custom-css" rel="stylesheet" type="text/css" href="/css/divback.css"><link rel="stylesheet" href="https://cdn.staticfile.net/firacode/6.2.0/fira_code.min.css"><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 6; pointer-events: none;" ></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><link rel="stylesheet" href="https://cdn.staticfile.net/lxgw-wenkai-screen-webfont/1.7.0/style.min.css" /><style>:root{--waline-theme-color: #66ccff !important;--waline-active-color: #39c5bb !important;}</style><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/myicon.jpg">
   <link rel="icon" href="/img/myicon.jpg">
@@ -97,7 +97,7 @@
 
 
   
-<!-- hexo injector head_end start --><script>fetch("https://onaniishoujo.deno.dev/").then(e=>e.json()).then(e=>{document.getElementById("counter_uv").innerHTML=e.uv,document.getElementById("counter_pv").innerHTML=e.pv});</script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/style.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start --><script>fetch("https://onaniishoujo.deno.dev/").then(e=>e.json()).then(e=>{document.getElementById("counter_uv").innerHTML=e.uv,document.getElementById("counter_pv").innerHTML=e.pv});</script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -482,25 +482,24 @@
   
     <article id="comments" lazyload>
       
-  <div id="twikoo"></div>
+  <div id="waline"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#comments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.net/twikoo/1.6.32/twikoo.all.min.js', function() {
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://cdn.staticfile.org/waline/2.15.5/waline.min.css')
+      Fluid.utils.createScript('https://cdn.staticfile.org/waline/2.15.5/waline.min.js', function() {
         var options = Object.assign(
-          {"envId":"https://shoujo-twikoo.hf.space","region":"ap-shanghai","path":"location.pathname"},
+          {"serverURL":"https://waline-1-g2450170.deta.app/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10,"reaction":true},
           {
-            el: '#twikoo',
-            path: 'location.pathname',
-            onCommentLoaded: function() {
-              Fluid.utils.listenDOMLoaded(function() {
-                var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
-                Fluid.plugins.imageCaption(imgSelector);
-                Fluid.plugins.fancyBox(imgSelector);
-              });
-            }
+            el: '#waline',
+            path: window.location.pathname
           }
         )
-        twikoo.init(options)
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
       });
     });
   </script>
@@ -788,5 +787,5 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-<!-- hexo injector body_end start --><script src="/js/L2Dwidget.min.js"></script><script>L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:false,debug:false,model:{jsonPath:"/live2d/model.json"},display:{position:"right",width:450,height:450},mobile:{show:false},log:true});</script><!-- hexo injector body_end end --></body>
+<!-- hexo injector body_end start --><script>!function(){if(!window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&Math.random()>=.5){var e=document.createElement("script");e.src="/js/L2Dwidget.min.js",e.async=!0,e.onload=(()=>{L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2d/model.json"},display:{position:"right",width:400,height:400},mobile:{show:!1},log:!0})}),document.body.appendChild(e)}else{var n=document.createElement("div"),t=document.createElement("link"),i=document.createElement("script");n.id="sakana-widget",n.style.position="fixed",n.style.right="0px",n.style.bottom="2px",n.style.zIndex=9999,t.rel="stylesheet",t.href="/css/sakana.min.css",i.async=!0,i.onload=(()=>{(new SakanaWidget).mount("#sakana-widget")}),i.src="https://cdn.staticfile.net/sakana-widget/2.7.0/sakana.min.js",document.body.appendChild(n),document.body.appendChild(t),document.body.appendChild(i)}}();</script><!-- hexo injector body_end end --></body>
 </html>

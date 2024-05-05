@@ -22,8 +22,10 @@ jobs:
             echo "::set-output name=directory::Particlex/"
           elif [ $day_of_week -eq 4 ]; then
             echo "::set-output name=directory::Stellaris/"
-          elif [ $day_of_week -eq 2 ] || [ $day_of_week -eq 7 ]; then
+          elif [ $day_of_week -eq 7 ]; then
             echo "::set-output name=directory::ShokaX/"
+          elif [ $day_of_week -eq 2 ]; then
+            echo "::set-output name=directory::Anzhiyu/"
           else # For Monday
             echo "::set-output name=directory::Diaspora/"
           fi

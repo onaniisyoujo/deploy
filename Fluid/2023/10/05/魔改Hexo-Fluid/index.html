@@ -6,7 +6,7 @@
 
 
 
-<head><!-- hexo injector head_begin start --><link id="custom-css" rel="stylesheet" type="text/css" href="/css/divback.css"><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 6; pointer-events: none;" ></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><!-- hexo injector head_begin end -->
+<head><!-- hexo injector head_begin start --><link id="custom-css" rel="stylesheet" type="text/css" href="/css/divback.css"><link rel="stylesheet" href="https://cdn.staticfile.net/firacode/6.2.0/fira_code.min.css"><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 6; pointer-events: none;" ></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><link rel="stylesheet" href="https://cdn.staticfile.net/lxgw-wenkai-screen-webfont/1.7.0/style.min.css" /><style>:root{--waline-theme-color: #66ccff !important;--waline-active-color: #39c5bb !important;}</style><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/myicon.jpg">
   <link rel="icon" href="/img/myicon.jpg">
@@ -25,7 +25,7 @@
 <meta property="og:description" content="整理一下本少女在使用hexo fluid时用到的代码   视频Banner将themes&#x2F;fluid&#x2F;layout&#x2F;_partials&#x2F;header&#x2F;banner.ejs修改为以下内容： 123456789101112131415161718192021222324252627282930313233343536&lt;%var banner_img &#x3D; page.banner_img || th">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-05T12:23:53.000Z">
-<meta property="article:modified_time" content="2024-03-22T13:27:28.461Z">
+<meta property="article:modified_time" content="2024-04-30T04:10:15.742Z">
 <meta property="article:author" content="オナニー少女">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Fluid">
@@ -95,7 +95,7 @@
 
 
   
-<!-- hexo injector head_end start --><script>fetch("https://onaniishoujo.deno.dev/").then(e=>e.json()).then(e=>{document.getElementById("counter_uv").innerHTML=e.uv,document.getElementById("counter_pv").innerHTML=e.pv});</script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-webfont/1.7.0/style.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start --><script>fetch("https://onaniishoujo.deno.dev/").then(e=>e.json()).then(e=>{document.getElementById("counter_uv").innerHTML=e.uv,document.getElementById("counter_pv").innerHTML=e.pv});</script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -321,7 +321,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于：2024年3月22日 晚上
+                    本文最后更新于：2024年4月30日 中午
                   
                 
               </p>
@@ -331,7 +331,7 @@
                 
                 <p>整理一下本少女在使用hexo fluid时用到的代码  </p>
 <h2 id="视频Banner"><a href="#视频Banner" class="headerlink" title="视频Banner"></a>视频Banner</h2><p>将<code>themes/fluid/layout/_partials/header/banner.ejs</code>修改为以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs ejs">&lt;%<br>var banner_img = page.banner_img || theme.index.banner_img<br>var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_img_height)<br>var banner_mask_alpha = parseFloat(page.banner_mask_alpha || theme.index.banner_mask_alpha)<br>var subtitle = page.subtitle || page.title<br>%&gt;<br><br>&lt;div id=&quot;banner&quot; class=&quot;banner&quot; style=&quot;background: url(&#x27;&lt;%- url_for(banner_img) %&gt;&#x27;) no-repeat center center; background-size: cover;&quot;&gt;<br>  &lt;video autoplay loop muted playsinline poster=&quot;&lt;%- url_for(banner_img) %&gt;&quot;<br>         style=&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;&quot;&gt;<br>    &lt;source src=&quot;[你的视频背景地址]&quot; type=&quot;video/mp4&quot;&gt;<br>  &lt;/video&gt;<br>  &lt;div class=&quot;full-bg-img&quot;&gt;<br>    &lt;div class=&quot;mask flex-center&quot; style=&quot;background-color: rgba(0, 0, 0, &lt;%= parseFloat(banner_mask_alpha) %&gt;)&quot;&gt;<br>      &lt;div class=&quot;banner-text text-center fade-in-up&quot;&gt;<br>        &lt;div class=&quot;h2&quot;&gt;<br>          &lt;% if(theme.fun_features.typing.enable &amp;&amp; in_scope(theme.fun_features.typing.scope)) &#123; %&gt;<br>            &lt;span id=&quot;subtitle&quot; data-typed-text=&quot;&lt;%= subtitle %&gt;&quot;&gt;&lt;/span&gt;<br>          &lt;% &#125; else &#123; %&gt;<br>            &lt;span id=&quot;subtitle&quot;&gt;&lt;%- subtitle %&gt;&lt;/span&gt;<br>          &lt;% &#125; %&gt;<br>        &lt;/div&gt;<br><br>        &lt;% if (is_post()) &#123; %&gt;<br>          &lt;%- inject_point(&#x27;postMetaTop&#x27;) %&gt;<br>        &lt;% &#125; %&gt;<br>      &lt;/div&gt;<br><br>      &lt;% if (theme.scroll_down_arrow.enable &amp;&amp; theme.scroll_down_arrow.banner_height_limit &lt;= banner_img_height &amp;&amp; page.layout !== &#x27;404&#x27;) &#123; %&gt;<br>        &lt;div class=&quot;scroll-down-bar&quot;&gt;<br>          &lt;i class=&quot;iconfont icon-arrowdown&quot;&gt;&lt;/i&gt;<br>        &lt;/div&gt;<br>      &lt;% &#125; %&gt;<br>    &lt;/div&gt;<br>  &lt;/div&gt;<br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs html">&lt;%<br>var banner_img = page.banner_img || theme.index.banner_img<br>var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_img_height)<br>var banner_mask_alpha = parseFloat(page.banner_mask_alpha || theme.index.banner_mask_alpha)<br>var subtitle = page.subtitle || page.title<br>%&gt;<br><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;banner&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;banner&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;background: url(&#x27;&lt;%- url_for(banner_img) %&gt;&#x27;) no-repeat center center; background-size: cover;&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">autoplay</span> <span class="hljs-attr">loop</span> <span class="hljs-attr">muted</span> <span class="hljs-attr">playsinline</span> <span class="hljs-attr">poster</span>=<span class="hljs-string">&quot;&lt;%- url_for(banner_img) %&gt;&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;[你的视频背景地址]&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;video/mp4&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">video</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;full-bg-img&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mask flex-center&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;background-color: rgba(0, 0, 0, &lt;%= parseFloat(banner_mask_alpha) %&gt;)&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;banner-text text-center fade-in-up&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;h2&quot;</span>&gt;</span><br>          &lt;% if(theme.fun_features.typing.enable &amp;&amp; in_scope(theme.fun_features.typing.scope)) &#123; %&gt;<br>            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;subtitle&quot;</span> <span class="hljs-attr">data-typed-text</span>=<span class="hljs-string">&quot;&lt;%= subtitle %&gt;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>          &lt;% &#125; else &#123; %&gt;<br>            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;subtitle&quot;</span>&gt;</span>&lt;%- subtitle %&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>          &lt;% &#125; %&gt;<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br>        &lt;% if (is_post()) &#123; %&gt;<br>          &lt;%- inject_point(&#x27;postMetaTop&#x27;) %&gt;<br>        &lt;% &#125; %&gt;<br>      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br>      &lt;% if (theme.scroll_down_arrow.enable &amp;&amp; theme.scroll_down_arrow.banner_height_limit &lt;= banner_img_height &amp;&amp; page.layout !== &#x27;404&#x27;) &#123; %&gt;<br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;scroll-down-bar&quot;</span>&gt;</span><br>          <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;iconfont icon-arrowdown&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>      &lt;% &#125; %&gt;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="添加自定义字体"><a href="#添加自定义字体" class="headerlink" title="添加自定义字体"></a>添加自定义字体</h2><ol>
 <li>通过自定义CSS引入字体</li>
@@ -501,25 +501,24 @@
   
     <article id="comments" lazyload>
       
-  <div id="twikoo"></div>
+  <div id="waline"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#comments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.net/twikoo/1.6.32/twikoo.all.min.js', function() {
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://cdn.staticfile.org/waline/2.15.5/waline.min.css')
+      Fluid.utils.createScript('https://cdn.staticfile.org/waline/2.15.5/waline.min.js', function() {
         var options = Object.assign(
-          {"envId":"https://shoujo-twikoo.hf.space","region":"ap-shanghai","path":"location.pathname"},
+          {"serverURL":"https://waline-1-g2450170.deta.app/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10,"reaction":true},
           {
-            el: '#twikoo',
-            path: 'location.pathname',
-            onCommentLoaded: function() {
-              Fluid.utils.listenDOMLoaded(function() {
-                var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
-                Fluid.plugins.imageCaption(imgSelector);
-                Fluid.plugins.fancyBox(imgSelector);
-              });
-            }
+            el: '#waline',
+            path: window.location.pathname
           }
         )
-        twikoo.init(options)
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
       });
     });
   </script>
@@ -807,5 +806,5 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-<!-- hexo injector body_end start --><script src="/js/L2Dwidget.min.js"></script><script>L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:false,debug:false,model:{jsonPath:"/live2d/model.json"},display:{position:"right",width:450,height:450},mobile:{show:false},log:true});</script><!-- hexo injector body_end end --></body>
+<!-- hexo injector body_end start --><script>!function(){if(!window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&Math.random()>=.5){var e=document.createElement("script");e.src="/js/L2Dwidget.min.js",e.async=!0,e.onload=(()=>{L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2d/model.json"},display:{position:"right",width:400,height:400},mobile:{show:!1},log:!0})}),document.body.appendChild(e)}else{var n=document.createElement("div"),t=document.createElement("link"),i=document.createElement("script");n.id="sakana-widget",n.style.position="fixed",n.style.right="0px",n.style.bottom="2px",n.style.zIndex=9999,t.rel="stylesheet",t.href="/css/sakana.min.css",i.async=!0,i.onload=(()=>{(new SakanaWidget).mount("#sakana-widget")}),i.src="https://cdn.staticfile.net/sakana-widget/2.7.0/sakana.min.js",document.body.appendChild(n),document.body.appendChild(t),document.body.appendChild(i)}}();</script><!-- hexo injector body_end end --></body>
 </html>
