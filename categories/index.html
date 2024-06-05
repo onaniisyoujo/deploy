@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head><!-- hexo injector head_begin start --><style>:root{--waline-theme-color: #66ccff !important;--waline-active-color: #39c5bb !important;}</style><!-- hexo injector head_begin end -->
     <meta charset="utf-8" />
-    <title>Hello, World! | 少女的Blog</title>
+    <title>categories | 少女的Blog</title>
     <meta name="author" content="少女" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -35,14 +35,6 @@
 
 <script src="/js/lib/preview.js"></script>
 
-
-
-
-
-
-<script src="https://s4.zstatic.net/ajax/libs/waline/2.15.8/waline.min.js"></script>
-<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/waline/2.15.8/waline.min.css" />
-<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/waline/2.15.8/waline-meta.min.css" />
 
 
 
@@ -182,36 +174,56 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>Hello, World!</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/8/30
+            <div id="archives">
+    
+    <div class="categories-tags">
+        
+        
+        
+        <span>
+            <a href="/categories/Code/" style="background: #00bcd4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Code
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/Code/Hexo/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Hexo
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/Code/Python/" style="background: #00bcd4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Python
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/%E6%97%A5%E5%B8%B8/" style="background: #00a596">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                日常
+            </a>
         </span>
         
         
     </div>
-    
-    <div class="content" v-pre>
-        <h1 id="初音ミク16岁生日快乐！！！"><a href="#初音ミク16岁生日快乐！！！" class="headerlink" title="初音ミク16岁生日快乐！！！"></a>初音ミク16岁生日快乐！！！</h1><h1 id="同时纪念少女的小站正式建成"><a href="#同时纪念少女的小站正式建成" class="headerlink" title="同时纪念少女的小站正式建成"></a>同时纪念少女的小站正式建成</h1><h1 id="2023-08-31-00-00-JST"><a href="#2023-08-31-00-00-JST" class="headerlink" title="2023.08.31 00:00 (JST)"></a>2023.08.31 00:00 (JST)</h1><p>Hello, World!</p>
-
-    </div>
-    
-    
-    
-    
-    
-    <div id="comment">
-        <div id="waline-container"></div>
-    </div>
-    
-    
-    
     
 </div>
 
@@ -250,29 +262,6 @@
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-<script>
-    Waline.init({
-        el: "#waline-container",
-        serverURL: "https://waline-1-g2450170.deta.app/",
-        commentCount: true,
-        pageview: false,
-        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
-        meta: "nick,mail,link".split(","),
-        requiredMeta: "nick".split(","),
-        lang: "zh-CN",
-        wordLimit: 0,
-        pageSize: "10",
-        login: "enable",
-        
-    });
-</script>
-
-
-
     
 <!-- hexo injector body_end start --><script>!function(){if(!window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&Math.random()>=.5){var e=document.createElement("script");e.src="/js/L2Dwidget.min.js",e.async=!0,e.onload=(()=>{L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2d/model.json"},display:{position:"right",width:400,height:400},mobile:{show:!1},log:!0})}),document.body.appendChild(e)}else{var n=document.createElement("div"),t=document.createElement("link"),i=document.createElement("script");n.id="sakana-widget",n.style.position="fixed",n.style.right="0px",n.style.bottom="2px",n.style.zIndex=9999,t.rel="stylesheet",t.href="/css/sakana.min.css",i.async=!0,i.onload=(()=>{(new SakanaWidget).mount("#sakana-widget")}),i.src="https://cdn.staticfile.net/sakana-widget/2.7.0/sakana.min.js",document.body.appendChild(n),document.body.appendChild(t),document.body.appendChild(i)}}();</script><!-- hexo injector body_end end --></body>
 </html>
