@@ -1,466 +1,77 @@
+<!doctypehtml><html lang=zh-CN><style>:root{--waline-theme-color: #66ccff !important;--waline-active-color: #39c5bb !important;}</style><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content=IE=edge,chrome=1 http-equiv=X-UA-COMPATIBLE><meta content=webkit name=renderer><link href=/assets/favicon.ico rel=icon sizes=32x32 type=image/ico><link href=/assets/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link href=/rss.xml rel=alternate title=少女的Blog type=application/rss+xml><link href=/atom.xml rel=alternate title=少女的Blog type=application/atom+xml><link href=https://onaniishoujo.github.io/feed.json rel=alternate title=少女的Blog type=application/json><link href=https://lf9-cdn-tos.bytecdntp.com rel=preconnect><link href=https://cdn.jsdelivr.net rel=dns-prefetch><link href=https://unpkg.com rel=dns-prefetch><link href=/css/app.css?v=0.3.15 rel=stylesheet><link href=https://npm.webcache.cn/@waline/client@v2/dist/waline.css media=none onload=this.media='all' rel=stylesheet><meta content=Hexo,资源 name=keywords><link href=https://onaniishoujo.github.io/2023/10/05/%E9%AD%94%E6%94%B9Hexo-Fluid/ rel=canonical><title>魔改Hexo Fluid</title><style>#banner_video{@media all and (orientation:portrait){width:100vh;height:100vh;object-fit:cover;};@media all and (orientation:landscape){width:100%;};}</style><script>fetch("https://onaniishoujo.deno.dev/").then(e=>e.json()).then(e=>{document.getElementById("counter_uv").innerHTML=e.uv,document.getElementById("counter_pv").innerHTML=e.pv});</script><link href=https://cdn.staticfile.net/lxgw-wenkai-screen-webfont/1.7.0/style.min.css rel=stylesheet><style>body { font-family: "LXGW WenKai Screen", "Noto Sans SC", sans-serif; }</style><meta content="Hexo 7.1.1" name=generator><body itemscope itemtype=http://schema.org/WebPage><div id=loading><div class=cat><div class=body></div><div class=head><div class=face></div></div><div class=foot><div class=tummy-end></div><div class=bottom></div><div class="legs left"></div><div class="legs right"></div></div><div class=paw><div class="hands left"></div><div class="hands right"></div></div></div></div><div id=container><header id=header itemscope itemtype=http://schema.org/WPHeader><div class=inner><div id=brand><div class=pjax><h1 itemprop="name headline">魔改Hexo Fluid</h1><div class=meta><span title="创建时间：2023-10-05 20:23:53" class=item><span class=icon><i class="ic i-calendar"></i></span><span class=text>发表于</span><time itemprop="dateCreated datePublished" datetime=2023-10-05T20:23:53+08:00>2023-10-05</time></span><span class=item title=本文字数><span class=icon><i class="ic i-pen"></i></span><span class=text>本文字数</span><span>4.9k</span><span class=text>字</span></span><span class=item title=阅读时长><span class=icon><i class="ic i-clock"></i></span><span class=text>阅读时长</span><span>4 分钟</span></span></div></div></div><nav id=nav><div class=inner><div class=toggle><div aria-label=切换导航栏 class=lines><span class=line></span><span class=line></span><span class=line></span></div></div><ul class=menu><li class="item title"><a href=/ rel=start>~Shoujo~</a></ul><ul class=right id=rightNav><li class="item theme" @click=changeThemeByBtn><i :class="{'i-sun': !themeStatus,'i-moon': themeStatus}" class=ic></i><li class="item search"><i class="ic i-search"></i></ul></div></nav></div><div class=pjax id=imgs><video autoplay id=banner_video loop muted poster=/assets/head.jpg src=https://t.mwm.moe/acg/acg></video></div></header><div id=waves><svg viewbox="0 24 150 28" class=waves preserveaspectratio=none shape-rendering=auto xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><defs><path d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" id=gentle-wave></path></defs><g class=parallax><use x=48 xlink:href=#gentle-wave y=0></use><use x=48 xlink:href=#gentle-wave y=3></use><use x=48 xlink:href=#gentle-wave y=5></use><use x=48 xlink:href=#gentle-wave y=7></use></g></svg></div><main><div class=inner><div class=pjax id=main><div class="article wrap"><div class=breadcrumb itemlistelement itemscope itemtype=https://schema.org/BreadcrumbList><i class="ic i-home"></i><span><a href=/>首页</a></span><i class="ic i-angle-right"></i><span itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/categories/Code/ itemprop=item rel=index title=分类于Code><span itemprop=name>Code<meta content=0 itemprop=position></span></a></span><i class="ic i-angle-right"></i><span class=current itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/categories/Code/Hexo/ itemprop=item rel=index title=分类于Hexo><span itemprop=name>Hexo<meta content=1 itemprop=position></span></a></span></div><article class="post block" itemscope itemtype=http://schema.org/Article lang=zh-CN><link href=https://onaniishoujo.github.io/2023/10/05/%E9%AD%94%E6%94%B9Hexo-Fluid/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta content=/assets/avatar.jpg itemprop=image><meta content=少女 itemprop=name><meta content=", " itemprop=description></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta content=少女的Blog itemprop=name></span><div class="body md" itemprop=articleBody><p>整理一下本少女在使用 hexo fluid 时用到的代码<h2 id=视频banner><a class=anchor href=#视频banner>#</a> 视频 Banner</h2><p>将 <code>themes/fluid/layout/_partials/header/banner.ejs</code> 修改为以下内容：<figure class="highlight html"><figcaption data-lang=HTML><span>l</span></figcaption><table><tbody><tr><td data-num=1><td><pre><%</pre><tr><td data-num=2><td><pre>var banner_img = page.banner_img || theme.index.banner_img</pre><tr><td data-num=3><td><pre>var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_img_height)</pre><tr><td data-num=4><td><pre>var banner_mask_alpha = parseFloat(page.banner_mask_alpha || theme.index.banner_mask_alpha)</pre><tr><td data-num=5><td><pre>var subtitle = page.subtitle || page.title</pre><tr><td data-num=6><td><pre>%></pre><tr><td data-num=7><td><pre></pre><tr><td data-num=8><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation"><</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>banner<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>banner<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">background</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'<%- url_for(banner_img) %>'</span><span class="token punctuation">)</span></span> no-repeat center center<span class="token punctuation">;</span> <span class="token property">background-size</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span></pre><tr><td data-num=9><td><pre>  <span class="token tag"><span class="token tag"><span class="token punctuation"><</span>video</span> <span class="token attr-name">autoplay</span> <span class="token attr-name">loop</span> <span class="token attr-name">muted</span> <span class="token attr-name">playsinline</span> <span class="token attr-name">poster</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><%- url_for(banner_img) %><span class="token punctuation">"</span></span></span></pre><tr><td data-num=10><td><pre>         <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span> <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span> <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span> <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span> <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span> <span class="token property">object-fit</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></pre><tr><td data-num=11><td><pre>    <span class="token tag"><span class="token tag"><span class="token punctuation"><</span>source</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>[你的视频背景地址]<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>video/mp4<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre><tr><td data-num=12><td><pre>  <span class="token tag"><span class="token tag"><span class="token punctuation">&LT/</span>video</span><span class="token punctuation">></span></span></pre><tr><td data-num=13><td><pre>  <span class="token tag"><span class="token tag"><span class="token punctuation"><</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>full-bg-img<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre><tr><td data-num=14><td><pre>    <span class="token tag"><span class="token tag"><span class="token punctuation"><</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mask flex-center<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> <%= <span class="token function">parseFloat</span><span class="token punctuation">(</span>banner_mask_alpha<span class="token punctuation">)</span> %><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span></pre><tr><td data-num=15><td><pre>      <span class="token tag"><span class="token tag"><span class="token punctuation"><</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>banner-text text-center fade-in-up<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre><tr><td data-num=16><td><pre>        <span class="token tag"><span class="token tag"><span class="token punctuation"><</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>h2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre><tr><td data-num=17><td><pre>          <% if(theme.fun_features.typing.enable && in_scope(theme.fun_features.typing.scope)) { %></pre><tr><td data-num=18><td><pre>            <span class="token tag"><span class="token tag"><span class="token punctuation"><</span>span</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>subtitle<span class="token punctuation">"</span></span> <span class="token attr-name">data-typed-text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><%= subtitle %><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&LT/</span>span</span><span class="token punctuation">></span></span></pre><tr><td data-num=19><td><pre>          <% } else { %></pre><tr><td data-num=20><td><pre>            <span class="token tag"><span class="token tag"><span class="token punctuation"><</span>span</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>subtitle<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><%- subtitle %><span class="token tag"><span class="token tag"><span class="token punctuation">&LT/</span>span</span><span class="token punctuation">></span></span></pre><tr><td data-num=21><td><pre>          <% } %></pre><tr><td data-num=22><td><pre>        <span class="token tag"><span class="token tag"><span class="token punctuation">&LT/</span>div</span><span class="token punctuation">></span></span></pre><tr><td data-num=23><td><pre></pre><tr><td data-num=24><td><pre>        <% if (is_post()) { %></pre><tr><td data-num=25><td><pre>          <%- inject_point('postMetaTop') %></pre><tr><td data-num=26><td><pre>        <% } %></pre><tr><td data-num=27><td><pre>      <span class="token tag"><span class="token tag"><span class="token punctuation">&LT/</span>div</span><span class="token punctuation">></span></span></pre><tr><td data-num=28><td><pre></pre><tr><td data-num=29><td><pre>      <% if (theme.scroll_down_arrow.enable && theme.scroll_down_arrow.banner_height_limit <= banner_img_height && page.layout !== '404') { %></pre><tr><td data-num=30><td><pre>        <span class="token tag"><span class="token tag"><span class="token punctuation"><</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>scroll-down-bar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre><tr><td data-num=31><td><pre>          <span class="token tag"><span class="token tag"><span class="token punctuation"><</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>iconfont icon-arrowdown<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&LT/</span>i</span><span class="token punctuation">></span></span></pre><tr><td data-num=32><td><pre>        <span class="token tag"><span class="token tag"><span class="token punctuation">&LT/</span>div</span><span class="token punctuation">></span></span></pre><tr><td data-num=33><td><pre>      <% } %></pre><tr><td data-num=34><td><pre>    <span class="token tag"><span class="token tag"><span class="token punctuation">&LT/</span>div</span><span class="token punctuation">></span></span></pre><tr><td data-num=35><td><pre>  <span class="token tag"><span class="token tag"><span class="token punctuation">&LT/</span>div</span><span class="token punctuation">></span></span></pre><tr><td data-num=36><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&LT/</span>div</span><span class="token punctuation">></span></span></pre></table></figure><h2 id=添加自定义字体><a class=anchor href=#添加自定义字体>#</a> 添加自定义字体</h2><ol><li>通过自定义 CSS 引入字体</ol><figure class="highlight css"><figcaption data-lang=CSS></figcaption><table><tbody><tr><td data-num=1><td><pre><span class="token atrule"><span class="token rule">@font-face</span></span> <span class="token punctuation">{</span></pre><tr><td data-num=2><td><pre>  <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">'FontName'</span><span class="token punctuation">;</span>  <span class="token comment">/* 换成你自己的字体名及路径 */</span></pre><tr><td data-num=3><td><pre>  <span class="token property">src</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'/font/font.ttf'</span><span class="token punctuation">)</span></span> <span class="token function">format</span><span class="token punctuation">(</span><span class="token string">'truetype'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre><tr><td data-num=4><td><pre>  <span class="token property">font-weight</span><span class="token punctuation">:</span> normal<span class="token punctuation">;</span></pre><tr><td data-num=5><td><pre>  <span class="token property">font-style</span><span class="token punctuation">:</span> normal<span class="token punctuation">;</span></pre><tr><td data-num=6><td><pre><span class="token punctuation">}</span></pre></table></figure><ol start=2><li>修改 <code>Blog/_config.fluid.yml</code></ol><figure class="highlight yaml"><figcaption data-lang=YAML></figcaption><table><tbody><tr><td data-num=1><td><pre><span class="token key atrule">font</span><span class="token punctuation">:</span></pre><tr><td data-num=2><td><pre>  <span class="token key atrule">font_size</span><span class="token punctuation">:</span> 18px   <span class="token comment"># 按需要自定义</span></pre><tr><td data-num=3><td><pre>  <span class="token key atrule">font_family</span><span class="token punctuation">:</span> FontName  <span class="token comment"># 换成你自己的字体名</span></pre><tr><td data-num=4><td><pre>  <span class="token key atrule">letter_spacing</span><span class="token punctuation">:</span> 0.02em</pre><tr><td data-num=5><td><pre>  <span class="token key atrule">code_font_size</span><span class="token punctuation">:</span> 85%</pre></table></figure><h2 id=添加网页背景图片><a class=anchor href=#添加网页背景图片>#</a> 添加网页背景图片</h2><ol><li>使用自定义 CSS 实现<br> 用上面的方法添加自定义 CSS</ol><figure class="highlight css"><figcaption data-lang=CSS></figcaption><table><tbody><tr><td data-num=1><td><pre><span class="token selector">body</span> <span class="token punctuation">{</span></pre><tr><td data-num=2><td><pre>  <span class="token property">background</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>/img/background.jpg<span class="token punctuation">)</span></span><span class="token punctuation">;</span>  <span class="token comment">/* 换成你自己的背景图 */</span></pre><tr><td data-num=3><td><pre>  <span class="token property">background-attachment</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span></pre><tr><td data-num=4><td><pre>  <span class="token property">background-size</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span>  </pre><tr><td data-num=5><td><pre><span class="token punctuation">}</span></pre></table></figure><p>可以使用图片的 api，个人感觉会拖慢加载速度<h2 id=复制变色><a class=anchor href=#复制变色>#</a> 复制变色</h2><p>自定义 CSS 添加以下内容<figure class="highlight css"><figcaption data-lang=CSS></figcaption><table><tbody><tr><td data-num=1><td><pre><span class="token selector">::selection</span> <span class="token punctuation">{</span></pre><tr><td data-num=2><td><pre>    <span class="token property">color</span><span class="token punctuation">:</span> #66ccff<span class="token punctuation">;</span> <span class="token comment">/* 设置选中文字的颜色 */</span></pre><tr><td data-num=3><td><pre>    <span class="token property">background</span><span class="token punctuation">:</span> transparent<span class="token punctuation">;</span> <span class="token comment">/* 设置选中文字的背景为透明 */</span></pre><tr><td data-num=4><td><pre><span class="token punctuation">}</span></pre></table></figure><h2 id=banner图随网页滑动变透明><a class=anchor href=#banner图随网页滑动变透明>#</a> Banner 图随网页滑动变透明</h2><p>Hexo Fluid，随着网页的滑动，Banner 图会逐渐变透明<br> 打字机也会变透明<p>自定义 js<figure class="highlight javascript"><figcaption data-lang=javascript></figcaption><table><tbody><tr><td data-num=1><td><pre><span class="token comment">// 获取图片元素</span></pre><tr><td data-num=2><td><pre><span class="token keyword">var</span> image <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"banner"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre><tr><td data-num=3><td><pre><span class="token keyword">var</span> targetDistance <span class="token operator">=</span> <span class="token number">695</span><span class="token punctuation">;</span> <span class="token comment">// 设置滑动 695px 后完全透明</span></pre><tr><td data-num=4><td><pre>window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"scroll"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre><tr><td data-num=5><td><pre>  <span class="token keyword">var</span> scrollDistance <span class="token operator">=</span> window<span class="token punctuation">.</span>pageYOffset <span class="token operator">||</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>scrollTop <span class="token operator">||</span> document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>scrollTop <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">;</span></pre><tr><td data-num=6><td><pre>  <span class="token keyword">var</span> opacity <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">-</span> <span class="token punctuation">(</span>scrollDistance <span class="token operator">/</span> targetDistance<span class="token punctuation">)</span><span class="token punctuation">;</span></pre><tr><td data-num=7><td><pre>  <span class="token keyword">if</span><span class="token punctuation">(</span>opacity <span class="token operator"><</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre><tr><td data-num=8><td><pre>    opacity <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span></pre><tr><td data-num=9><td><pre>  <span class="token punctuation">}</span></pre><tr><td data-num=10><td><pre>  image<span class="token punctuation">.</span>style<span class="token punctuation">.</span>opacity <span class="token operator">=</span> opacity<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre><tr><td data-num=11><td><pre><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></table></figure><p>或者根据滑动网页的百分比减少不透明度<figure class="highlight javascript"><figcaption data-lang=javascript></figcaption><table><tbody><tr><td data-num=1><td><pre><span class="token keyword">var</span> image <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"banner"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre><tr><td data-num=2><td><pre><span class="token keyword">var</span> pageHeight <span class="token operator">=</span> document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>scrollHeight <span class="token operator">-</span> window<span class="token punctuation">.</span>innerHeight<span class="token punctuation">;</span></pre><tr><td data-num=3><td><pre>window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"scroll"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre><tr><td data-num=4><td><pre>  <span class="token keyword">var</span> scrollDistance <span class="token operator">=</span> window<span class="token punctuation">.</span>pageYOffset <span class="token operator">||</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>scrollTop <span class="token operator">||</span> document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>scrollTop <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">;</span></pre><tr><td data-num=5><td><pre>  <span class="token keyword">var</span> opacity <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">-</span> <span class="token punctuation">(</span>scrollDistance <span class="token operator">/</span> pageHeight<span class="token punctuation">)</span><span class="token punctuation">;</span></pre><tr><td data-num=6><td><pre>  <span class="token keyword">if</span><span class="token punctuation">(</span>opacity <span class="token operator"><</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre><tr><td data-num=7><td><pre>    opacity <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span></pre><tr><td data-num=8><td><pre>  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>opacity <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre><tr><td data-num=9><td><pre>    opacity <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span></pre><tr><td data-num=10><td><pre>  <span class="token punctuation">}</span></pre><tr><td data-num=11><td><pre>  image<span class="token punctuation">.</span>style<span class="token punctuation">.</span>opacity <span class="token operator">=</span> opacity<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre><tr><td data-num=12><td><pre><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></table></figure><p>设置 banner 的淡出样式<figure class="highlight css"><figcaption data-lang=CSS></figcaption><table><tbody><tr><td data-num=1><td><pre><span class="token selector">#banner</span> <span class="token punctuation">{</span></pre><tr><td data-num=2><td><pre>  <span class="token property">position</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span></pre><tr><td data-num=3><td><pre>  <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span></pre><tr><td data-num=4><td><pre>  <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span></pre><tr><td data-num=5><td><pre>  <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span></pre><tr><td data-num=6><td><pre>  <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span></pre><tr><td data-num=7><td><pre><span class="token punctuation">}</span></pre></table></figure><h2 id=文章中代码的字体及背景色><a class=anchor href=#文章中代码的字体及背景色>#</a> 文章中代码的字体及背景色</h2><p>自定义 CSS 添加以下内容<figure class="highlight css"><figcaption data-lang=CSS></figcaption><table><tbody><tr><td data-num=1><td><pre><span class="token selector">.markdown-body code</span> <span class="token punctuation">{</span></pre><tr><td data-num=2><td><pre>    <span class="token property">tab-size</span><span class="token punctuation">:</span> 4<span class="token punctuation">;</span></pre><tr><td data-num=3><td><pre>    <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">rgb</span><span class="token punctuation">(</span>251 253 83 / 50%<span class="token punctuation">)</span><span class="token punctuation">;</span></pre><tr><td data-num=4><td><pre>    <span class="token property">transition</span><span class="token punctuation">:</span> background-color 0.2s ease-in-out<span class="token punctuation">;</span></pre><tr><td data-num=5><td><pre>    <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">"FontName"</span><span class="token punctuation">;</span>  <span class="token comment">/* 改为你自己的字体名 */</span></pre><tr><td data-num=6><td><pre><span class="token punctuation">}</span></pre></table></figure><ul><li><code>background-color</code> 用于设置背景色<li><code>font-family</code> 用于设置字体</ul><h2 id=滚动条><a class=anchor href=#滚动条>#</a> 滚动条</h2><p>自定义 CSS<figure class="highlight css"><figcaption data-lang=CSS><span>s</span></figcaption><table><tbody><tr><td data-num=1><td><pre><span class="token selector">::-webkit-scrollbar</span> <span class="token punctuation">{</span></pre><tr><td data-num=2><td><pre>    <span class="token property">width</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span></pre><tr><td data-num=3><td><pre>    <span class="token property">height</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span></pre><tr><td data-num=4><td><pre><span class="token punctuation">}</span></pre><tr><td data-num=5><td><pre></pre><tr><td data-num=6><td><pre><span class="token selector">::-webkit-scrollbar-thumb</span> <span class="token punctuation">{</span></pre><tr><td data-num=7><td><pre>    <span class="token property">background-color</span><span class="token punctuation">:</span> #e58a8a<span class="token punctuation">;</span></pre><tr><td data-num=8><td><pre>    <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token function">-webkit-linear-gradient</span><span class="token punctuation">(</span> 45deg<span class="token punctuation">,</span> <span class="token function">rgba</span><span class="token punctuation">(</span>255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 0.4<span class="token punctuation">)</span> 25%<span class="token punctuation">,</span> transparent 25%<span class="token punctuation">,</span> transparent 50%<span class="token punctuation">,</span> <span class="token function">rgba</span><span class="token punctuation">(</span>255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 0.4<span class="token punctuation">)</span> 50%<span class="token punctuation">,</span> <span class="token function">rgba</span><span class="token punctuation">(</span>255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 0.4<span class="token punctuation">)</span> 75%<span class="token punctuation">,</span> transparent 75%<span class="token punctuation">,</span> transparent<span class="token punctuation">)</span><span class="token punctuation">;</span></pre><tr><td data-num=9><td><pre>    <span class="token property">border-radius</span><span class="token punctuation">:</span> 2em<span class="token punctuation">;</span></pre><tr><td data-num=10><td><pre><span class="token punctuation">}</span></pre><tr><td data-num=11><td><pre></pre><tr><td data-num=12><td><pre><span class="token selector">::-webkit-scrollbar-corner</span> <span class="token punctuation">{</span></pre><tr><td data-num=13><td><pre>    <span class="token property">background-color</span><span class="token punctuation">:</span> transparent<span class="token punctuation">;</span></pre><tr><td data-num=14><td><pre><span class="token punctuation">}</span></pre><tr><td data-num=15><td><pre></pre><tr><td data-num=16><td><pre><span class="token selector">::-moz-selection</span> <span class="token punctuation">{</span></pre><tr><td data-num=17><td><pre>    <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span></pre><tr><td data-num=18><td><pre>    <span class="token property">background-color</span><span class="token punctuation">:</span> #e58a8a<span class="token punctuation">;</span></pre><tr><td data-num=19><td><pre><span class="token punctuation">}</span></pre></table></figure><h2 id=关于hexo-fluid的评论><a class=anchor href=#关于hexo-fluid的评论>#</a> 关于 Hexo Fluid 的评论</h2><p>因为出了一点 Bug，本站的评论通过修改 <code>Blog/themes/fluid/layout/post.ejs</code> 实现。<br> 将 <code>post.ejs</code> 中的 <code><%- inject_point('postComments') %></code> 替换为 你使用的评论系统 提供的 html 代码<br> 以 Utterance 为例:<figure class="highlight html"><figcaption data-lang=HTML></figcaption><table><tbody><tr><td data-num=1><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation"><</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://utteranc.es/client.js<span class="token punctuation">"</span></span></span></pre><tr><td data-num=2><td><pre>        <span class="token attr-name">repo</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>用户名/仓库地址<span class="token punctuation">"</span></span></pre><tr><td data-num=3><td><pre>        <span class="token attr-name">issue-term</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pathname<span class="token punctuation">"</span></span></pre><tr><td data-num=4><td><pre>        <span class="token attr-name">theme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>github-light<span class="token punctuation">"</span></span></pre><tr><td data-num=5><td><pre>        <span class="token attr-name">crossorigin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>anonymous<span class="token punctuation">"</span></span></pre><tr><td data-num=6><td><pre>        <span class="token attr-name">async</span><span class="token punctuation">></span><span class="token script"><span class="token language-javascript"></span></span></pre><tr><td data-num=7><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&LT/</span>script</span><span class="token punctuation">></span></span></pre></table></figure><h2 id=关于网站图标><a class=anchor href=#关于网站图标>#</a> 关于网站图标</h2><p>在 <code>_config.fluid.yml</code> 设置没反应，手动将网页图标重命名为 <code>favicon.ico</code> ，复制到 <code>public</code> 文件夹下<h2 id=关于valine><a class=anchor href=#关于valine>#</a> 关于 Valine</h2><p>测试时发现 LeanCloud 提供的域名会屏蔽中国大陆的访问...<br> 绑定自己的域名后就能正常访问...<p>在 LeanCloud 的 <code>设置-域名绑定</code> 选项绑定自己的子域名，然后在子域名的 DNS 上设置 <code>CNAME</code> 记录，解析到 LeanCloud 提供的域名，之后配置 Valine 时，使用绑定的子域名<p><s>不想打字了</s><div class=tags><a href=/tags/Hexo/ rel=tag><i class="ic i-tag"></i>Hexo</a><a href=/tags/Fluid/ rel=tag><i class="ic i-tag"></i>Fluid</a><a href=/tags/%E8%B5%84%E6%BA%90/ rel=tag><i class="ic i-tag"></i>资源</a></div></div><footer><div class=meta><span class=item><span class=icon><i class="ic i-calendar-check"></i></span><span class=text>更新于</span><time title="修改时间：2024-04-30 12:10:15" datetime=2024-04-30T12:10:15+08:00 itemprop=dateModified>2024-04-30</time></span></div><div id=copyright><ul><li class=author><strong>本文作者：</strong>少女<i class="ic i-at"><em>@</em></i>少女的Blog<li class=link><strong>本文链接：</strong><a title="魔改Hexo Fluid" href=https://onaniishoujo.github.io/2023/10/05/%E9%AD%94%E6%94%B9Hexo-Fluid/>https://onaniishoujo.github.io/2023/10/05/魔改Hexo-Fluid/</a><li class=license><strong>版权声明：</strong>本站所有文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh rel=noopener target=_blank><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> 许可协议。转载请注明出处！</ul></div></footer></article></div><div class=post-nav><div class="item left"><a data-background-image=https://imgapi.xl0408.top/index.php href=/2023/10/05/%E6%88%91%E6%83%B3%E5%8F%98%E6%88%90%E5%A5%B3%E7%94%9F/ itemprop=url rel=prev title=我想变成女生><span class=type>上一篇</span><span class=category><i class="ic i-flag"></i>日常</span><h3>我想变成女生</h3></a></div><div class="item right"><a title="为Hexo Fluid的文章设置网格背景" data-background-image=https://imgapi.xl0408.top/index.php href=/2023/10/14/%E4%B8%BAHexo-Fluid%E7%9A%84%E6%96%87%E7%AB%A0%E8%AE%BE%E7%BD%AE%E7%BD%91%E6%A0%BC%E8%83%8C%E6%99%AF/ itemprop=url rel=next><span class=type>下一篇</span><span class=category><i class="ic i-flag"></i>Hexo</span><h3>为Hexo Fluid的文章设置网格背景</h3></a></div></div><div class=wrap id=wcomments></div><script data-pjax=data-pjax type=module>import { init } from 'https://npm.webcache.cn/@waline/client@v2/dist/waline.mjs';
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head><!-- hexo injector head_begin start --><style>:root{--waline-theme-color: #66ccff !important;--waline-active-color: #39c5bb !important;}</style><!-- hexo injector head_begin end -->
-    <meta charset="utf-8" />
-    <title>魔改Hexo Fluid | 少女的Blog</title>
-    <meta name="author" content="少女" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <link rel="icon" href="/images/myicon.jpg" />
-    <link rel="preconnect" href="https://s4.zstatic.net" />
-<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
-<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-<link rel="preconnect" href="https://fonts.googleapis.cn" />
-<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
-<link
-    rel="stylesheet"
-    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
-/>
-<script> const mixins = {}; </script>
-
-<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
-
-
-<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
-
-
-
-<script src="/js/lib/preview.js"></script>
-
-
-
-
-
-
-<script src="https://s4.zstatic.net/ajax/libs/waline/2.15.8/waline.min.js"></script>
-<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/waline/2.15.8/waline.min.css" />
-<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/waline/2.15.8/waline-meta.min.css" />
-
-
-
-
-<link rel="stylesheet" href="/css/main.css" />
-<!-- hexo injector head_end start --><script>fetch("https://onaniishoujo.deno.dev/").then(e=>e.json()).then(e=>{document.getElementById("counter_uv").innerHTML=e.uv,document.getElementById("counter_pv").innerHTML=e.pv});</script><link rel="stylesheet" href="https://cdn.staticfile.net/lxgw-wenkai-screen-webfont/1.7.0/style.min.css" /><style>body { font-family: "LXGW WenKai Screen", Lexend, "Noto Sans SC", sans-serif; }</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
-<body>
-    <div id="layout">
-        <transition name="fade">
-            <div id="loading" v-show="loading">
-                <div id="loading-circle">
-                    <h2>LOADING</h2>
-                    <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/loading.gif" />
-                </div>
-            </div>
-        </transition>
-        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
-    <nav id="desktop-menu">
-        <a class="title" href="/">
-            <span>少女的BLOG</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
-        </a>
-        
-        <a href="/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
-        </a>
-        
-        <a href="/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
-        </a>
-        
-        <a href="/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
-        </a>
-        
-        <a href="/tags">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
-        </a>
-        
-        <a href="/shuoshuo">
-            <i class="fa-solid fa-pen fa-fw"></i>
-            <span>&ensp;Diary</span>
-        </a>
-        
-        <a href="/brewski">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Inside</span>
-        </a>
-        
-    </nav>
-    <nav id="mobile-menu">
-        <div class="title" @click="showMenuItems = !showMenuItems">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;少女的BLOG</span>
-        </div>
-        <transition name="slide">
-            <div class="items" v-show="showMenuItems">
-                
-                <a href="/">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-house fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
-                    </div>
-                </a>
-                
-                <a href="/about">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-id-card fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
-                    </div>
-                </a>
-                
-                <a href="/archives">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-box-archive fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
-                    </div>
-                </a>
-                
-                <a href="/categories">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
-                    </div>
-                </a>
-                
-                <a href="/tags">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
-                    </div>
-                </a>
-                
-                <a href="/shuoshuo">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-pen fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Diary</div>
-                    </div>
-                </a>
-                
-                <a href="/brewski">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Inside</div>
-                    </div>
-                </a>
-                
-            </div>
-        </transition>
-    </nav>
-</div>
-<transition name="fade">
-    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
-</transition>
-
-        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>魔改Hexo Fluid</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/10/5
-        </span>
-        
-        <span class="category">
-            <a href="/categories/Code/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Code
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/Hexo/" style="color: #ff7d73">Hexo</a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Fluid/" style="color: #00bcd4">Fluid</a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/%E8%B5%84%E6%BA%90/" style="color: #03a9f4">资源</a>
-            </span>
-            
-        </span>
-        
-    </div>
-    
-    <div class="content" v-pre>
-        <p>整理一下本少女在使用hexo fluid时用到的代码  </p>
-<h2 id="视频Banner"><a href="#视频Banner" class="headerlink" title="视频Banner"></a>视频Banner</h2><p>将<code>themes/fluid/layout/_partials/header/banner.ejs</code>修改为以下内容：</p>
-<pre><code class="html">&lt;%
-var banner_img = page.banner_img || theme.index.banner_img
-var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_img_height)
-var banner_mask_alpha = parseFloat(page.banner_mask_alpha || theme.index.banner_mask_alpha)
-var subtitle = page.subtitle || page.title
-%&gt;
-
-&lt;div id=&quot;banner&quot; class=&quot;banner&quot; style=&quot;background: url(&#39;&lt;%- url_for(banner_img) %&gt;&#39;) no-repeat center center; background-size: cover;&quot;&gt;
-  &lt;video autoplay loop muted playsinline poster=&quot;&lt;%- url_for(banner_img) %&gt;&quot;
-         style=&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;&quot;&gt;
-    &lt;source src=&quot;[你的视频背景地址]&quot; type=&quot;video/mp4&quot;&gt;
-  &lt;/video&gt;
-  &lt;div class=&quot;full-bg-img&quot;&gt;
-    &lt;div class=&quot;mask flex-center&quot; style=&quot;background-color: rgba(0, 0, 0, &lt;%= parseFloat(banner_mask_alpha) %&gt;)&quot;&gt;
-      &lt;div class=&quot;banner-text text-center fade-in-up&quot;&gt;
-        &lt;div class=&quot;h2&quot;&gt;
-          &lt;% if(theme.fun_features.typing.enable &amp;&amp; in_scope(theme.fun_features.typing.scope)) &#123; %&gt;
-            &lt;span id=&quot;subtitle&quot; data-typed-text=&quot;&lt;%= subtitle %&gt;&quot;&gt;&lt;/span&gt;
-          &lt;% &#125; else &#123; %&gt;
-            &lt;span id=&quot;subtitle&quot;&gt;&lt;%- subtitle %&gt;&lt;/span&gt;
-          &lt;% &#125; %&gt;
-        &lt;/div&gt;
-
-        &lt;% if (is_post()) &#123; %&gt;
-          &lt;%- inject_point(&#39;postMetaTop&#39;) %&gt;
-        &lt;% &#125; %&gt;
-      &lt;/div&gt;
-
-      &lt;% if (theme.scroll_down_arrow.enable &amp;&amp; theme.scroll_down_arrow.banner_height_limit &lt;= banner_img_height &amp;&amp; page.layout !== &#39;404&#39;) &#123; %&gt;
-        &lt;div class=&quot;scroll-down-bar&quot;&gt;
-          &lt;i class=&quot;iconfont icon-arrowdown&quot;&gt;&lt;/i&gt;
-        &lt;/div&gt;
-      &lt;% &#125; %&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-<h2 id="添加自定义字体"><a href="#添加自定义字体" class="headerlink" title="添加自定义字体"></a>添加自定义字体</h2><ol>
-<li>通过自定义CSS引入字体</li>
-</ol>
-<pre><code class="css">@font-face &#123;
-  font-family: &#39;FontName&#39;;  /*换成你自己的字体名及路径*/
-  src: url(&#39;/font/font.ttf&#39;) format(&#39;truetype&#39;);
-  font-weight: normal;
-  font-style: normal;
-&#125;
-</code></pre>
-<ol start="2">
-<li>修改<code>Blog/_config.fluid.yml</code></li>
-</ol>
-<pre><code class="yaml">font:
-  font_size: 18px   # 按需要自定义
-  font_family: FontName  # 换成你自己的字体名
-  letter_spacing: 0.02em
-  code_font_size: 85%
-</code></pre>
-<h2 id="添加网页背景图片"><a href="#添加网页背景图片" class="headerlink" title="添加网页背景图片"></a>添加网页背景图片</h2><ol>
-<li>使用自定义CSS实现<br>用上面的方法添加自定义CSS</li>
-</ol>
-<pre><code class="css">body &#123;
-  background: url(/img/background.jpg);  /*换成你自己的背景图*/
-  background-attachment: fixed;
-  background-size: cover;  
-&#125;
-</code></pre>
-<p>可以使用图片的api，个人感觉会拖慢加载速度  </p>
-<h2 id="复制变色"><a href="#复制变色" class="headerlink" title="复制变色"></a>复制变色</h2><p>自定义CSS添加以下内容  </p>
-<pre><code class="css">::selection &#123;
-    color: #66ccff; /* 设置选中文字的颜色 */
-    background: transparent; /* 设置选中文字的背景为透明 */
-&#125;
-</code></pre>
-<h2 id="Banner图随网页滑动变透明"><a href="#Banner图随网页滑动变透明" class="headerlink" title="Banner图随网页滑动变透明"></a>Banner图随网页滑动变透明</h2><p>Hexo Fluid，随着网页的滑动，Banner图会逐渐变透明<br>打字机也会变透明  </p>
-<p>自定义js</p>
-<pre><code class="javascript">// 获取图片元素
-var image = document.getElementById(&quot;banner&quot;);
-var targetDistance = 695; // 设置滑动695px后完全透明
-window.addEventListener(&quot;scroll&quot;, function() &#123;
-  var scrollDistance = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-  var opacity = 1 - (scrollDistance / targetDistance);
-  if(opacity &lt; 0) &#123;
-    opacity = 0;
-  &#125;
-  image.style.opacity = opacity.toString();
-&#125;);
-</code></pre>
-<p>或者根据滑动网页的百分比减少不透明度</p>
-<pre><code class="javascript">var image = document.getElementById(&quot;banner&quot;);
-var pageHeight = document.body.scrollHeight - window.innerHeight;
-window.addEventListener(&quot;scroll&quot;, function() &#123;
-  var scrollDistance = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-  var opacity = 1 - (scrollDistance / pageHeight);
-  if(opacity &lt; 0) &#123;
-    opacity = 0;
-  &#125; else if(opacity &gt; 1) &#123;
-    opacity = 1;
-  &#125;
-  image.style.opacity = opacity.toString();
-&#125;);
-</code></pre>
-<p>设置banner的淡出样式</p>
-<pre><code class="css">#banner &#123;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-&#125;
-</code></pre>
-<h2 id="文章中代码的字体及背景色"><a href="#文章中代码的字体及背景色" class="headerlink" title="文章中代码的字体及背景色"></a>文章中代码的字体及背景色</h2><p>自定义CSS添加以下内容</p>
-<pre><code class="css">.markdown-body code &#123;
-    tab-size: 4;
-    background-color: rgb(251 253 83 / 50%);
-    transition: background-color 0.2s ease-in-out;
-    font-family: &quot;FontName&quot;;  /*改为你自己的字体名*/
-&#125;
-</code></pre>
-<ul>
-<li><code>background-color</code>用于设置背景色</li>
-<li><code>font-family</code>用于设置字体</li>
-</ul>
-<h2 id="滚动条"><a href="#滚动条" class="headerlink" title="滚动条"></a>滚动条</h2><p>自定义CSS</p>
-<pre><code class="css">::-webkit-scrollbar &#123;
-    width: 10px;
-    height: 10px;
-&#125;
-
-::-webkit-scrollbar-thumb &#123;
-    background-color: #e58a8a;
-    background-image: -webkit-linear-gradient( 45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
-    border-radius: 2em;
-&#125;
-
-::-webkit-scrollbar-corner &#123;
-    background-color: transparent;
-&#125;
-
-::-moz-selection &#123;
-    color: #fff;
-    background-color: #e58a8a;
-&#125;
-</code></pre>
-<h2 id="关于Hexo-Fluid的评论"><a href="#关于Hexo-Fluid的评论" class="headerlink" title="关于Hexo Fluid的评论"></a>关于Hexo Fluid的评论</h2><p>因为出了一点Bug，本站的评论通过修改<code>Blog/themes/fluid/layout/post.ejs</code>实现。<br>将<code>post.ejs</code>中的<code>&lt;%- inject_point(&#39;postComments&#39;) %&gt;</code>替换为 你使用的评论系统 提供的html代码<br>以Utterance为例:</p>
-<pre><code class="html">&lt;script src=&quot;https://utteranc.es/client.js&quot;
-        repo=&quot;用户名/仓库地址&quot;
-        issue-term=&quot;pathname&quot;
-        theme=&quot;github-light&quot;
-        crossorigin=&quot;anonymous&quot;
-        async&gt;
-&lt;/script&gt;
-</code></pre>
-<h2 id="关于网站图标"><a href="#关于网站图标" class="headerlink" title="关于网站图标"></a>关于网站图标</h2><p>在<code>_config.fluid.yml</code>设置没反应，手动将网页图标重命名为<code>favicon.ico</code>，复制到<code>public</code>文件夹下</p>
-<h2 id="关于Valine"><a href="#关于Valine" class="headerlink" title="关于Valine"></a>关于Valine</h2><p>测试时发现LeanCloud提供的域名会屏蔽中国大陆的访问…<br>绑定自己的域名后就能正常访问…  </p>
-<p>在LeanCloud的<code>设置-域名绑定</code>选项绑定自己的子域名，然后在子域名的DNS上设置<code>CNAME</code>记录，解析到LeanCloud提供的域名，之后配置Valine时,使用绑定的子域名  </p>
-<p><del>不想打字了</del></p>
-
-    </div>
-    
-    
-    
-    
-    
-    <div id="comment">
-        <div id="waline-container"></div>
-    </div>
-    
-    
-    
-    
-</div>
-
-            <footer id="footer">
-    <div id="footer-wrap">
-        <div>
-            &copy;
-            2023 - 2024 少女的Blog
-            <span id="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            &commat;少女
-        </div>
-        <div>
-            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
-            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
-        </div>
-        
-        <div>
-            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div id="bsz">本站总访问量<span id="counter_pv">???</span>次&nbsp;&nbsp;
-            访客数<span id="counter_uv">???</span>人</div>
-        </div>
-        
-        
-    </div>
-</footer>
-
-        </div>
-        
-        <transition name="fade">
-            <div id="preview" ref="preview" v-show="previewShow">
-                <img id="preview-content" ref="previewContent" />
-            </div>
-        </transition>
-        
-    </div>
-    <script src="/js/main.js"></script>
-    
-    
-
-
-<script>
-    Waline.init({
-        el: "#waline-container",
-        serverURL: "https://waline-1-g2450170.deta.app/",
-        commentCount: true,
-        pageview: false,
-        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
-        meta: "nick,mail,link".split(","),
-        requiredMeta: "nick".split(","),
-        lang: "zh-CN",
+setTimeout(function () {
+    init({
+        el: '#wcomments',
+        serverURL: 'https://waline-1-g2450170.deta.app',
+        lang: 'zh-CN',
+        locale: {},
+        emoji: ["https://unpkg.com/@waline/emojis@1.0.1/weibo","https://unpkg.com/@waline/emojis@1.0.1/alus","https://unpkg.com/@waline/emojis@1.0.1/bilibili","https://unpkg.com/@waline/emojis@1.0.1/qq","https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/tw-emoji"],
+        meta: ["nick","mail","link"],
+        requiredMeta: ["nick","mail"],
         wordLimit: 0,
-        pageSize: "10",
-        login: "enable",
-        
+        pageSize: 10,
+        pageview: false,
+        path: window.location.pathname,
+        dark: 'html[data-theme="dark"]'
     });
-</script>
-
-
-
-    
-<!-- hexo injector body_end start --><script>!function(){if(!window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&Math.random()>=.5){var e=document.createElement("script");e.src="/js/L2Dwidget.min.js",e.async=!0,e.onload=(()=>{L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2d/model.json"},display:{position:"right",width:400,height:400},mobile:{show:!1},log:!0})}),document.body.appendChild(e)}else{var n=document.createElement("div"),t=document.createElement("link"),i=document.createElement("script");n.id="sakana-widget",n.style.position="fixed",n.style.right="0px",n.style.bottom="2px",n.style.zIndex=9999,t.rel="stylesheet",t.href="/css/sakana.min.css",i.async=!0,i.onload=(()=>{(new SakanaWidget).mount("#sakana-widget")}),i.src="https://cdn.staticfile.net/sakana-widget/2.7.0/sakana.min.js",document.body.appendChild(n),document.body.appendChild(t),document.body.appendChild(i)}}();</script><!-- hexo injector body_end end --></body>
-</html>
+}, 1000)</script></div><div id=sidebar><div class=inner><div class=panels><div class=inner><div class="contents panel pjax" data-title=文章目录><ol class=toc><li class="toc-item toc-level-2"><a class=toc-link href=#%E8%A7%86%E9%A2%91banner><span class=toc-number>1.</span> <span class=toc-text> 视频 Banner</span></a><li class="toc-item toc-level-2"><a class=toc-link href=#%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%97%E4%BD%93><span class=toc-number>2.</span> <span class=toc-text> 添加自定义字体</span></a><li class="toc-item toc-level-2"><a class=toc-link href=#%E6%B7%BB%E5%8A%A0%E7%BD%91%E9%A1%B5%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87><span class=toc-number>3.</span> <span class=toc-text> 添加网页背景图片</span></a><li class="toc-item toc-level-2"><a class=toc-link href=#%E5%A4%8D%E5%88%B6%E5%8F%98%E8%89%B2><span class=toc-number>4.</span> <span class=toc-text> 复制变色</span></a><li class="toc-item toc-level-2"><a class=toc-link href=#banner%E5%9B%BE%E9%9A%8F%E7%BD%91%E9%A1%B5%E6%BB%91%E5%8A%A8%E5%8F%98%E9%80%8F%E6%98%8E><span class=toc-number>5.</span> <span class=toc-text> Banner 图随网页滑动变透明</span></a><li class="toc-item toc-level-2"><a class=toc-link href=#%E6%96%87%E7%AB%A0%E4%B8%AD%E4%BB%A3%E7%A0%81%E7%9A%84%E5%AD%97%E4%BD%93%E5%8F%8A%E8%83%8C%E6%99%AF%E8%89%B2><span class=toc-number>6.</span> <span class=toc-text> 文章中代码的字体及背景色</span></a><li class="toc-item toc-level-2"><a class=toc-link href=#%E6%BB%9A%E5%8A%A8%E6%9D%A1><span class=toc-number>7.</span> <span class=toc-text> 滚动条</span></a><li class="toc-item toc-level-2"><a class=toc-link href=#%E5%85%B3%E4%BA%8Ehexo-fluid%E7%9A%84%E8%AF%84%E8%AE%BA><span class=toc-number>8.</span> <span class=toc-text> 关于 Hexo Fluid 的评论</span></a><li class="toc-item toc-level-2"><a class=toc-link href=#%E5%85%B3%E4%BA%8E%E7%BD%91%E7%AB%99%E5%9B%BE%E6%A0%87><span class=toc-number>9.</span> <span class=toc-text> 关于网站图标</span></a><li class="toc-item toc-level-2"><a class=toc-link href=#%E5%85%B3%E4%BA%8Evaline><span class=toc-number>10.</span> <span class=toc-text> 关于 Valine</span></a></ol></div><div class="related panel pjax" data-title=系列文章><ul><li class=active><a title="魔改Hexo Fluid" href=/2023/10/05/%E9%AD%94%E6%94%B9Hexo-Fluid/ rel=bookmark>魔改Hexo Fluid</a><li><a title="为Hexo Fluid的文章设置网格背景" href=/2023/10/14/%E4%B8%BAHexo-Fluid%E7%9A%84%E6%96%87%E7%AB%A0%E8%AE%BE%E7%BD%AE%E7%BD%91%E6%A0%BC%E8%83%8C%E6%99%AF/ rel=bookmark>为Hexo Fluid的文章设置网格背景</a><li><a title="Hexo Fluid添加一言及出处" href=/2023/11/26/Hexo-Fluid%E6%B7%BB%E5%8A%A0%E4%B8%80%E8%A8%80%E5%8F%8A%E5%87%BA%E5%A4%84/ rel=bookmark>Hexo Fluid添加一言及出处</a><li><a title="使用Github Actions自动切换网站主题" href=/2024/01/21/%E4%BD%BF%E7%94%A8Github-Actions%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E7%AB%99%E4%B8%BB%E9%A2%98/ rel=bookmark>使用Github Actions自动切换网站主题</a><li><a title="Hexo ParticleX添加Valine评论" href=/2024/01/21/Hexo-ParticleX%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/ rel=bookmark>Hexo ParticleX添加Valine评论</a><li><a title="Hexo ParticleX及Diaspora主题使用Artitalk" href=/2024/02/02/Hexo-ParticleX%E5%8F%8ADiaspora%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8Artitalk/ rel=bookmark>Hexo ParticleX及Diaspora主题使用Artitalk</a><li><a title="Deno Deploy的妙用" href=/2024/03/09/Deno-Deploy%E7%9A%84%E5%A6%99%E7%94%A8/ rel=bookmark>Deno Deploy的妙用</a></ul></div><div class="overview panel" data-title=站点概览><div class=author itemprop=author itemscope itemtype=http://schema.org/Person><img alt=少女 class=image data-src=/assets/avatar.webp itemprop=image loading=lazy><p class=name itemprop=name>少女<div class=description itemprop=description></div></div><nav class=state><div class="item posts"><a href=/archives/><span class=count>17</span><span class=name>文章</span></a></div><div class="item categories"><a href=/categories/><span class=count>4</span><span class=name>分类</span></a></div><div class="item tags"><a href=/tags/><span class=count>14</span><span class=name>标签</span></a></div></nav><div class=social><a class="item github" href=https://github.com/onaniishoujo rel=noopener target=_blank title=https://github.com/onaniishoujo><i class="ic i-github"></i></a><a class="item email" href=mailto:crazycute@163.com title=mailto:crazycute@163.com><i class="ic i-envelope"></i></a></div><div class=menu><li class=item><a href=/ rel=section><i class="ic i-home"></i>首页</a><li class="item dropdown"><a href=javascript:void(0);><i class="ic i-user"></i>关于</a><ul class=submenu><li class=item><a href=/about/ rel=section><i class="ic i-user"></i>关于本站</a></ul><li class="item dropdown"><a href=javascript:void(0);><i class="ic i-feather"></i>文章</a><ul class=submenu><li class=item><a href=/archives/ rel=section><i class="ic i-list-alt"></i>归档</a><li class=item><a href=/categories/ rel=section><i class="ic i-th"></i>分类</a><li class=item><a href=/tags/ rel=section><i class="ic i-tags"></i>标签</a></ul><li class=item><a href=/shuoshuo rel=section><i class="ic i-pen"></i>说说</a><li class=item><a href=/brewski rel=section><i class="ic i-sakura"></i>里站</a></div></div></div></div><ul id=quick><li class="prev pjax"><a href=/2023/10/14/%E4%B8%BAHexo-Fluid%E7%9A%84%E6%96%87%E7%AB%A0%E8%AE%BE%E7%BD%AE%E7%BD%91%E6%A0%BC%E8%83%8C%E6%99%AF/ rel=prev title=上一篇><i class="ic i-chevron-left"></i></a><li class=up><i class="ic i-arrow-up"></i><li class=down><i class="ic i-arrow-down"></i><li class="next pjax"><a href=/2023/10/05/%E6%88%91%E6%83%B3%E5%8F%98%E6%88%90%E5%A5%B3%E7%94%9F/ rel=next title=下一篇><i class="ic i-chevron-right"></i></a><li class=percent></ul></div></div><div class=dimmer></div></div></main><footer id=footer><div class=inner><div class=widgets><div class="rpost pjax"><h2>随机文章</h2><ul><li class=item><div class=breadcrumb><a href=/categories/Code/ title=分类于Code>Code</a><i class="ic i-angle-right"></i><a href=/categories/Code/Hexo/ title=分类于Hexo>Hexo</a></div><span><a href=/2023/11/26/Hexo-Fluid%E6%B7%BB%E5%8A%A0%E4%B8%80%E8%A8%80%E5%8F%8A%E5%87%BA%E5%A4%84/>Hexo Fluid添加一言及出处</a></span><li class=item><div class=breadcrumb><a href=/categories/Code/ title=分类于Code>Code</a><i class="ic i-angle-right"></i><a href=/categories/Code/Hexo/ title=分类于Hexo>Hexo</a></div><span><a href=/2024/01/21/%E4%BD%BF%E7%94%A8Github-Actions%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E7%BD%91%E7%AB%99%E4%B8%BB%E9%A2%98/>使用Github Actions自动切换网站主题</a></span><li class=item><div class=breadcrumb><a href=/categories/Code/ title=分类于Code>Code</a><i class="ic i-angle-right"></i><a href=/categories/Code/Hexo/ title=分类于Hexo>Hexo</a></div><span><a href=/2023/10/05/%E9%AD%94%E6%94%B9Hexo-Fluid/>魔改Hexo Fluid</a></span><li class=item><div class=breadcrumb><a href=/categories/%E6%97%A5%E5%B8%B8/ title=分类于日常>日常</a></div><span><a href=/2023/10/14/%E8%B0%81%E8%83%BD%E5%B8%AE%E6%88%91%E6%89%BE%E4%B8%AA%E5%A5%B3%E6%9C%8B%E5%8F%8B/>谁能帮我找个女朋友</a></span><li class=item><div class=breadcrumb><a href=/categories/Code/ title=分类于Code>Code</a><i class="ic i-angle-right"></i><a href=/categories/Code/Hexo/ title=分类于Hexo>Hexo</a></div><span><a href=/2024/02/02/Hexo-ParticleX%E5%8F%8ADiaspora%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8Artitalk/>Hexo ParticleX及Diaspora主题使用Artitalk</a></span><li class=item><div class=breadcrumb><a href=/categories/Code/ title=分类于Code>Code</a><i class="ic i-angle-right"></i><a href=/categories/Code/Hexo/ title=分类于Hexo>Hexo</a></div><span><a href=/2024/01/21/Hexo-ParticleX%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/>Hexo ParticleX添加Valine评论</a></span><li class=item><div class=breadcrumb><a href=/categories/%E6%97%A5%E5%B8%B8/ title=分类于日常>日常</a></div><span><a href=/2023/11/26/%E5%A7%90%E5%A7%90%E2%99%A1%E5%96%9C%E6%AC%A2/>姐姐♡喜欢</a></span><li class=item><div class=breadcrumb><a href=/categories/Code/ title=分类于Code>Code</a></div><span><a href=/2024/04/06/Ubuntu%E9%85%8D%E7%BD%AEAndroid-SDK%E5%B9%B6%E4%BD%BF%E7%94%A8Cordova/>Ubuntu配置Android SDK并使用Cordova</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/08/30/hello-world/>Hello, World!</a></span><li class=item><div class=breadcrumb><a href=/categories/%E6%97%A5%E5%B8%B8/ title=分类于日常>日常</a></div><span><a href=/2023/10/26/%E6%83%B3%E7%A9%BFLolita/>想穿Lolita</a></span></ul></div></div><div class=status><div class=copyright>© 2023 -<span itemprop=copyrightYear>2024</span><span class=with-love><i class="ic i-sakura rotate"></i></span><span class=author itemprop=copyrightHolder>少女 @ ~Shoujo~</span></div><div id=bsz><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script></div><div>本站总访问量<span id=counter_pv>??? </span>次  总访客数<span id=counter_uv>??? </span>人</div><div class=count><span class=post-meta-item-icon><i class="ic i-chart-area"></i></span><span title=站点总字数>22k 字</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon><i class="ic i-coffee"></i></span><span title=站点阅读时长>20 分钟</span></div><div class=powered-by>基于 <a href=https://hexo.io/ rel=noopener target=_blank>Hexo</a> & Theme.<a href=https://github.com/theme-shoka-x/hexo-theme-shokaX/ rel=noopener target=_blank>ShokaX</a></div></div></div></footer></div><script data-config>var LOCAL = {
+        path: `2023/10/05/魔改Hexo-Fluid/`,
+        favicon: {
+        show: `喵喵喵`,
+        hide: `呜呜呜`
+    },
+    search: {
+        placeholder: "文章搜索",
+        empty: "关于 「 ${query} 」，什么也没搜到",
+        stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    fancybox: true,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
+    quiz: {
+        choice: `单选题`,
+        multiple: `多选题`,
+        true_false: `判断题`,
+        essay: `问答题`,
+        gap_fill: `填空题`,
+        mistake: `错题备注`
+    },
+    ignores: [
+        (uri) => uri.includes('#'),
+        (uri) => new RegExp(LOCAL.path + '$').test(uri),
+            []
+    ]
+};</script><script src=https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.prod.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/algoliasearch/4.12.1/algoliasearch-lite.umd.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/instantsearch.js/4.39.0/instantsearch.production.min.js></script><script src=https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js></script><script src=/js/app.js?v=0.3.15></script><script data-pjax type=module>let items = []
+        import { RecentComments } from 'https://npm.webcache.cn/@waline/client@v2/dist/waline.mjs'
+        RecentComments({
+          serverURL: 'https://waline-1-g2450170.deta.app',
+          count: 10,
+        }).then(({ comments }) => {
+          comments.forEach(function (item) {
+              let cText = (item.orig.length > 50) ? item.orig.substring(0,50)+'...' : item.orig
+              item.url = item.url.startsWith('/') ? item.url : '/' + item.url;
+              const siteLink = item.url + "#" + item.objectId
+              items.push({
+                  href: siteLink,
+                  nick: item.nick,
+                  time: item.insertedAt.split('T').shift(),
+                  text: cText
+              })
+          })
+          Vue.createApp({
+            data() {
+                return {
+                    coms: items,
+                    root: ''
+                }
+            }
+          }).mount('#new-comment')
+        }).catch(function (err) {
+          console.error(err)
+        })</script><script>!function(){if(!window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&Math.random()>=.5){var e=document.createElement("script");e.src="/js/L2Dwidget.min.js",e.async=!0,e.onload=(()=>{L2Dwidget.init({pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2d/model.json"},display:{position:"right",width:400,height:400},mobile:{show:!1},log:!0})}),document.body.appendChild(e)}else{var n=document.createElement("div"),t=document.createElement("link"),i=document.createElement("script");n.id="sakana-widget",n.style.position="fixed",n.style.right="0px",n.style.bottom="2px",n.style.zIndex=9999,t.rel="stylesheet",t.href="/css/sakana.min.css",i.async=!0,i.onload=(()=>{(new SakanaWidget).mount("#sakana-widget")}),i.src="https://cdn.staticfile.net/sakana-widget/2.7.0/sakana.min.js",document.body.appendChild(n),document.body.appendChild(t),document.body.appendChild(i)}}();</script>
