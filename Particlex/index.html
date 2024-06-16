@@ -197,6 +197,135 @@
         
 
 <div class="post">
+    <a href="/2024/06/16/Deno-Deploy%E9%83%A8%E7%BD%B2Artitalk-SafeMode/">
+        <h2 class="post-title">Deno Deploy部署Artitalk_SafeMode</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Code/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Code
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/6/16
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p><a target="_blank" rel="noopener" href="https://artitalk.js.org/">Artitalk</a>自带SafeMode，但是需要使用Cloudflare Workers，在某些地区不方便使用</p>
+<p>本人修改了原版的Workers脚本，并将其移植到了Deno Deploy</p>
+<p>需要设置的环境变量：</p>
+<p><code>APPID</code>: 字符串</p>
+<p> <code>APPKEY</code>: 字符串</p>
+<p><code>SERVERDOMAIN</code>: 当前Deno Deploy的域名，不带<code>https://</code>头</p>
+<p><code>ATCOMMENT</code>: true或false</p>
+<p><code>CORS</code>: url1,url2,url3 (url之间用半角逗号隔开 且没有空格)</p>
+<p>修改后的脚本如下</p>
+<pre><code class="typescript">async function handleRequest(event: Request): Promise&lt;Response&gt; &#123;
+    const AppId: string = Deno.env.get(&#39;APPID&#39;)
+    const AppKey: string = Deno.env.get(&#39;APPKEY&#39;)
+    const ServerDomain: string = Deno.env.get(&#39;SERVERDOMAIN&#39;)
+    const atComment: Boolean = Deno.env.get(&#39;ATCOMMENT&#39;) == &#39;true&#39;
+    const CORS: string[] = Deno.env.get(&#39;CORS&#39;).split(&#39;,&#39;)
+
+    const request: Request = event
+    const url: URL = new URL(request.url)
+    const urlObj: URL = new URL(url)
+    const path: string = urlObj.href.substr(urlObj.origin.length)
+    const classac: string = l(rp(path).split(&#39;/&#39;))
+
+    if (AppId == &quot;&quot; || AppKey == &quot;&quot;) &#123; return new Response(&#39;Artitalk-Safe异常: 您没有设定appid和appkey&#39;) &#125;
+    if (classac == &quot;atComment&quot; &amp;&amp; !atComment) &#123; return new Response(&#39;&#123;&quot;code&quot;:101,&quot;error&quot;:&quot;Artitalk-Safe: 评论功能未开启&quot;&#125;&#39;, &#123; headers: &#123; &quot;content-type&quot;: &quot;application/json;charset=utf-8&quot; &#125; &#125;) &#125;
+    if (classac == &quot;_File&quot; || classac == &quot;_Followee&quot; || classac == &quot;_Follower&quot; || classac == &quot;_Installation&quot; || classac == &quot;_Role&quot;) &#123; return new Response(&#39;&#123;&quot;code&quot;:101,&quot;error&quot;:&quot;Artitalk-Safe: 操作是禁止的&quot;&#125;&#39;, &#123; headers: &#123; &quot;content-type&quot;: &quot;application/json;charset=utf-8&quot; &#125; &#125;) &#125;
+
+    url.hostname = ServerDomain
+    const reqHEDNew: Headers = new Headers(request.headers)
+    if (reqHEDNew.get(&quot;X-LC-Id&quot;)) &#123;
+        reqHEDNew.set(&quot;X-LC-Id&quot;, AppId)
+        reqHEDNew.set(&quot;X-LC-Key&quot;, AppKey)
+    &#125;
+    if (reqHEDNew.get(&quot;x-lc-sign&quot;)) &#123;
+        reqHEDNew.delete(&quot;X-LC-Sign&quot;)
+    &#125;
+    const reqNew: Request = new Request(request, &#123; headers: reqHEDNew &#125;)
+    const responsefetch: Response = await fetch(url.toString(), reqNew)
+    const resHEDNew: Headers = new Headers(responsefetch.headers)
+    
+    let flag: Boolean = false;
+    for (let i of CORS)&#123;
+        if (i.indexOf(request.url) != -1)&#123;
+            flag = true;
+            resHEDNew.set(&quot;Access-Control-Allow-Origin&quot;, i);
+            break;
+        &#125;
+    &#125;
+
+    if (!flag)&#123;
+        resHEDNew.delete(&quot;Access-Control-Allow-Origin&quot;)
+    &#125;
+
+    const response: Response = new Response(responsefetch.body, &#123; headers: resHEDNew &#125;)
+    return response
+&#125;
+
+function rp(p: string): string &#123;
+    return p.split(&quot;?&quot;)[0]
+&#125;
+
+function l(p: string[]): string &#123;
+    return p[getJsonLength(p) - 1]
+&#125;
+
+function getJsonLength(jsonData: string[]): number &#123;
+    var jsonLength = 0;
+    for (var _ in jsonData) &#123;
+        jsonLength++;
+    &#125;
+    return jsonLength;
+&#125;
+
+Deno.serve((req: Request) =&gt; &#123;
+    return handleRequest(req)
+&#125;);
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Code/" style="color: #ffa2c4">Code</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/TypeScript/" style="color: #ff7d73">TypeScript</a>
+        </span>
+        
+    </div>
+    <a href="/2024/06/16/Deno-Deploy%E9%83%A8%E7%BD%B2Artitalk-SafeMode/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2024/04/06/Ubuntu%E9%85%8D%E7%BD%AEAndroid-SDK%E5%B9%B6%E4%BD%BF%E7%94%A8Cordova/">
         <h2 class="post-title">Ubuntu配置Android SDK并使用Cordova</h2>
     </a>
@@ -282,17 +411,17 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/bin
         
         <span class="tag">
             
-            <a href="/tags/Github/" style="color: #00a596">Github</a>
+            <a href="/tags/Github/" style="color: #ff7d73">Github</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Android/" style="color: #ff7d73">Android</a>
+            <a href="/tags/Android/" style="color: #00a596">Android</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Linux/" style="color: #03a9f4">Linux</a>
+            <a href="/tags/Linux/" style="color: #ff7d73">Linux</a>
         </span>
         
     </div>
@@ -391,17 +520,17 @@ def main():
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #03a9f4">Code</a>
+            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Python/" style="color: #ffa2c4">Python</a>
+            <a href="/tags/Python/" style="color: #00a596">Python</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Toga/" style="color: #03a9f4">Toga</a>
+            <a href="/tags/Toga/" style="color: #ffa2c4">Toga</a>
         </span>
         
     </div>
@@ -552,7 +681,7 @@ Deno.serve(async (request: Request, info: Deno.ServeHandlerInfo) =&gt; &#123;
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #03a9f4">Code</a>
+            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
         </span>
         
         <span class="tag">
@@ -633,7 +762,7 @@ Deno.serve(async (request: Request, info: Deno.ServeHandlerInfo) =&gt; &#123;
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
+            <a href="/tags/Code/" style="color: #ffa2c4">Code</a>
         </span>
         
         <span class="tag">
@@ -813,12 +942,12 @@ valine:
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
+            <a href="/tags/Code/" style="color: #00a596">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Hexo/" style="color: #03a9f4">Hexo</a>
+            <a href="/tags/Hexo/" style="color: #ffa2c4">Hexo</a>
         </span>
         
     </div>
@@ -927,12 +1056,12 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
+            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Github/" style="color: #00a596">Github</a>
+            <a href="/tags/Github/" style="color: #03a9f4">Github</a>
         </span>
         
     </div>
@@ -975,7 +1104,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/birthday/" style="color: #ffa2c4">birthday</a>
+            <a href="/tags/birthday/" style="color: #ff7d73">birthday</a>
         </span>
         
     </div>
@@ -1026,137 +1155,16 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #ffa2c4">日常</a>
+            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00bcd4">日常</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #ff7d73">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #00a596">女生</a>
         </span>
         
     </div>
     <a href="/2023/11/26/%E5%A7%90%E5%A7%90%E2%99%A1%E5%96%9C%E6%AC%A2/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/11/26/Hexo-Fluid%E6%B7%BB%E5%8A%A0%E4%B8%80%E8%A8%80%E5%8F%8A%E5%87%BA%E5%A4%84/">
-        <h2 class="post-title">Hexo Fluid添加一言及出处</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Code/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Code
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/11/26
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>原版只能显示<code>hitokoto</code>(正文)部分，不能显示<code>from</code>(出处)部分</p>
-<ol>
-<li>修改<code>themes\fluid\layout\_partials\plugins\typed.ejs</code>替换为如下内容</li>
-</ol>
-<pre><code class="js">&lt;% if(theme.fun_features.typing.enable &amp;&amp; in_scope(theme.fun_features.typing.scope) &amp;&amp; page.subtitle !== false) &#123; %&gt;
-  &lt;%- js_ex(theme.static_prefix.typed, &#39;/typed.min.js&#39;) %&gt;
-  &lt;script&gt;
-    (function (window, document) &#123;
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById(&#39;subtitle&#39;);
-      if (!subtitle || !typing) &#123;
-        return;
-      &#125;
-      var text;
-      &lt;% if (is_home() &amp;&amp; theme.index.slogan.api &amp;&amp; theme.index.slogan.api.enable) &#123; %&gt;
-        jQuery.ajax(&#123;
-          type: &#39;&lt;%= theme.index.slogan.api.method %&gt;&#39;,
-          url: &#39;&lt;%- theme.index.slogan.api.url %&gt;&#39;,
-          headers: &lt;%- JSON.stringify(theme.index.slogan.api.headers || &#123;&#125;) %&gt;,
-          dataType: &#39;json&#39;,
-          success: function(result) &#123;
-            var apiText;
-            if (result) &#123;
-              var keys = &#39;&lt;%= theme.index.slogan.api.keys %&gt;&#39;.split(&#39;,&#39;);
-              if (result instanceof Array) &#123;
-                result = result[0];
-              &#125;
-              for (const k of keys) &#123;
-                var value = result[k];
-                if (typeof value === &#39;string&#39;) &#123;
-                  apiText = value;
-                  break;
-                &#125; else if (value instanceof Object) &#123;
-                  result = value;
-                &#125;
-              &#125;
-              text = apiText ? (result.&lt;%= theme.index.slogan.api.keys %&gt; + &#39; - &#39; + result.&lt;%= theme.index.slogan.api.keys2 %&gt;) : (result.&lt;%= theme.index.slogan.api.keys %&gt; + &#39; - &#39; + result.&lt;%= theme.index.slogan.api.keys2 %&gt;);
-            &#125;
-            typing(text);
-          &#125;,
-          error: function(xhr, status, error) &#123;
-            if (error) &#123;
-              console.error(&#39;Failed to request &lt;%= theme.index.slogan.api.url %&gt;:&#39;, error);
-            &#125;
-            typing(text);
-          &#125;
-        &#125;)
-      &lt;% &#125; else &#123; %&gt;
-        text = subtitle.getAttribute(&#39;data-typed-text&#39;);
-        typing(text);
-      &lt;% &#125; %&gt;
-    &#125;)(window, document);
-  &lt;/script&gt;
-&lt;% &#125; %&gt;
-</code></pre>
-<ol start="2">
-<li>修改<code>_config.fluid.yml</code><br>添加<code>keys2</code>用于控制出处的取值</li>
-</ol>
-<pre><code class="yaml">      # 从请求结果获取字符串的取值字段，最终必须是一个字符串，例如返回结果为 &#123;&quot;data&quot;: &#123;&quot;author&quot;: &quot;fluid&quot;, &quot;content&quot;: &quot;An elegant theme&quot;&#125;&#125;, 则取值字段为 [&#39;data&#39;, &#39;content&#39;]；如果返回是列表则自动选择第一项
-      # The value field of the string obtained from the response. For example, the response content is &#123;&quot;data&quot;: &#123;&quot;author&quot;: &quot;fluid&quot;, &quot;content&quot;: &quot;An elegant theme&quot;&#125;&#125;, the expected `keys: [&#39;data&#39;,&#39;content&#39;]`; if the return is a list, the first item is automatically selected
-      keys: [&#39;hitokoto&#39;]
-      keys2: [&#39;from&#39;]
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Code/" style="color: #00a596">Code</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Hexo/" style="color: #ff7d73">Hexo</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Fluid/" style="color: #03a9f4">Fluid</a>
-        </span>
-        
-    </div>
-    <a href="/2023/11/26/Hexo-Fluid%E6%B7%BB%E5%8A%A0%E4%B8%80%E8%A8%80%E5%8F%8A%E5%87%BA%E5%A4%84/" class="go-post">阅读全文</a>
 </div>
 
 

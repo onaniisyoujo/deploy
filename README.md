@@ -6,3 +6,4 @@
 - Hexo Stellaris
 - Hexo Diaspora
 - Hexo ShokaX
+- Hexo Anzhiyu

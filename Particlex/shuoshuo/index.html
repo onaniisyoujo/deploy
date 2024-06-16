@@ -212,16 +212,16 @@
     // 创建script标签
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = 'https://cdn.staticfile.org/artitalk/3.3.4/js/artitalk.js';
+    script.src = 'https://cdn.staticfile.net/artitalk/3.3.4/js/artitalk.js';
 
     // 当脚本加载完成后初始化Artitalk
     script.onload = function() {
       // 确保Artitalk已加载
       if (typeof Artitalk !== 'undefined') {
         new Artitalk({
-          appId: 'MMH0HmN9WNMhxXgccAiwt5qA-MdYXbMMI',
-          appKey: 'meCb4Dp0hSEmax5CgVfNrZST',
-          serverURL: 'https://api.miku.run.place',
+          appId: 'id',
+          appKey: 'key',
+          serverURL: 'https://rainbow.deno.dev',
           color1: '#8DC9D3',
           color2: '#FFBFD7',
         });

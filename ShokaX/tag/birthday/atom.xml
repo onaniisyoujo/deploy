@@ -6,6 +6,7 @@
     <updated>2023-12-15T13:48:38.000Z</updated>
     <category term="Code" />
     <category term="Github" />
+    <category term="TypeScript" />
     <category term="Hexo" />
     <category term="Fluid" />
     <category term="Android" />
@@ -25,7 +26,7 @@
         <content type="html">&lt;p&gt;生日快乐，我的 15 岁&lt;/p&gt;
 &lt;p&gt;许个愿 —— 当然不能说出来啦！&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;12/15/2023&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/assets/avatar.webp&#34; alt=&#34;birthday&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/images/myicon.jpg&#34; alt=&#34;birthday&#34; /&gt;&lt;/p&gt;
 </content>
         <category term="birthday" />
         <updated>2023-12-15T13:48:38.000Z</updated>
