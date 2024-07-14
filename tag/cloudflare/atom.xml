@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://onaniishoujo.github.io</id>
+    <title>少女的Blog • Posts by &#34;cloudflare&#34; tag</title>
+    <link href="https://onaniishoujo.github.io" />
+    <updated>2024-02-08T15:10:56.000Z</updated>
+    <category term="Code" />
+    <category term="Github" />
+    <category term="TypeScript" />
+    <category term="Hexo" />
+    <category term="Fluid" />
+    <category term="Android" />
+    <category term="Linux" />
+    <category term="Cloudflare" />
+    <category term="Python" />
+    <category term="Toga" />
+    <category term="日常" />
+    <category term="女生" />
+    <category term="人设" />
+    <category term="birthday" />
+    <category term="资源" />
+    <entry>
+        <id>https://onaniishoujo.github.io/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</id>
+        <title>使用Cloudflare Pages搭建图床</title>
+        <link rel="alternate" href="https://onaniishoujo.github.io/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/"/>
+        <content type="html">&lt;blockquote&gt;
+&lt;p&gt;⚠️警告⚠️&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pages.dev&lt;/code&gt;  域名被移动运营商污染，请谨慎使用！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;使用 &lt;code&gt;Cloudflare Pages&lt;/code&gt;  搭建图床&lt;/p&gt;
+&lt;p&gt;除了图床也可以放各种各样的文件&lt;/p&gt;
+&lt;p&gt;限制：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;最多 100 个 &lt;code&gt;pages.dev&lt;/code&gt;  域名&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;每月最多部署 500 次&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;每个 &lt;code&gt;Cloudflare Pages&lt;/code&gt;  最多 20000 个文件，单个文件最大 &lt;code&gt;25 MiB&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;使用方法&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#使用方法&#34;&gt;#&lt;/a&gt; 使用方法&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;新建 Git 仓库，上传你的文件&lt;/p&gt;
+&lt;p&gt;在仓库根目录中新建一个 &lt;code&gt;_headers&lt;/code&gt;  文件，内容如下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/*
+  Access-Control-Allow-Origin: *
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意：最好把 &lt;code&gt;Access-Control-Allow-Origin: *&lt;/code&gt;  中的 &lt;code&gt;*&lt;/code&gt;  替换为你的网站 URL&lt;/p&gt;
+&lt;p&gt;不替换就是所有人都能跨域访问&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;新建一个 &lt;code&gt;Cloudflare Pages&lt;/code&gt; ，选择上面仓库的某个分支并部署&lt;/p&gt;
+&lt;p&gt;此时你就得到了一个图床&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Code" />
+        <category term="Cloudflare" />
+        <updated>2024-02-08T15:10:56.000Z</updated>
+    </entry>
+</feed>
