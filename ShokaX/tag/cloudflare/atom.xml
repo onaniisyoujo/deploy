@@ -5,20 +5,20 @@
     <link href="https://onaniishoujo.github.io" />
     <updated>2024-02-08T15:10:56.000Z</updated>
     <category term="Code" />
-    <category term="Github" />
     <category term="TypeScript" />
-    <category term="Hexo" />
-    <category term="Fluid" />
+    <category term="Github" />
     <category term="Android" />
     <category term="Linux" />
+    <category term="Hexo" />
+    <category term="Fluid" />
     <category term="Cloudflare" />
-    <category term="Python" />
-    <category term="Toga" />
     <category term="日常" />
     <category term="女生" />
     <category term="人设" />
     <category term="birthday" />
     <category term="资源" />
+    <category term="Python" />
+    <category term="Toga" />
     <entry>
         <id>https://onaniishoujo.github.io/2024/02/08/%E4%BD%BF%E7%94%A8Cloudflare-Pages%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</id>
         <title>使用Cloudflare Pages搭建图床</title>

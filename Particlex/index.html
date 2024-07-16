@@ -227,19 +227,18 @@
 <p>本人修改了原版的Workers脚本，并将其移植到了Deno Deploy</p>
 <p>需要设置的环境变量：</p>
 <p><code>APPID</code>: 字符串</p>
-<p> <code>APPKEY</code>: 字符串</p>
+<p><code>APPKEY</code>: 字符串</p>
 <p><code>SERVERDOMAIN</code>: 当前Deno Deploy的域名，不带<code>https://</code>头</p>
 <p><code>ATCOMMENT</code>: true或false</p>
 <p><code>CORS</code>: url1,url2,url3 (url之间用半角逗号隔开 且没有空格)</p>
 <p>修改后的脚本如下</p>
-<pre><code class="typescript">async function handleRequest(event: Request): Promise&lt;Response&gt; &#123;
+<pre><code class="typescript">async function handleRequest(request: Request): Promise&lt;Response&gt; &#123;
     const AppId: string = Deno.env.get(&#39;APPID&#39;)
     const AppKey: string = Deno.env.get(&#39;APPKEY&#39;)
     const ServerDomain: string = Deno.env.get(&#39;SERVERDOMAIN&#39;)
     const atComment: Boolean = Deno.env.get(&#39;ATCOMMENT&#39;) == &#39;true&#39;
     const CORS: string[] = Deno.env.get(&#39;CORS&#39;).split(&#39;,&#39;)
 
-    const request: Request = event
     const url: URL = new URL(request.url)
     const urlObj: URL = new URL(url)
     const path: string = urlObj.href.substr(urlObj.origin.length)
@@ -262,12 +261,16 @@
     const responsefetch: Response = await fetch(url.toString(), reqNew)
     const resHEDNew: Headers = new Headers(responsefetch.headers)
     
-    let flag: Boolean = false;
-    for (let i of CORS)&#123;
-        if (i.indexOf(request.url) != -1)&#123;
-            flag = true;
-            resHEDNew.set(&quot;Access-Control-Allow-Origin&quot;, i);
-            break;
+    var flag: Boolean = false
+    for (let pair of request.headers.entries()) &#123;
+        if (pair[0] == &#39;referer&#39;) &#123;
+            for (let url of CORS) &#123;
+                if (pair[1].indexOf(url) != -1) &#123;
+                    resHEDNew.set(&quot;Access-Control-Allow-Origin&quot;, url.slice(0, -1))
+                    flag = true
+                    break
+                &#125;
+            &#125; break
         &#125;
     &#125;
 
@@ -288,11 +291,11 @@ function l(p: string[]): string &#123;
 &#125;
 
 function getJsonLength(jsonData: string[]): number &#123;
-    var jsonLength = 0;
+    var jsonLength = 0
     for (var _ in jsonData) &#123;
-        jsonLength++;
+        jsonLength++
     &#125;
-    return jsonLength;
+    return jsonLength
 &#125;
 
 Deno.serve((req: Request) =&gt; &#123;
@@ -313,12 +316,12 @@ Deno.serve((req: Request) =&gt; &#123;
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #ffa2c4">Code</a>
+            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/TypeScript/" style="color: #ff7d73">TypeScript</a>
+            <a href="/tags/TypeScript/" style="color: #ffa2c4">TypeScript</a>
         </span>
         
     </div>
@@ -411,17 +414,17 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/bin
         
         <span class="tag">
             
-            <a href="/tags/Github/" style="color: #ff7d73">Github</a>
+            <a href="/tags/Github/" style="color: #03a9f4">Github</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Android/" style="color: #00a596">Android</a>
+            <a href="/tags/Android/" style="color: #ff7d73">Android</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Linux/" style="color: #ff7d73">Linux</a>
+            <a href="/tags/Linux/" style="color: #03a9f4">Linux</a>
         </span>
         
     </div>
@@ -520,7 +523,7 @@ def main():
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
+            <a href="/tags/Code/" style="color: #03a9f4">Code</a>
         </span>
         
         <span class="tag">
@@ -530,7 +533,7 @@ def main():
         
         <span class="tag">
             
-            <a href="/tags/Toga/" style="color: #ffa2c4">Toga</a>
+            <a href="/tags/Toga/" style="color: #03a9f4">Toga</a>
         </span>
         
     </div>
@@ -681,12 +684,12 @@ Deno.serve(async (request: Request, info: Deno.ServeHandlerInfo) =&gt; &#123;
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
+            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Github/" style="color: #ff7d73">Github</a>
+            <a href="/tags/Github/" style="color: #03a9f4">Github</a>
         </span>
         
     </div>
@@ -762,12 +765,12 @@ Deno.serve(async (request: Request, info: Deno.ServeHandlerInfo) =&gt; &#123;
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #ffa2c4">Code</a>
+            <a href="/tags/Code/" style="color: #03a9f4">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Cloudflare/" style="color: #00a596">Cloudflare</a>
+            <a href="/tags/Cloudflare/" style="color: #ff7d73">Cloudflare</a>
         </span>
         
     </div>
@@ -856,7 +859,7 @@ Deno.serve(async (request: Request, info: Deno.ServeHandlerInfo) =&gt; &#123;
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #ff7d73">Code</a>
+            <a href="/tags/Code/" style="color: #00a596">Code</a>
         </span>
         
     </div>
@@ -942,12 +945,12 @@ valine:
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #00a596">Code</a>
+            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Hexo/" style="color: #ffa2c4">Hexo</a>
+            <a href="/tags/Hexo/" style="color: #00a596">Hexo</a>
         </span>
         
     </div>
@@ -1056,7 +1059,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/Code/" style="color: #00bcd4">Code</a>
+            <a href="/tags/Code/" style="color: #00a596">Code</a>
         </span>
         
         <span class="tag">
@@ -1104,7 +1107,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/birthday/" style="color: #ff7d73">birthday</a>
+            <a href="/tags/birthday/" style="color: #00a596">birthday</a>
         </span>
         
     </div>
@@ -1160,7 +1163,7 @@ jobs:
         
         <span class="tag">
             
-            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #00a596">女生</a>
+            <a href="/tags/%E5%A5%B3%E7%94%9F/" style="color: #03a9f4">女生</a>
         </span>
         
     </div>

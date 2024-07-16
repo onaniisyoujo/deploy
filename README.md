@@ -7,3 +7,4 @@
 - Hexo Diaspora
 - Hexo ShokaX
 - Hexo Anzhiyu
+- Fuwari
