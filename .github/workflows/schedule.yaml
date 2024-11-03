@@ -50,7 +50,7 @@ jobs:
           deno-version: v1.x
 
       - name: Install deployctl
-        run: "deno install --allow-all --no-check -r -f https://deno.land/x/deploy/deployctl.ts"
+        run: "deno add jsr:@deno/deployctl"
 
       - name: Upload to Deno Deploy
         env: 
