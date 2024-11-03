@@ -55,4 +55,4 @@ jobs:
       - name: Upload to Deno Deploy
         env: 
           DENO_TOKEN: ${{ secrets.DENO_TOKEN }}
-        run: "deployctl deploy --prod --project=shoujo --entrypoint=jsr:@std/http/file-server --env=DENO_DEPLOY_TOKEN=$DENO_TOKEN"
+        run: "DENO_DEPLOY_TOKEN=$DENO_TOKEN deployctl deploy --prod --project=shoujo --entrypoint=jsr:@std/http/file-server"
